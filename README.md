@@ -37,3 +37,11 @@ The goal of this project is to create an application that allows maintenance/eng
 * Easy to use UI when working
 * Notifications system that informs users of new jobs that have been assigned
 
+### User Stories
+
+* As a maintenance engineer, I need to be able to easily view my outstanding jobs while on the production floor. I also need to be able to quickly create and record time against jobs. I also need to be able to create unscheduled *ad hoc* jobs. I also want to be notified of any new jobs that are assigned to me.
+* As a maintenance manager, I need to be able to create jobs and assign them to users. I also need jobs to be automatically generated for different assets at specified time intervals. I also need to be able to view reports detailing resources used by different departments/product lines. I also need to be able to see pending requests and approve them. I also want to be able to assign priorities to jobs.
+* As a stock controller, I need to be able to accurately maintain stock records. I need to be able to receive stock in and then assign it to users who can then assign it to jobs. I'd also like to be notified when stock quantities fall below a certain threshold. I'd also like to be able to assign items barcodes and be able to scan those barcodes when assigning stock.
+* As a production supervisor, I need to be able to request jobs by maintenance. I should be able to specify the area where the problem is, details of the problem and I should be notified whether the request has been accepted or not.
+* As a commercial buyer, I need to be able to see reports detailing how much resources/time is being consumed by my product lines so that I can make informed decisions about the viability of the products.
+
