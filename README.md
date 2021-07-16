@@ -45,3 +45,9 @@ The goal of this project is to create an application that allows maintenance/eng
 * As a production supervisor, I need to be able to request jobs by maintenance. I should be able to specify the area where the problem is, details of the problem and I should be notified whether the request has been accepted or not.
 * As a commercial buyer, I need to be able to see reports detailing how much resources/time is being consumed by my product lines so that I can make informed decisions about the viability of the products.
 
+### Site Owner Goals
+
+* As a site owner, I want the mobile controls for users to be minimal, simple and easy to use for engineers trying to record jobs on the go.
+* As a site owner, I need to have a robust permissions system to account for different user types who should have access to different sections.
+* As a site owner, I need to build a robust relataional database structure that allows for easy expansion and changes.
+
