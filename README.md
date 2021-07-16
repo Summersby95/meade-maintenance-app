@@ -51,3 +51,24 @@ The goal of this project is to create an application that allows maintenance/eng
 * As a site owner, I need to have a robust permissions system to account for different user types who should have access to different sections.
 * As a site owner, I need to build a robust relataional database structure that allows for easy expansion and changes.
 
+### User Requirements and Expectations
+
+#### Requirements
+
+* Create and record time/resources against jobs
+* Jobs page where they can see tasks that have been assigned to them
+* Stock management system
+* Allow assignment of stock/time resources to departments
+* Notifications system to inform users of outstanding jobs that need to be done, new requests, stock alerts
+* Manager console where managers can assign jobs, view crew status
+* Reports where managers can view resources/time being consumed by different departments/product lines
+* Asset management system where assets *(machines, equipment)* can be recorded and maintained
+* Job request form that anyone in the company can fill in to request a job be done.
+* Request approval system for managers.
+* Barcoding system for parts
+* Easy search functionality when searching for parts
+* View asset history, maintenance job records
+* PPM - Scheduling of PPMs for assets
+* Projects system - Jobs Assigned to Project
+* File uploads, pictures, pdfs, etc.
+
