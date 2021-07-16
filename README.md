@@ -2,8 +2,8 @@
 
 ## Contents
 
-1. [Project Inception](#project-inception)
-2. [Project Description](#project-description)
+1. [Project Overview](#project-overview)
+2. [Project Inception](#project-inception)
 3. [UX](#ux)
 4. [Features](#features)
 5. [Technologies](#technologies)
