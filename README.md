@@ -72,3 +72,10 @@ The goal of this project is to create an application that allows maintenance/eng
 * Projects system - Jobs Assigned to Project
 * File uploads, pictures, pdfs, etc.
 
+#### Expectations
+
+* Consistent styling across site
+* Easy to use, formal/professional UI
+
+### Design Choices
+
