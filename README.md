@@ -78,4 +78,3 @@ The goal of this project is to create an application that allows maintenance/eng
 * Easy to use, formal/professional UI
 
 ### Design Choices
-
