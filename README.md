@@ -103,3 +103,59 @@ For wireframing, I used [Balsamiq](https://balsamiq.com/). I spent a lot of time
 
 I eventually decided on a dashboard layout where navigation headings would be at the top of the main elements and the sub navigation within that heading to the side.
 
+#### Dashboard
+
+![Dashboard](wireframes/Dashboard.png)
+
+The dashboard view is the view a user sees when they initially log into the app. It consists of a different stats and charts that display key metrics about the state of affairs regarding jobs, people and projects.
+
+The top bar consists of the app name, and the user name where they can click to log out. It also has a notification icon which shows the user how many unread notifications they have.
+
+Beneath that, on desktop the users can navigate to the different main sections of the site, the links appear differently depending on the user type *(Admin/Manager/Stock Person/General Operative)*
+
+The side navigation, on desktop shows the sub navigations for that section. For the dashboard this means they can go to the home screen, the screen they are on or view reports about various things.
+
+These navigation elements wrap on mobile views to a dropdown menu with the subheadings as a dropdown menu.
+
+The main section of the site features the off white colour for the background of the site and the different elements for the section featured in tabs with the dark blue colour for the heading of the tab.
+
+#### Jobs - Home
+
+![Jobs - Home](wireframes/jobs-home.png)
+
+The Jobs - Home page shows the user their outstanding jobs in a table format with key details. They can click on the rows to view the job. There is also a search bar where the user can search for something in the table.
+
+Some of the columns are removed on mobile views to fit screen width.
+
+#### Job - Detail
+
+![Job - Detail](wireframes/job-detail.png)
+
+The job detail views shows details of the job in the first tab as well as attachments, the steps needed to complete the job in the second tab, the parts that have been added to the job in the third tab. The equipment needed for the job in the fourth section and the time that has been logged for the job in the fifth section.
+
+Beneath this are operations the user can perform for the job such as editing the details of the job, starting/stopping the job, logging time against the job, marking it complete, adding parts to the job or canceling the job.
+
+#### Job - Create
+
+![Job - Create](wireframes/job-create.png)
+
+The job create view allows the user to create a job. The top section allows the user to add the details for the job, the second section allows the user to attach files such as a user manual or picture to the job. The third section allows the user to add the steps required to complete the job, it also allows them to adjust the ordering of the steps to complete the job. The third section allows the user to specify the equipment needed to complete the job.
+
+#### Notificaitons
+
+![Notifications](wireframes/Notifications.png)
+
+The notifications view shows the user notifications in a table view as well as providing a link to whatever it is requires their attention.
+
+#### Employee/Profile Page
+
+![Profile Page](wireframes/profile.png)
+
+The profile page allows users to view their profile with their employee details as well as their statistics.
+
+If a manager is logged in, they can generate an employee report or use the *Give Bonus* button to award an employee a bonus.
+
+#### More Wireframes
+
+The rest of the wireframes follow a similar styling pattern and so I will not show them all here. You can view the rest of the wireframes [here](wireframes/Wireframes.pdf).
+
