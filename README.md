@@ -78,3 +78,22 @@ The goal of this project is to create an application that allows maintenance/eng
 * Easy to use, formal/professional UI
 
 ### Design Choices
+
+Given the application's purpose, I needed the UI of the application to be simple, clear, easy to navigate and minimalistic so as not to distract a user trying to complete tasks on the app while working. I decided to use [Bootstrap v4.6](https://getbootstrap.com/docs/4.6/getting-started/introduction/) as a starting place given it's wide range of built-in functionality.
+
+#### Colours
+
+For colours, I wanted the site to be consistent across the site with a standard colour pallette to make user interactions clear and easy. I used [Coolors](https://coolors.co/) to help with that. I settled on a two blue shades for the navigation and header elements of the site, along with black and white white colours for the main fields and body elements as well as text.
+
+![Colour Pallete](/images/pallas-pallete.png)
+
+#### Fonts
+
+I wanted the fonts to be professional, clearly legible and formal. For this, I decided on Lato Regular 400 for the main element text and Roboto Bold 500 for the headings and navigation.
+
+I used [Google Fonts](fonts.google.com) to source these fonts.
+
+### Process Flow
+
+TBD
+
