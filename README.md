@@ -159,3 +159,44 @@ If a manager is logged in, they can generate an employee report or use the *Give
 
 The rest of the wireframes follow a similar styling pattern and so I will not show them all here. You can view the rest of the wireframes [here](wireframes/Wireframes.pdf).
 
+### Data Structure
+
+This project required the use of a relational database which made a lot of sense for this project given the many different models and relationships between models required.
+
+I decided when designing the project to create a graphical representation of the database structure and relationships to help visualize and think about the data structure. I used [diagrams.net](https://app.diagrams.net/) to do this.
+
+![Database Design](images/database-design.png)
+
+#### Users
+
+![Users](images/users-design.png)
+
+For the users model, I needed the user to have a username to login with, first and last names, an email address, phone number as well as a *department* and *user type*.
+
+The *department* links to the *departments* table in a one-to-many relationship and represents which department of the company the user belongs to. The *user type* field links to the *user types* table and represents the type of user it is, *Admin, General Operative, Manager* or *other*.
+
+#### Jobs
+
+![Jobs](images/jobs-design.png)
+
+The *Jobs* model links to a lot of different models because it is so integral to application. The *Job Type* links to the links to the *Job Type* model, the *Department* links to the *Department* model and so on. All these relationships are one-to-many jobs. The *Jobs* model also has optional foreign key fields for *Assets* and *Project* if the job is attached to a particular one.
+
+The *Job Items* model is essentially a many-to-many relationship between the *Jobs* and *Items* models with the additional fields of *Employee Number* and *Quantity*.
+
+#### Projects
+
+![Projects](images/projects-design.png)
+
+*Projects*, from the application's point of view, is simply a collection of jobs with a project information attached to it. The project model has a one *Project* to many *Jobs* relationship. It also has a *Location* relationship to the *Locaitons* model as well as a *Project Status* link to the *Project Status* model.
+
+#### Assets
+
+![Assets](images/assets-design.png)
+
+An asset is a particular machine or piece of equipment that requires on-going, regular maintenance. This is facilated through the *PPM* model *(Planned Preventative Maintenance)* where jobs are selected that repeat themselves, i.e. duplicate/copy themselves, at a specified time interval to be performed again. Records of these jobs being completed are required for food safety audit compliance and automating the scheduling of these jobs made a lot of sense.
+
+#### Items
+
+![Items](images/items-design.png)
+
+*Items* are stockable consummables or items that are used in jobs like screws, bearings, motors, cables etc. *Items* have a *Mastercode* or master tag that signifies which master group they belong to, 12 inch screws have a *mastercode* of *screws*, *100mm bearings* have a *mastercode* of *bearings* etc. This is necessary to help categorize different items that are similar but slightly different dimensions or manufacturer etc. *Stock Type* represents whether the product is consummable or equipment that can be resused. *Stock Receipts* stores a history of the receipt of items in to stock. *Locations* signify where an item is located.
