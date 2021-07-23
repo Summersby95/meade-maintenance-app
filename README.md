@@ -167,7 +167,7 @@ I decided when designing the project to create a graphical representation of the
 
 ![Database Design](images/database-design.png)
 
-#### Users
+#### Users Model
 
 ![Users](images/users-design.png)
 
@@ -175,7 +175,7 @@ For the users model, I needed the user to have a username to login with, first a
 
 The *department* links to the *departments* table in a one-to-many relationship and represents which department of the company the user belongs to. The *user type* field links to the *user types* table and represents the type of user it is, *Admin, General Operative, Manager* or *other*.
 
-#### Jobs
+#### Jobs Model
 
 ![Jobs](images/jobs-design.png)
 
@@ -183,20 +183,52 @@ The *Jobs* model links to a lot of different models because it is so integral to
 
 The *Job Items* model is essentially a many-to-many relationship between the *Jobs* and *Items* models with the additional fields of *Employee Number* and *Quantity*.
 
-#### Projects
+#### Projects Model
 
 ![Projects](images/projects-design.png)
 
 *Projects*, from the application's point of view, is simply a collection of jobs with a project information attached to it. The project model has a one *Project* to many *Jobs* relationship. It also has a *Location* relationship to the *Locaitons* model as well as a *Project Status* link to the *Project Status* model.
 
-#### Assets
+#### Assets Model
 
 ![Assets](images/assets-design.png)
 
 An asset is a particular machine or piece of equipment that requires on-going, regular maintenance. This is facilated through the *PPM* model *(Planned Preventative Maintenance)* where jobs are selected that repeat themselves, i.e. duplicate/copy themselves, at a specified time interval to be performed again. Records of these jobs being completed are required for food safety audit compliance and automating the scheduling of these jobs made a lot of sense.
 
-#### Items
+#### Items Model
 
 ![Items](images/items-design.png)
 
 *Items* are stockable consummables or items that are used in jobs like screws, bearings, motors, cables etc. *Items* have a *Mastercode* or master tag that signifies which master group they belong to, 12 inch screws have a *mastercode* of *screws*, *100mm bearings* have a *mastercode* of *bearings* etc. This is necessary to help categorize different items that are similar but slightly different dimensions or manufacturer etc. *Stock Type* represents whether the product is consummable or equipment that can be resused. *Stock Receipts* stores a history of the receipt of items in to stock. *Locations* signify where an item is located.
+
+## Application Logic
+
+In this section, I am going to explain a bit about the application that may not be immediately evident to a non-Meade Farm user.
+
+### Users
+
+A user is a Meade Farm employee who has to log jobs through the application. As explained earlier, users have a user type or clearance level which determines their level of access in the application.
+
+Admin users have access to all areas of the site and can perform any action. Managers similarly can access all areas of the site except the django admin panel. Stock Controllers have similar access as Managers but cannot view reports or individual employee profiles, other than their own. General operatives can create, edit and delete jobs but only if they created them or were assigned to them. They can also view and add stock to jobs but cannot receive stock or move stock around. Requesters can request a job be performed via a form but nothing else.
+
+### Jobs
+
+A job is a task to be undertaken by a user. Jobs can be requested by Requesters, which then must be approved by the respective department Manager. Jobs can also be created by managers and assigned to users or created by general operatives.
+
+When a job is assigned to a user it is assigned the status of *Not Started*, when a user first logs time agains a job the job's status changes to *Started*, when a user is satisfied that the job is complete they can go in to the job and mark it as *Completed*.
+
+Multiple users can be assigned and work on a single job. As such the relationship between the *Assigned To* field in the *Jobs* model and the *Users* model is a *Many-To-Many* relationship.
+
+### Projects
+
+From a real-world point of view, a *project* is a large task/undertaking/development that is multi-staged and requires work over several weeks/months. From a logical point of view, *projects* are just collections of jobs with a common heading.
+
+### Assets
+
+Similar to projects, *assets* are collections of jobs with a common heading, in this case the *asset*. This is typically a large machine that requires on-going maintenance. Unlike projects though, *assets* require ongoing maintenance through *PPM*s and records of these being done at regular intervals is required by food safety auditors. As such, jobs need to be automatically duplicated at set intervals so that users are notified that the task needs to be repeated.
+
+### Stock Items
+
+*Stock Items* or *Items* are stockable items that can be consumed by jobs. These can include, screws, bearings, cables, motors and so on.
+
+TBC
