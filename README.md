@@ -232,3 +232,53 @@ Similar to projects, *assets* are collections of jobs with a common heading, in 
 *Stock Items* or *Items* are stockable items that can be consumed by jobs. These can include, screws, bearings, cables, motors and so on.
 
 TBC
+
+## Development Process
+
+TBC
+
+## Features
+
+TBC
+
+## Technologies Used
+
+### Languages
+
+* HTML5
+* CSS3
+* JavaScript
+* Python 3.9
+* SQL
+
+### Frameworks/Libraries/Tools
+
+* [Django](https://www.djangoproject.com/)
+* [Heroku](https://www.heroku.com/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [Git](https://git-scm.com/)
+* [GitHub](https://github.com/)
+* [Bootstrap v4.6](https://getbootstrap.com/)
+* [jQuery](https://jquery.com/)
+* [Balsamiq](https://balsamiq.com/)
+* [Diagrams.net](https://app.diagrams.net/)
+
+## Testing
+
+For testing information regarding this project please see the [TESTING.md](TESTING.md) file.
+
+## Running Locally
+
+TBC
+
+## Deployment
+
+TBC
+
+## Project Outcome
+
+TBC
+
+## Credits
+
+TBC
