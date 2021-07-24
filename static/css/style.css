@@ -21,3 +21,23 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
 
+/* Navbar Rules */
+
+nav {
+    background-color: var(--blue-header);
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: var(--off-white);
+}
+
+.nav-item .active {
+    color: black;
+    background-color: var(--off-white);
+}
+
+
