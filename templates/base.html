@@ -13,8 +13,42 @@
     <title>Pallas {% block extra_title %}{% endblock %}</title>
 </head>
 <body>
-    <header class="container-fluid fixed-top">
+    <header class="sticky-top shadow">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a href="#" class="navbar-brand">
+                <img src="{{ MEDIA_URL }}owl-icon.png" alt="Game Logo" width="30" height="30">
+                Pallas
+            </a>
         
+            {% if user.is_authenticated %}
+                <div class="dropdown ml-auto">
+                    <a role="button" class="nav-link dropdown-toggle" id="logoutDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-alt"></i> James
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="logoutDropdown">
+                        <a href="#" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#loginNavbar" aria-controls="loginNavbar" aria-expanded="false" aria-label="Toggle Navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse ml-auto" id="loginNavbar">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-alt"></i> Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fab fa-wpforms"></i> Register
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        </nav>
     </header>
     {% if messages %}
         <div class="message-container"></div>
