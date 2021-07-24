@@ -41,3 +41,16 @@ nav {
 }
 
 
+/* sidebar rules */
+
+/* Rule copied from https://getbootstrap.com/docs/4.6/examples/dashboard/ */ 
+.sidebar {
+    background-color: var(--blue-body);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
+}
