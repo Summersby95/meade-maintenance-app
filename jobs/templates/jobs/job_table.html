@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="card content-card">
+            <h4 class="card-header">
+                Outstanding Jobs
+            </h4>
+            <div class="card-body">
+                <table class="table" id="jobsTable">
+                    <thead>
+                        <th class="col">Job Number</th>
+                        <th class="col">Title</th>
+                        <th class="col">Department</th>
+                        <th class="col">Priority</th>
+                        <th class="col">Status</th>
+                        <th class="col">Employee</th>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                            <tr>
+                                <th scope="row">{{ job.id }}</th>
+                                <td>{{ job.job_title }}</td>
+                                <td>{{ job.department }}</td>
+                                <td>{{ job.priority }}</td>
+                                <td>{{ job.status }}</td>
+                                <td>#</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#jobsTable").DataTable({
+                responsive: true,
+                columnDefs: [
+                    { responsivePriority: 1, targets: 1 },
+                    { 'max-width': '20%', targets: 0}
+                ]
+            });
+            $(window).resize(function() {
+                window.location.reload();
+            });
+        });
+    </script>
+{% endblock %}
