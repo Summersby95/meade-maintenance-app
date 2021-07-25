@@ -30,3 +30,25 @@ def job_details(request, job_id):
     }
 
     return render(request, 'jobs/job_details.html', context)
+
+
+def create_job(request):
+    """ View to create job """
+    if request.method == 'POST':
+        form = JobForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return outstanding_jobs(request)
+        else:
+            print(form.errors)
+    else:
+        form = JobForm()
+        stepsForm = JobStepsForm()
+    
+    context = {
+        'form': form,
+        'stepsForm': stepsForm,
+    }
+
+    return render(request, 'jobs/create_job.html', context)
+
