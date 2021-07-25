@@ -91,3 +91,20 @@ header ul.nav {
 .warning {
     background-color: #FF9800;
 }
+
+/* Content card rules */
+
+.content-card {
+    border-radius: 0 0 10px 10px;
+    min-height: 100%;
+}
+
+.content-card .card-header {
+    background-color: var(--blue-body);
+    color: white;
+    border-radius: 0;
+}
+
+.content-card ul {
+    margin-bottom: 5px;
+}
