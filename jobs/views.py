@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from .models import Job, JobSteps, JobTimes
+from .forms import JobForm, JobStepsForm
 
 
 def outstanding_jobs(request):
@@ -52,3 +53,24 @@ def create_job(request):
 
     return render(request, 'jobs/create_job.html', context)
 
+
+def edit_job(request, job_id):
+    """ View to edit job """
+    job = get_object_or_404(Job, pk=job_id)
+
+    if request.method == 'POST':
+        form = JobForm(request.POST, instance=job)
+        if form.is_valid():
+            form.save()
+            return outstanding_jobs(request)
+        else:
+            print(form.errors)
+    else:
+        form = JobForm(instance=job)
+    
+    context = {
+        'form': form,
+        'job': job,
+    }
+
+    return render(request, 'jobs/edit_job.html', context)
