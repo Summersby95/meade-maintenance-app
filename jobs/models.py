@@ -49,3 +49,15 @@ class Job(models.Model):
         return self.job_title
 
 
+class JobSteps(models.Model):
+    """ Job Steps Model """
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    step_number = models.IntegerField()
+    step = models.CharField(max_length=255)
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.step
+    
+    class Meta:
+        verbose_name_plural = 'Job Steps'
