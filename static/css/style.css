@@ -44,6 +44,17 @@ nav {
     background-color: var(--off-white);
 }
 
+header ul.nav {
+    background-color: var(--blue-body);
+}
+
+.mobile-nav {
+    text-align: center;
+}
+
+.mobile-nav .nav-link {
+    border-bottom: 1px solid white;
+}
 
 /* sidebar rules */
 
