@@ -5,6 +5,9 @@ class Departments(models.Model):
 
     def __str__(self):
         return self.department_name
+    
+    class Meta:
+        verbose_name_plural = "Departments"
 
 
 class Locations(models.Model):
@@ -13,3 +16,6 @@ class Locations(models.Model):
 
     def __str__(self):
         return self.location_name
+    
+    class Meta:
+        verbose_name_plural = "Locations"
