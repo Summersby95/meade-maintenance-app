@@ -11,3 +11,15 @@ class JobForm(forms.ModelForm):
     def _init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
+class JobStepsForm(forms.ModelForm):
+
+    class Meta:
+        model = JobSteps
+        fields = ['step_number', 'step']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    
+
+
