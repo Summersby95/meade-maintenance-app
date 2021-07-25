@@ -152,8 +152,12 @@
                     <div class="message-container"></div>
                 {% endif %}
 
-                {% block content %}
-                {% endblock %}
+                <div class="container-fluid">
+                    <div class="row">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
             </main>
         </div>
     </div>
