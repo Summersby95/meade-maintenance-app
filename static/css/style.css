@@ -70,3 +70,24 @@ header ul.nav {
     padding: 85px 0 0;
     box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
 }
+
+/* message container */
+
+.message-container {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+
+.success {
+    background-color: #4CAF50;
+}
+
+.error {
+    background-color: #F44336;
+}
+
+.warning {
+    background-color: #FF9800;
+}
