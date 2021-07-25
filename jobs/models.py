@@ -61,3 +61,16 @@ class JobSteps(models.Model):
     
     class Meta:
         verbose_name_plural = 'Job Steps'
+
+
+class JobTimes(models.Model):
+    """ Job Times Model """
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    time_start = models.DateTimeField(null=True)
+    time_end = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return str(self.time_start) + " - " + str(self.time_end)
+    
+    class Meta:
+        verbose_name_plural = 'Job Times'
