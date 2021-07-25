@@ -105,3 +105,33 @@ header ul.nav {
 .content-card ul {
     margin-bottom: 5px;
 }
+
+/* Action Button Classes */
+.action-button {
+    padding-top: 14px;
+    font-size: 20px;
+    height: 60px;
+    width: 100%;
+    border-radius: 0;
+    color: white;
+}
+
+.action-button:hover {
+    color: white;
+}
+
+.midnight-blue {
+    background-color: var(--blue-header);
+}
+
+.orange {
+    background-color: #F77F00;
+}
+
+.purple {
+    background-color: #693668;
+}
+
+.blue {
+    background-color: var(--blue-body);
+}
