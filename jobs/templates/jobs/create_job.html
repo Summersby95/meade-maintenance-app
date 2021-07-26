@@ -3,42 +3,37 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="col-12">
-        <div class="card content-card">
-            <h4 class="card-header">
-                Create Job
-            </h4>
-            <div class="card-body">
-                <form action="{% url 'create_job' %}" method="post" class="row">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        <div class="col-12 col-lg-6">
-                            {{ field | as_crispy_field }}
-                        </div>
-                    {% endfor %}
-                    <button type="submit" class="btn action-button btn-success">
-                        <i class="fas fa-check"></i> Create Job
+    <form action="{% url 'create_job' %}" method="post">
+        {% csrf_token %}
+        <div class="col-12">
+            <div class="card content-card">
+                <h4 class="card-header">
+                    Create Job
+                </h4>
+                <div class="card-body">
+                    <div class="row">
+                        {% for field in form %}
+                            <div class="col-12 col-lg-6">
+                                {{ field | as_crispy_field }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card content-card">
+                <h4 class="card-header">
+                    Steps (Optional)
+                </h4>
+                <div class="card-body">
+                    <table class="table" id="stepsTable"></table>
+                    <button type="button" class="btn" id="stepAdd">
+                        <i class="fas fa-plus"></i> Add Step
                     </button>
-                    <a href="{% url 'outstanding_jobs' %}" class="btn action-button btn-danger">
-                        <i class="fas fa-times"></i> Cancel
-                    </a>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-12">
-        <div class="card content-card">
-            <h4 class="card-header">
-                Steps (Optional)
-            </h4>
-            <div class="card-body">
-                <table class="table" id="stepsTable"></table>
-                <button class="btn" id="stepAdd">
-                    <i class="fas fa-plus"></i> Add Step
-                </button>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
 {% block extrajs %}
