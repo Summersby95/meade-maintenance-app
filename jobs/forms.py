@@ -22,7 +22,7 @@ class JobStepsForm(forms.ModelForm):
 
     class Meta:
         model = JobSteps
-        fields = ['step_number', 'step']
+        fields = ['job', 'step_number', 'step']
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
