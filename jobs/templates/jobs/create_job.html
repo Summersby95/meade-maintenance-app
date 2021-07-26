@@ -9,9 +9,13 @@
                 Create Job
             </h4>
             <div class="card-body">
-                <form action="{% url 'create_job' %}" method="post">
+                <form action="{% url 'create_job' %}" method="post" class="row">
                     {% csrf_token %}
-                    {{ form | crispy }}
+                    {% for field in form %}
+                        <div class="col-12 col-lg-6">
+                            {{ field | as_crispy_field }}
+                        </div>
+                    {% endfor %}
                     <button type="submit" class="btn action-button btn-success">
                         <i class="fas fa-check"></i> Create Job
                     </button>
