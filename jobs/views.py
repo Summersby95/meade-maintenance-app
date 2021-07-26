@@ -57,11 +57,9 @@ def create_job(request):
             print(form.errors)
     else:
         form = JobForm()
-        stepsForm = JobStepsForm()
     
     context = {
         'form': form,
-        'stepsForm': stepsForm,
     }
 
     return render(request, 'jobs/create_job.html', context)
