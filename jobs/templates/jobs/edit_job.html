@@ -3,23 +3,70 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="col-12">
-        <div class="card content-card">
-            <h4 class="card-header">
-                Edit Job
-            </h4>
-            <div class="card-body">
-                <form action="{% url 'edit_job' job.id %}" method="post">
-                    {% csrf_token %}
-                    {{ form | crispy }}
-                    <button type="submit" class="btn action-button btn-success">
-                        <i class="fas fa-check"></i> Update Job
-                    </button>
-                    <a href="{% url 'outstanding_jobs' %}" class="btn action-button btn-danger">
-                        <i class="fas fa-times"></i> Cancel
-                    </a>
-                </form>
+    <form action="{% url 'edit_job' job.id %}" method="post">
+        {% csrf_token %}
+        <div class="col-12">
+            <div class="card content-card">
+                <h4 class="card-header">
+                    Update Job
+                </h4>
+                <div class="card-body">
+                    <div class="row">
+                        {% for field in form %}
+                            <div class="col-12 col-lg-6">
+                                {{ field | as_crispy_field }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="col-12">
+            <div class="card content-card">
+                <h4 class="card-header">
+                    Steps (Optional)
+                </h4>
+                <div class="card-body">
+                    <table class="table" id="stepsTable">
+                        {% for step in job_steps %}
+                            <tr>
+                                <th>{{ step.step_number }}.</th>
+                                <td>
+                                    <input class="form-control"  name="step_{{ step.step_number }}" id="step_{{ step.step_number }}" value="{{ step.step }}" required>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn step-up" data-step="{{ step.step_number }}">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn step-down" data-step="{{ step.step_number }}">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn step-delete text-danger" data-step="{{ step.step_number }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <button type="button" class="btn" id="stepAdd">
+                        <i class="fas fa-plus"></i> Add Step
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn action-button btn-success">
+            <i class="fas fa-check"></i> Update Job
+        </button>
+        <a href="{% url 'job_detail' job.id %}" class="btn action-button btn-danger">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </form>
+{% endblock %}
+
+{% block extrajs %}
+<script src="{% static 'js/steps.js' %}"></script>
 {% endblock %}
