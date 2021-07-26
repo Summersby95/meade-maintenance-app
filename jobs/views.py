@@ -68,6 +68,7 @@ def create_job(request):
 def edit_job(request, job_id):
     """ View to edit job """
     job = get_object_or_404(Job, pk=job_id)
+    job_steps = JobSteps.objects.filter(job=job_id)
 
     if request.method == 'POST':
         form = JobForm(request.POST, instance=job)
