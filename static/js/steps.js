@@ -1,3 +1,14 @@
+/* jshint esversion: 7 */
+
+// Set move button to disabled on page load
+$(document).ready(function() {
+    $(".step-up").attr("disabled", false);
+    $(".step-up:first").attr("disabled", true);
+
+    $(".step-down").attr("disabled", false);
+    $(".step-down:last").attr("disabled", true);
+});
+
 // Button event listener to add table row
 $("#stepAdd").click(function() {
     tableLength = $("#stepsTable tr").length;
