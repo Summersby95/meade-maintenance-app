@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 def dashboard(request):
     """Returns dashboard home"""
-    return render(request, 'dashboard/index.html')
+    return render(request, 'dashboard/dashboard.html')
