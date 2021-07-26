@@ -6,7 +6,13 @@ class JobForm(forms.ModelForm):
 
     class Meta:
         model = Job
-        fields = '__all__'
+        fields = [
+            'job_title',
+            'department',
+            'type',
+            'priority',
+            'description',
+        ]
     
     def _init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
