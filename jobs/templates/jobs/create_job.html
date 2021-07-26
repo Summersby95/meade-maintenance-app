@@ -69,3 +69,9 @@
                 </td>
             </tr>
         `);
+        $(".step-up").attr("disabled", false);
+        $(".step-up:first").attr("disabled", true);
+
+        $(".step-down").attr("disabled", false);
+        $(".step-down:last").attr("disabled", true);
+    });
