@@ -95,6 +95,7 @@ def edit_job(request, job_id):
     context = {
         'form': form,
         'job': job,
+        'job_steps': job_steps,
     }
 
     return render(request, 'jobs/edit_job.html', context)
