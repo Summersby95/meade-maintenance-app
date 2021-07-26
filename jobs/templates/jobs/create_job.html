@@ -89,3 +89,10 @@
         $(".step-down").attr("disabled", false);
         $(".step-down:last").attr("disabled", true);
     });
+    $("body").on('click', ".step-up", function() {
+        let stepNumber = $(this).data("step");
+        let topStepVal = $(`#step_${stepNumber-1}`).val();
+        let botStepVal = $(`#step_${stepNumber}`).val();
+        $(`#step_${stepNumber-1}`).val(botStepVal);
+        $(`#step_${stepNumber}`).val(topStepVal);
+    });
