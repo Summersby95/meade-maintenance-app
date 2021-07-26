@@ -29,10 +29,13 @@
     <div class="col-12">
         <div class="card content-card">
             <h4 class="card-header">
-                Job Steps
+                Steps (Optional)
             </h4>
             <div class="card-body">
-                {{ stepsForm | crispy }}
+                <table class="table" id="stepsTable"></table>
+                <button class="btn" id="stepAdd">
+                    <i class="fas fa-plus"></i> Add Step
+                </button>
             </div>
         </div>
     </div>
