@@ -34,6 +34,13 @@
                 </div>
             </div>
         </div>
+        <button type="submit" class="btn action-button btn-success">
+            <i class="fas fa-check"></i> Create Job
+        </button>
+        <a href="{% url 'outstanding_jobs' %}" class="btn action-button btn-danger">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </form>
 {% endblock %}
 
 {% block extrajs %}
