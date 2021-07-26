@@ -40,3 +40,32 @@
         </div>
     </div>
 {% endblock %}
+
+{% block extrajs %}
+<script>
+    $("#stepAdd").click(function() {
+        tableLength = $("#stepsTable tr").length;
+        stepNumber = tableLength + 1;
+        $("#stepsTable").append(`
+            <tr>
+                <th>${stepNumber}.</th>
+                <td>
+                    <input class="form-control"  name="step_${stepNumber}" id="step_${stepNumber}" required>
+                </td>
+                <td>
+                    <button class="btn step-up" data-step="${stepNumber}">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn step-down" data-step="${stepNumber}">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn step-delete text-danger" data-step="${stepNumber}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `);
