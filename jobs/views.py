@@ -37,9 +37,22 @@ def create_job(request):
     """ View to create job """
     if request.method == 'POST':
         form = JobForm(request.POST)
+        
         if form.is_valid():
-            form.save()
-            return outstanding_jobs(request)
+            job = form.save()
+            for key, value in request.POST.items():
+                if 'step' in key:
+                    step_form = JobStepsForm({
+                        'job': job.id,
+                        'step_number': key.split('_')[1],
+                        'step': value,
+                    });
+                    if step_form.is_valid():
+                        step_form.save()
+                    else:
+                        print(step_form.errors)
+
+            return redirect(reverse(job_details, args=[job.id]))
         else:
             print(form.errors)
     else:
