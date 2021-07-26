@@ -96,3 +96,13 @@
         $(`#step_${stepNumber-1}`).val(botStepVal);
         $(`#step_${stepNumber}`).val(topStepVal);
     });
+    $("body").on('click', ".step-down", function() {
+        let stepNumber = $(this).data("step");
+        let topStepVal = $(`#step_${stepNumber}`).val();
+        let botStepVal = $(`#step_${stepNumber+1}`).val();
+        $(`#step_${stepNumber}`).val(botStepVal);
+        $(`#step_${stepNumber+1}`).val(topStepVal);
+    });
+
+</script>
+{% endblock %}
