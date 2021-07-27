@@ -51,18 +51,5 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#jobsTable").DataTable({
-                responsive: true,
-                columnDefs: [
-                    { responsivePriority: 1, targets: 1 },
-                    { 'max-width': '20%', targets: 0}
-                ]
-            });
-            $(window).resize(function() {
-                window.location.reload();
-            });
-        });
-    </script>
+    <script src="{% static 'js/datatables.js' %}"></script>
 {% endblock %}
