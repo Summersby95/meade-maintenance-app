@@ -123,3 +123,12 @@ def create_time_log(request, job_id):
 
     return render(request, 'jobs/create_time_log.html', context)
 
+
+def mark_completed(request, job_id):
+    """ View to mark job as completed """
+    job = get_object_or_404(Job, pk=job_id)
+    job.status = get_object_or_404(JobStatus, status='Completed')
+    job.save()
+    return redirect(reverse(job_details, args=[job_id]))
+
+
