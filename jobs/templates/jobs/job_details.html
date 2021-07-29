@@ -140,23 +140,17 @@
         </div>
     </div>
     <div class="col-12">
-        <a href="{% url 'edit_job' job.id %}" class="btn action-button midnight-blue">
-            <i class="fas fa-pen"></i> Edit Job
-        </a>
-        <a href="#" class="btn action-button blue">
-            <i class="far fa-clock"></i> Start/Stop Job
-        </a>
-        <a href="#" class="btn action-button purple">
-            <i class="far fa-calendar"></i> Log Time
-        </a>
-        <a href="#" class="btn action-button btn-success">
-            <i class="fas fa-check"></i> Mark Completed
-        </a>
-        <a href="#" class="btn action-button orange">
-            <i class="fas fa-plus"></i> Add Part
-        </a>
-        <a href="#" class="btn action-button btn-danger">
-            <i class="fas fa-times"></i> Cancel Job
-        </a>
+            </a>
+            <a href="{% url 'create_time_log' job.id %}" class="btn action-button purple">
+                <i class="far fa-calendar"></i> Log Time
+            </a>
+            <a href="{% url 'mark_completed' job.id %}" class="btn action-button btn-success">
+                <i class="fas fa-check"></i> Mark Completed
+            </a>
+            <a href="#" class="btn action-button orange">
+                <i class="fas fa-plus"></i> Add Part
+            </a>
+            <a href="{% url 'cancel_job' job.id %}" class="btn action-button btn-danger">
+                <i class="fas fa-times"></i> Cancel Job
     </div>
 {% endblock %}
