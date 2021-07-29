@@ -46,7 +46,7 @@ def create_job(request):
                         'job': job.id,
                         'step_number': key.split('_')[1],
                         'step': value,
-                    });
+                    })
                     if step_form.is_valid():
                         step_form.save()
                     else:
@@ -81,7 +81,7 @@ def edit_job(request, job_id):
                         'job': job.id,
                         'step_number': key.split('_')[1],
                         'step': value,
-                    });
+                    })
                     if step_form.is_valid():
                         step_form.save()
                     else:
