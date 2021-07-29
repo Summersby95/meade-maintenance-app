@@ -132,3 +132,10 @@ def mark_completed(request, job_id):
     return redirect(reverse(job_details, args=[job_id]))
 
 
+def reopen_job(request, job_id):
+    """ View to reopen job """
+    job = get_object_or_404(Job, pk=job_id)
+    job.status = get_object_or_404(JobStatus, status='Started')
+    job.save()
+    return redirect(reverse(job_details, args=[job_id]))
+
