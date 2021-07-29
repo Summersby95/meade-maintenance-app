@@ -1,6 +1,8 @@
 from django import forms
-from .models import Job, JobStatus, JobPriority, JobTypes, JobSteps
+from django.forms.widgets import SplitDateTimeWidget
+from .models import Job, JobStatus, JobPriority, JobTimes, JobTypes, JobSteps
 from ancillaries.models import Departments
+from datetime import datetime, timedelta
 
 class JobForm(forms.ModelForm):
 
