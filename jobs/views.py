@@ -139,3 +139,10 @@ def reopen_job(request, job_id):
     job.save()
     return redirect(reverse(job_details, args=[job_id]))
 
+
+def cancel_job(request, job_id):
+    """ View to cancel job """
+    job = get_object_or_404(Job, pk=job_id)
+    job.status = get_object_or_404(JobStatus, status='Cancelled')
+    job.save()
+    return redirect(reverse(job_details, args=[job_id]))
