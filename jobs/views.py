@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect, reverse
-from .models import Job, JobSteps, JobTimes
-from .forms import JobForm, JobStepsForm
+from .models import Job, JobStatus, JobSteps, JobTimes
+from .forms import JobForm, JobStepsForm, JobTimesForm
 
 
 def outstanding_jobs(request):
