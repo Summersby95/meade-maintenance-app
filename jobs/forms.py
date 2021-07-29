@@ -28,6 +28,25 @@ class JobStepsForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    
 
+
+class JobTimesForm(forms.ModelForm):
+    
+    class Meta:
+        model = JobTimes
+        exclude = ['job']
+    
+    time_start = forms.DateTimeField(
+        input_formats=['%d/%m/%Y %H:%M'],
+        widget=forms.DateTimeInput(),
+        initial=datetime.now()
+    )
+    time_end = forms.DateTimeField(
+        input_formats=['%d/%m/%Y %H:%M'],
+        widget=forms.DateTimeInput(),
+        initial=datetime.now() + timedelta(hours=1)
+    )
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
