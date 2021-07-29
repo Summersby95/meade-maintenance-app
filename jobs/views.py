@@ -99,3 +99,27 @@ def edit_job(request, job_id):
     }
 
     return render(request, 'jobs/edit_job.html', context)
+
+
+def create_time_log(request, job_id):
+    """ View to create time log """
+    job=get_object_or_404(Job, pk=job_id)
+
+    if request.method == 'POST':
+        form = JobTimesForm(request.POST)
+        if form.is_valid():
+            job_time = JobTimes(job=job, **form.cleaned_data)
+            job_time.save()
+            return redirect(reverse(job_details, args=[job_id]))
+        else:
+            print(form.errors)
+    else:
+        form = JobTimesForm()
+
+    context = {
+        'job_id': job_id,
+        'form': form,
+    }
+
+    return render(request, 'jobs/create_time_log.html', context)
+
