@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'dashboard',
     'jobs',
     'ancillaries',
+    'profiles',
     'crispy_forms',
 ]
 
