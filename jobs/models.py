@@ -1,5 +1,6 @@
 from django.db import models
 from ancillaries.models import *
+from django.contrib.auth.models import User
 
 
 class JobStatus(models.Model):
@@ -44,6 +45,8 @@ class Job(models.Model):
     priority = models.ForeignKey(JobPriority, null=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    assigned_to = models.ManyToManyField(User, related_name='assigned_to', blank=True)
 
     def __str__(self):
         return self.job_title
@@ -68,6 +71,7 @@ class JobTimes(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     time_start = models.DateTimeField(null=True)
     time_end = models.DateTimeField(null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.time_start) + " - " + str(self.time_end)
