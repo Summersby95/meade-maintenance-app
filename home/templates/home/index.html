@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<header class="sticky-top shadow">
+    <nav class="navbar navbar-dark">
+        <a href="#" class="navbar-brand">
+            <img src="{{ MEDIA_URL }}owl-icon.png" alt="Logo" width="30" height="30">
+            Pallas
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#loginNavbar" aria-controls="loginNavbar" aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ml-auto" id="loginNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/accounts/login/" class="nav-link">
+                        <i class="fas fa-user-alt"></i> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/accounts/signup/" class="nav-link">
+                        <i class="fab fa-wpforms"></i> Register
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<h4>Placeholder!</h4>
+{% endblock %}
