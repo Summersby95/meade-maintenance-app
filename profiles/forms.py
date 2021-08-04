@@ -11,16 +11,18 @@ class CustomSignupForm(SignupForm):
     user_type = forms.ModelChoiceField(queryset=UserTypes.objects.all(), required=True)
     phone_number = forms.CharField(max_length=15, required=True)
     
-    def signup(self, request, user):
-        user.save()
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
         profile = UserProfile(
             user=user,
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name'],
             department=self.cleaned_data['department'],
             user_type=self.cleaned_data['user_type'],
+            phone_number=self.cleaned_data['phone_number'],
         )
         profile.save()
         return user
+
 
     

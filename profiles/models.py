@@ -15,11 +15,11 @@ class UserTypes(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=15)
+    last_name = models.CharField(max_length=15)
     department = models.ForeignKey(Departments, on_delete=models.CASCADE)
     user_type = models.ForeignKey(UserTypes, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15)
 
     def __str__(self):
-        return self.username
+        return self.user.username
