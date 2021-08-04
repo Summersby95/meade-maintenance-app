@@ -2,6 +2,13 @@ from django.shortcuts import get_object_or_404, render, redirect, reverse
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
 
+app_context = {
+    'nbar': 'jobs',
+    'links': (
+        ('Outstanding Jobs', 'outstanding_jobs'),
+        ('Create Job', 'create_job'),
+    ),
+}
 
 def outstanding_jobs(request):
     """ View to see outstanding jobs for user """
@@ -11,6 +18,7 @@ def outstanding_jobs(request):
     context = {
         'jobs': jobs,
     }
+    context = {**context, **app_context}
 
     return render(request, 'jobs/job_table.html', context)
 
