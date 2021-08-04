@@ -172,3 +172,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ACCOUNT_FORMS = {'signup': 'profiles.forms.CustomSignupForm'}
+
+LOGIN_REDIRECT_URL = 'dashboard'
