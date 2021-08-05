@@ -6,13 +6,13 @@ app_context = {
     'nbar': 'dashboard',
     'links': [
         {
-            'href': 'outstanding_jobs',
+            'href': 'dashboard',
             'text': 'Dashboard',
         },
-        {
-            'href': 'create_job',
-            'text': 'Reports',
-        },
+        # {
+        #     'href': 'create_job',
+        #     'text': 'Reports',
+        # },
     ],
 }
 
