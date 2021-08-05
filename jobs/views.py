@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
+from django.contrib.auth.decorators import login_required
 
 app_context = {
     'nbar': 'jobs',
@@ -10,6 +11,8 @@ app_context = {
     ),
 }
 
+
+@login_required
 def outstanding_jobs(request):
     """ View to see outstanding jobs for user """
     
@@ -23,6 +26,7 @@ def outstanding_jobs(request):
     return render(request, 'jobs/job_table.html', context)
 
 
+@login_required
 def job_details(request, job_id):
     """ View to see details of a job """
     
@@ -41,6 +45,7 @@ def job_details(request, job_id):
     return render(request, 'jobs/job_details.html', context)
 
 
+@login_required
 def create_job(request):
     """ View to create job """
     if request.method == 'POST':
@@ -73,6 +78,7 @@ def create_job(request):
     return render(request, 'jobs/create_job.html', context)
 
 
+@login_required
 def edit_job(request, job_id):
     """ View to edit job """
     job = get_object_or_404(Job, pk=job_id)
@@ -109,6 +115,7 @@ def edit_job(request, job_id):
     return render(request, 'jobs/edit_job.html', context)
 
 
+@login_required
 def create_time_log(request, job_id):
     """ View to create time log """
     job=get_object_or_404(Job, pk=job_id)
@@ -132,6 +139,7 @@ def create_time_log(request, job_id):
     return render(request, 'jobs/create_time_log.html', context)
 
 
+@login_required
 def mark_completed(request, job_id):
     """ View to mark job as completed """
     job = get_object_or_404(Job, pk=job_id)
@@ -140,6 +148,7 @@ def mark_completed(request, job_id):
     return redirect(reverse(job_details, args=[job_id]))
 
 
+@login_required
 def reopen_job(request, job_id):
     """ View to reopen job """
     job = get_object_or_404(Job, pk=job_id)
@@ -148,6 +157,7 @@ def reopen_job(request, job_id):
     return redirect(reverse(job_details, args=[job_id]))
 
 
+@login_required
 def cancel_job(request, job_id):
     """ View to cancel job """
     job = get_object_or_404(Job, pk=job_id)
