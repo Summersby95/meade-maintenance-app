@@ -1,7 +1,10 @@
+from jobs.decorators import custom_user_test, job_edit_check
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from profiles.models import UserProfile
 
 app_context = {
     'nbar': 'jobs',
@@ -96,9 +99,12 @@ def create_job(request):
 
 
 @login_required
+@custom_user_test(job_edit_check, login_url='/jobs/', redirect_field_name=None)
 def edit_job(request, job_id):
     """ View to edit job """
     job = get_object_or_404(Job, pk=job_id)
+    profile = get_object_or_404(UserProfile, user=request.user)
+
     job_steps = JobSteps.objects.filter(job=job_id)
 
     if request.method == 'POST':
