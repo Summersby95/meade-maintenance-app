@@ -5,10 +5,16 @@ from django.contrib.auth.decorators import login_required
 
 app_context = {
     'nbar': 'jobs',
-    'links': (
-        ('Outstanding Jobs', 'outstanding_jobs'),
-        ('Create Job', 'create_job'),
-    ),
+    'links': [
+        {
+            'href': 'outstanding_jobs',
+            'text': 'Outstanding Jobs',
+        },
+        {
+            'href': 'create_job',
+            'text': 'Create Job',
+        },
+    ],
 }
 
 
