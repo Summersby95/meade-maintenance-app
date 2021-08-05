@@ -112,15 +112,9 @@
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-none d-md-block sidebar collapse">
             <div class="sidebar-sticky pt-3">
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Reports</a>
-                    </li>
                     {% for link in links %}
                         <li class="nav-item">
-                            <a href="{{ url link.1 }}" class="nav-link">{{ link.0 }}</a>
+                            <a href="{% url link.href %}" class="nav-link">{{ link.text }}</a>
                         </li>
                     {% endfor %}
                 </ul>
