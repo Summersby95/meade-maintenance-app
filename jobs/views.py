@@ -21,8 +21,17 @@ app_context = {
 @login_required
 def outstanding_jobs(request):
     """ View to see outstanding jobs for user """
+    profile = get_object_or_404(UserProfile, user=request.user)
     
-    jobs = Job.objects.filter()
+    if str(profile.user_type).lower() in ("admin", "manager"):
+        jobs = Job.objects.filter(
+            (Q(status=JobStatus.objects.get(status='Not Started')) | Q(status=JobStatus.objects.get(status='Started')))
+        )
+    else:
+        jobs = Job.objects.filter(
+            (Q(assigned_to=request.user) | Q(assigned_to=None)) &
+            (Q(status=JobStatus.objects.get(status='Not Started')) | Q(status=JobStatus.objects.get(status='Started')))
+        )
 
     context = {
         'jobs': jobs,
