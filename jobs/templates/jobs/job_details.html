@@ -135,13 +135,13 @@
                 <table class="table">
                     <tbody>
                         <thead>
-                            <th>Start Time</th>
-                            <th>Finish Time</th>
+                            <th>User</th>
+                            <th>Time Spent</th>
                         </thead>
                         {% for log in job_times %}
                             <tr>
-                                <td>{{ log.time_start }}</td>
-                                <td>{{ log.time_end }}</td>
+                                <td>{{ log.user }}</td>
+                                <td>{{ log.time_diff }} hours</td>
                             </tr>
                         {% endfor %}
                     </tbody>
