@@ -1,6 +1,7 @@
 from django.db import models
 from ancillaries.models import *
 from django.contrib.auth.models import User
+from datetime import timedelta
 
 
 class JobStatus(models.Model):
@@ -74,7 +75,10 @@ class JobTimes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.time_start) + " - " + str(self.time_end)
+        return self.job.job_title
+    
+    def time_diff(self):
+        return self.time_end - self.time_start
     
     class Meta:
         verbose_name_plural = 'Job Times'
