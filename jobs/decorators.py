@@ -38,3 +38,20 @@ def custom_user_test(test_func, login_url=None, redirect_field_name=REDIRECT_FIE
         return _wrapped_view
     return decorator
 
+
+def job_edit_check(request):
+    profile = get_object_or_404(UserProfile, user=request.user)
+    print(request.GET)
+    # job_id = request.GET['job_id']
+    # print(job_id)
+    # job = get_object_or_404(Job, id=job_id)
+    res = False
+    
+    if str(profile.user_type).lower() in ('admin', 'manager'):
+        res = True
+    # elif job.created_by == request.user:
+    #     res = True
+    # elif job.assigned_to == request.user:
+    #     res = True
+    
+    return res
