@@ -47,6 +47,7 @@ def job_details(request, job_id):
         'job_steps': job_steps,
         'job_times': job_times,
     }
+    context = {**context, **app_context}
 
     return render(request, 'jobs/job_details.html', context)
 
@@ -80,6 +81,7 @@ def create_job(request):
     context = {
         'form': form,
     }
+    context = {**context, **app_context}
 
     return render(request, 'jobs/create_job.html', context)
 
@@ -117,6 +119,7 @@ def edit_job(request, job_id):
         'job': job,
         'job_steps': job_steps,
     }
+    context = {**context, **app_context}
 
     return render(request, 'jobs/edit_job.html', context)
 
@@ -141,6 +144,7 @@ def create_time_log(request, job_id):
         'job_id': job_id,
         'form': form,
     }
+    context = {**context, **app_context}
 
     return render(request, 'jobs/create_time_log.html', context)
 
