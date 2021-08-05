@@ -33,11 +33,21 @@
                             </li>
                             <li class="list-group-item">
                                 <b>Assigned To</b>
-                                <span class="float-right">N/A</span>
+                                <span class="float-right">
+                                    {% if job.assigned_to.all|length > 0 %}
+                                        <ul class="list-group list-group-flush">
+                                            {% for ass_user in job.assigned_to.all %}
+                                                <li class="list-group-item">{{ ass_user }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %} 
+                                        Unassigned
+                                    {% endif %}
+                                </span>
                             </li>
                             <li class="list-group-item">
                                 <b>Created By</b>
-                                <span class="float-right">N/A</span>
+                                <span class="float-right">{{ job.created_by }}</span>
                             </li>
                             <li class="list-group-item">
                                 <b>Created On</b>
