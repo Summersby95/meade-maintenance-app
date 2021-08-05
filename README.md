@@ -285,3 +285,4 @@ TBC
 
 * [Bootstrap - Dashboard Example](https://getbootstrap.com/docs/4.0/examples/dashboard/)
 * [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/index.html)
+* [Django - Authentication](https://docs.djangoproject.com/en/3.2/topics/auth/default/)
