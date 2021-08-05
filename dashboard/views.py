@@ -18,4 +18,5 @@ app_context = {
 
 def dashboard(request):
     """Returns dashboard home"""
-    return render(request, 'dashboard/dashboard.html')
+    context = app_context
+    return render(request, 'dashboard/dashboard.html', context)
