@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 
 app_context = {
@@ -16,6 +17,7 @@ app_context = {
 }
 
 
+@login_required
 def dashboard(request):
     """Returns dashboard home"""
     context = app_context
