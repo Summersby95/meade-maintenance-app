@@ -177,6 +177,7 @@ def mark_completed(request, job_id):
 
 
 @login_required
+@custom_user_test(job_cancel_check, login_url='/jobs/', redirect_field_name=None)
 def reopen_job(request, job_id):
     """ View to reopen job """
     job = get_object_or_404(Job, pk=job_id)
@@ -186,6 +187,7 @@ def reopen_job(request, job_id):
 
 
 @login_required
+@custom_user_test(job_cancel_check, login_url='/jobs/', redirect_field_name=None)
 def cancel_job(request, job_id):
     """ View to cancel job """
     job = get_object_or_404(Job, pk=job_id)
