@@ -58,3 +58,24 @@ def job_edit_check(request):
         res = True
     
     return res
+
+
+def job_cancel_check(request):
+    """
+    Custom decorator test function that checks if the user is an admin, manager or
+    creator of the job
+    """
+    profile = get_object_or_404(UserProfile, user=request.user)
+    job_id = request.build_absolute_uri().split('/')[-2]
+    job = get_object_or_404(Job, id=job_id)
+
+    res = False
+    
+    if str(profile.user_type).lower() in ('admin', 'manager'):
+        res = True
+    elif job.created_by == request.user:
+        res = True
+    elif job.assigned_to == request.user:
+        res = True
+    
+    return res
