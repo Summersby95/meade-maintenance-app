@@ -140,6 +140,7 @@ def edit_job(request, job_id):
 
 
 @login_required
+@custom_user_test(job_edit_check, login_url='/jobs/', redirect_field_name=None)
 def create_time_log(request, job_id):
     """ View to create time log """
     job=get_object_or_404(Job, pk=job_id)
@@ -165,6 +166,7 @@ def create_time_log(request, job_id):
 
 
 @login_required
+@custom_user_test(job_edit_check, login_url='/jobs/', redirect_field_name=None)
 def mark_completed(request, job_id):
     """ View to mark job as completed """
     job = get_object_or_404(Job, pk=job_id)
