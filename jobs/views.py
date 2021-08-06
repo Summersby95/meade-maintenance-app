@@ -1,4 +1,4 @@
-from jobs.decorators import custom_user_test, job_edit_check
+from jobs.decorators import custom_user_test, job_cancel_check, job_edit_check
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
