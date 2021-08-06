@@ -286,3 +286,5 @@ TBC
 * [Bootstrap - Dashboard Example](https://getbootstrap.com/docs/4.0/examples/dashboard/)
 * [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/index.html)
 * [Django - Authentication](https://docs.djangoproject.com/en/3.2/topics/auth/default/)
+* [Django - Make Form Field Readonly](https://stackoverflow.com/questions/324477/in-a-django-form-how-do-i-make-a-field-readonly-or-disabled-so-that-it-cannot)
+* [Django - Pass User Object To Form](https://stackoverflow.com/questions/43347566/how-to-pass-user-object-to-forms-in-django)
