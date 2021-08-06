@@ -67,8 +67,9 @@ def job_details(request, job_id):
 @login_required
 def create_job(request):
     """ View to create job """
+    profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
-        form = JobForm(request.POST)
+        form = JobForm(request.POST, profile=profile)
         
         if form.is_valid():
             job = form.save()
