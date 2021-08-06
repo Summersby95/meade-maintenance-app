@@ -1,11 +1,9 @@
 from functools import wraps
-import functools
 from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.shortcuts import resolve_url, get_object_or_404
-from django.utils.encoding import force_str
 
 from profiles.models import UserProfile
 from jobs.models import Job
@@ -13,9 +11,8 @@ from jobs.models import Job
 
 def custom_user_test(test_func, login_url=None, redirect_field_name=REDIRECT_FIELD_NAME):
     """
-    Decorator for views that checks that the user passes the given test,
-    redirecting to the log-in page if necessary. The test should be a callable
-    that takes the user object and returns True if the user passes.
+    Custom user_passes_test decorator that passes the request to the test_func instead
+    of request.user.
     """
 
     def decorator(view_func):
