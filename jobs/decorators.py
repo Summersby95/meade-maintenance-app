@@ -43,17 +43,18 @@ def job_edit_check(request):
     same as the job's department.
     """
     profile = get_object_or_404(UserProfile, user=request.user)
-    print(request.GET)
-    # job_id = request.GET['job_id']
-    # print(job_id)
-    # job = get_object_or_404(Job, id=job_id)
+    job_id = request.build_absolute_uri().split('/')[-2]
+    job = get_object_or_404(Job, id=job_id)
+
     res = False
     
     if str(profile.user_type).lower() in ('admin', 'manager'):
         res = True
-    # elif job.created_by == request.user:
-    #     res = True
-    # elif job.assigned_to == request.user:
-    #     res = True
+    elif job.created_by == request.user:
+        res = True
+    elif job.assigned_to == request.user:
+        res = True
+    elif job.assigned_to == None and job.department == profile.department:
+        res = True
     
     return res
