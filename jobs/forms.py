@@ -18,8 +18,17 @@ class JobForm(forms.ModelForm):
             'created_by',
         ]
     
-    def _init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        self.profile = kwargs.pop('profile')
+        super(JobForm, self).__init__(*args, **kwargs)
+        self.fields['created_by'].initial = self.profile.user.id
+        self.fields['created_by'].widget.attrs['hidden'] = True
+        self.fields['created_by'].label = ""
+
+        if not str(self.profile.user_type).lower() in ('admin', 'manager'):
+            self.fields['assigned_to'].initial = self.profile.user.id
+            self.fields['assigned_to'].widget.attrs['hidden'] = True
+            self.fields['assigned_to'].label = ""
 
 
 class JobStepsForm(forms.ModelForm):
