@@ -109,7 +109,7 @@ def edit_job(request, job_id):
     job_steps = JobSteps.objects.filter(job=job_id)
 
     if request.method == 'POST':
-        form = JobForm(request.POST, instance=job)
+        form = JobForm(request.POST, instance=job, profile=profile)
         if form.is_valid():
             job = form.save()
             job_steps.delete()
@@ -128,7 +128,7 @@ def edit_job(request, job_id):
         else:
             print(form.errors)
     else:
-        form = JobForm(instance=job)
+        form = JobForm(instance=job, profile=profile)
     
     context = {
         'form': form,
