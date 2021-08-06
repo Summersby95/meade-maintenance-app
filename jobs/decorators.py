@@ -37,6 +37,11 @@ def custom_user_test(test_func, login_url=None, redirect_field_name=REDIRECT_FIE
 
 
 def job_edit_check(request):
+    """
+    Custom decorator test function that checks if the user is an admin, manager or
+    creator of the job or the job is unassigned and the user's department is the
+    same as the job's department.
+    """
     profile = get_object_or_404(UserProfile, user=request.user)
     print(request.GET)
     # job_id = request.GET['job_id']
