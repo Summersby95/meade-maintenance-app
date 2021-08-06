@@ -89,7 +89,7 @@ def create_job(request):
         else:
             print(form.errors)
     else:
-        form = JobForm()
+        form = JobForm(profile=profile)
     
     context = {
         'form': form,
