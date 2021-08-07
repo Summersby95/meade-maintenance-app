@@ -87,3 +87,27 @@ def create_project(request):
 
     return render(request, 'projects/create_project.html', context)
 
+
+@login_required
+def edit_project(request, project_id):
+    """ View to edit job """
+    project = get_object_or_404(Project, pk=project_id)
+    profile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=project, profile=profile)
+        
+        if form.is_valid():
+            project = form.save()
+            return redirect(reverse(project_details, args=[project.id]))
+        else:
+            print(form.errors)
+    else:
+        form = ProjectForm(profile=profile, instance=project)
+    
+    context = {
+        'form': form,
+        'project': project,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'projects/edit_project.html', context)
