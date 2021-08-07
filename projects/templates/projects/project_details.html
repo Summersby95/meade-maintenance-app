@@ -131,4 +131,11 @@
             </div>
         </div>
     </div>
+    <div class="col-12">
+        {% if project.status.status != 'Completed' and project.status.status != 'Cancelled' %}
+            <a href="{% url 'edit_project' project.id %}" class="btn action-button midnight-blue">
+                <i class="fas fa-pen"></i> Edit Project
+            </a>
+        {% else %}
+        {% endif %}
 {% endblock %}
