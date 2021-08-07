@@ -63,3 +63,27 @@ def project_details(request, project_id):
     }
     context = {**app_context, **context}
     return render(request, 'projects/project_details.html', context)
+
+
+@login_required
+def create_project(request):
+    """ View to create job """
+    profile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, profile=profile)
+        
+        if form.is_valid():
+            project = form.save()
+            return redirect(reverse(project_details, args=[project.id]))
+        else:
+            print(form.errors)
+    else:
+        form = ProjectForm(profile=profile)
+    
+    context = {
+        'form': form,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'projects/create_project.html', context)
+
