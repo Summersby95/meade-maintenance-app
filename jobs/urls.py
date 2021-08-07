@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.outstanding_jobs, name='outstanding_jobs'),
     path('<int:job_id>/', views.job_details, name='job_detail'),
     path('create_job/', views.create_job, name='create_job'),
+    path('create_job/project/<int:project_id>/', views.create_project_job, name='create_project_job'),
     path('edit_job/<int:job_id>/', views.edit_job, name='edit_job'),
     path('log_time/<int:job_id>/', views.create_time_log, name='create_time_log'),
     path('mark_completed/<int:job_id>/', views.mark_completed, name='mark_completed'),
