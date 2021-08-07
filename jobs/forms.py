@@ -22,6 +22,9 @@ class JobForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.profile = kwargs.pop('profile')
         super(JobForm, self).__init__(*args, **kwargs)
+        self.fields['priority'].initial = JobPriority.objects.get(priority='Medium')
+        self.fields['department'].initial = self.profile.department
+        self.fields['type'].initial = JobTypes.objects.get(type='General Maintenance')
         self.fields['created_by'].initial = self.profile.user.id
         self.fields['created_by'].widget.attrs['hidden'] = True
         self.fields['created_by'].label = ""
