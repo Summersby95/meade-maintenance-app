@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#jobsTable").DataTable({
+    $("#dataTable").DataTable({
         responsive: {
             details: false
         },
