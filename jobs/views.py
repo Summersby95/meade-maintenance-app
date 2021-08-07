@@ -1,4 +1,4 @@
-from jobs.decorators import custom_user_test, job_edit_check
+from jobs.decorators import custom_user_test, job_cancel_check, job_edit_check
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
@@ -67,8 +67,9 @@ def job_details(request, job_id):
 @login_required
 def create_job(request):
     """ View to create job """
+    profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
-        form = JobForm(request.POST)
+        form = JobForm(request.POST, profile=profile)
         
         if form.is_valid():
             job = form.save()
@@ -88,7 +89,7 @@ def create_job(request):
         else:
             print(form.errors)
     else:
-        form = JobForm()
+        form = JobForm(profile=profile)
     
     context = {
         'form': form,
@@ -108,7 +109,7 @@ def edit_job(request, job_id):
     job_steps = JobSteps.objects.filter(job=job_id)
 
     if request.method == 'POST':
-        form = JobForm(request.POST, instance=job)
+        form = JobForm(request.POST, instance=job, profile=profile)
         if form.is_valid():
             job = form.save()
             job_steps.delete()
@@ -127,7 +128,7 @@ def edit_job(request, job_id):
         else:
             print(form.errors)
     else:
-        form = JobForm(instance=job)
+        form = JobForm(instance=job, profile=profile)
     
     context = {
         'form': form,
@@ -176,6 +177,7 @@ def mark_completed(request, job_id):
 
 
 @login_required
+@custom_user_test(job_cancel_check, login_url='/jobs/', redirect_field_name=None)
 def reopen_job(request, job_id):
     """ View to reopen job """
     job = get_object_or_404(Job, pk=job_id)
@@ -185,6 +187,7 @@ def reopen_job(request, job_id):
 
 
 @login_required
+@custom_user_test(job_cancel_check, login_url='/jobs/', redirect_field_name=None)
 def cancel_job(request, job_id):
     """ View to cancel job """
     job = get_object_or_404(Job, pk=job_id)
