@@ -33,3 +33,13 @@ def ongoing_projects(request):
 
     return render(request, 'projects/projects_table.html', context)
 
+
+@login_required
+def project_details(request, project_id):
+    """ View to see project details. """
+    project = get_object_or_404(Project, pk=project_id)
+    context = {
+        'project': project,
+    }
+    context = {**app_context, **context}
+    return render(request, 'projects/project_details.html', context)
