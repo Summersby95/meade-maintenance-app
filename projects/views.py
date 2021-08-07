@@ -19,3 +19,17 @@ app_context = {
         }
     ]
 }
+
+
+@login_required
+def ongoing_projects(request):
+    """ View to see ongoing projects. """
+    projects = Project.objects.filter(status=ProjectStatus.objects.get(status='Pending')).order_by('-due_date')
+
+    context = {
+        'projects': projects,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'projects/projects_table.html', context)
+
