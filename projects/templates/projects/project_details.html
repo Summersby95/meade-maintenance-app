@@ -52,6 +52,37 @@
     <div class="col-12">
         <div class="card content-card">
             <h4 class="card-header">
+                Project Time Statistics
+            </h4>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>Total Time Logged:</b>
+                        <span class="float-right">{{ total_time }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Average Time per Job</b>
+                        <span class="float-right">{{ average_time }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Jobs Logged:</b>
+                        <span class="float-right">{{ jobs|length }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Jobs Completed:</b>
+                        <span class="float-right">{{ completed }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Total Users:</b>
+                        <span class="float-right">{{ distinct_users }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card content-card">
+            <h4 class="card-header">
                 Parts Used
             </h4>
             <div class="card-body">
