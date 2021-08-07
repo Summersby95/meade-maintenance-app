@@ -57,10 +57,14 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <b>Project</b>
-                                <span class="float-right">N/A</span>
-                            </li>
+                            {% if job.project %}
+                                <li class="list-group-item">
+                                    <b>Project</b>
+                                    <span class="float-right">
+                                        <a href="{% url 'project_details' job.project.id %}">{{ job.project }}</a>
+                                    </span>
+                                </li>
+                            {% endif %}
                             <li class="list-group-item">
                                 <b>Asset</b>
                                 <span class="float-right">N/A</span>
