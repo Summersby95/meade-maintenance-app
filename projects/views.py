@@ -111,3 +111,14 @@ def edit_project(request, project_id):
     context = {**context, **app_context}
 
     return render(request, 'projects/edit_project.html', context)
+
+
+@login_required
+def mark_project_completed(request, project_id):
+    """ View to mark job as completed """
+    project = get_object_or_404(Project, pk=project_id)
+    project.status = get_object_or_404(ProjectStatus, status='Completed')
+    project.save()
+    return redirect(reverse(project_details, args=[project_id]))
+
+
