@@ -14,6 +14,7 @@ class JobForm(forms.ModelForm):
             'type',
             'priority',
             'description',
+            'project',
         ]
     
     def _init__(self, *args, **kwargs):
