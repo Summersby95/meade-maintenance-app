@@ -122,3 +122,12 @@ def mark_project_completed(request, project_id):
     return redirect(reverse(project_details, args=[project_id]))
 
 
+@login_required
+def cancel_project(request, project_id):
+    """ View to mark job as completed """
+    project = get_object_or_404(Project, pk=project_id)
+    project.status = get_object_or_404(ProjectStatus, status='Cancelled')
+    project.save()
+    return redirect(reverse(project_details, args=[project_id]))
+
+
