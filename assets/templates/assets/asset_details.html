@@ -109,19 +109,37 @@
     <div class="col-12">
         <div class="card content-card">
             <h4 class="card-header">
-                PPM Jobs
+                Scheduled PPMs
             </h4>
             <div class="card-body">
-                <table class="table table-responsive-sm">
+                <table class="table table-responsive-lg">
+                    <thead>
+                        <th>#</th>
+                        <th>PPM Title:</th>
+                        <th>Created By:</th>
+                        <th>Day Interval:</th>
+                        <th>Active:</th>
+                    </thead>
                     <tbody>
-                        <thead>
-                            <th>Job Number:</th>
-                            <th>Job Title:</th>
-                            <th>Created By:</th>
-                            <th>Interval:</th>
-                            <th>Active:</th>
-                        </thead>
-                    
+                        {% for ppm in ppms %} 
+                            <tr>
+                                <td>{{ ppm.id }}</td>
+                                <td>
+                                    <a href="{% url 'ppm_details' ppm.id %}">
+                                        {{ ppm.job_title }}
+                                    </a>
+                                </td>
+                                <td>{{ ppm.created_by }}</td>
+                                <td>{{ ppm.time_interval }}</td>
+                                <td>
+                                    {% if ppm.active %}
+                                        <i class="far fa-check-circle text-success"></i>
+                                    {% else %}
+                                        <i class="far fa-times-circle text-danger"></i>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
