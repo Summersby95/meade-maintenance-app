@@ -76,3 +76,23 @@ def asset_details(request, asset_id):
 
     return render(request, 'assets/asset_details.html', context)
 
+
+@login_required
+def create_asset(request):
+    """ View to create a new asset """
+    if request.method == 'POST':
+        form = AssetForm(request.POST)
+        if form.is_valid():
+            asset = form.save()
+            return redirect(reverse('asset_details', args=(asset.id,)))
+    else:
+        form = AssetForm()
+
+    context = {
+        'form': form,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'assets/create_asset.html', context)
+
+
