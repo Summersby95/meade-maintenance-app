@@ -1,7 +1,10 @@
+import datetime
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from .models import Assets, AssetTypes, PPM
-from jobs.models import Job
+from .forms import AssetForm, PPMForm
+from jobs.models import Job, JobPriority, JobStatus, JobTimes, JobTypes
+from django.db.models import Q
 
 app_context = {
     'nbar': 'assets',
@@ -11,6 +14,9 @@ app_context = {
             'text': 'Active Assets',
         },
         {
+            'href': 'create_asset',
+            'text': 'Create New Asset',
+        },
         {
             'href': 'inactive_assets',
             'text': 'Inactive Assets',
