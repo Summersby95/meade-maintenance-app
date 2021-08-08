@@ -4,6 +4,7 @@ from projects.models import Project
 from django.contrib.auth.models import User
 from datetime import timedelta
 from assets.submodels.assets import Assets
+from assets.submodels.ppm import PPM
 
 
 class JobStatus(models.Model):
