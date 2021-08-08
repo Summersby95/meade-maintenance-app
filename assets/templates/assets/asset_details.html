@@ -65,8 +65,8 @@
             <div class="card-body">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <b>PPM Jobs Completed</b>
-                        <span class="float-right">0</span>
+                        <b>PPM Jobs</b>
+                        <span class="float-right">{{ ppms|length }}</span>
                     </li>
                     <li class="list-group-item">
                         <b>Jobs Logged</b>
@@ -74,15 +74,15 @@
                     </li>
                     <li class="list-group-item">
                         <b>Users Involved</b>
-                        <span class="float-right">0</span>
+                        <span class="float-right">{{ distinct_users }}</span>
                     </li>
                     <li class="list-group-item">
-                        <b>Total PPM Time Logged</b>
-                        <span class="float-right">0</span>
+                        <b>Total Job Time Logged</b>
+                        <span class="float-right">{{ total_time }}</span>
                     </li>
                     <li class="list-group-item">
                         <b>Jobs Completed</b>
-                        <span class="float-right">0</span>
+                        <span class="float-right">{{ completed }}</span>
                     </li>
                 </ul>
             </div>
