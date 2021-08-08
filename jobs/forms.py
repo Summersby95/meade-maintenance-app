@@ -15,6 +15,7 @@ class JobForm(forms.ModelForm):
             'priority',
             'description',
             'project',
+            'asset',
             'assigned_to',
             'created_by',
         ]
