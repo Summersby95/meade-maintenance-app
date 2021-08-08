@@ -47,6 +47,7 @@ class Job(models.Model):
     status = models.ForeignKey(JobStatus, null=True, on_delete=models.SET_NULL, default=1)
     project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.SET_NULL)
     asset = models.ForeignKey(Assets, null=True, blank=True, on_delete=models.SET_NULL)
+    ppm = models.ForeignKey(PPM, null=True, blank=True, on_delete=models.SET_NULL)
     priority = models.ForeignKey(JobPriority, null=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -54,7 +55,10 @@ class Job(models.Model):
     assigned_to = models.ManyToManyField(User, related_name='assigned_to', blank=True)
 
     def __str__(self):
-        return self.job_title
+        if self.ppm is not None:
+            return 'PPM: ' + self.job_title
+        else:
+            return self.job_title
 
 
 class JobSteps(models.Model):
