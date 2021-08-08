@@ -123,3 +123,39 @@ def edit_asset(request, asset_id):
     return render(request, 'assets/edit_asset.html', context)
 
 
+@login_required
+def add_ppm(request, asset_id):
+    """ View to add a new PPM to an existing asset """
+    asset = get_object_or_404(Assets, pk=asset_id)
+    if request.method == 'POST':
+        form = PPMForm(request.POST)
+        if form.is_valid():
+            ppm = form.save(commit=False)
+            ppm.asset = asset
+            ppm.created_by = request.user
+            ppm.save()
+
+            Job.objects.create(
+                job_title=ppm.job_title,
+                department=asset.department,
+                type=JobTypes.objects.get(type='General Maintenance'),
+                status=JobStatus.objects.get(status='Not Started'),
+                asset=asset,
+                ppm=ppm,
+                created_by=request.user,
+                priority=JobPriority.objects.get(priority='Medium'),
+                description=ppm.description,
+            )
+
+            return redirect(reverse('asset_details', args=(asset.id,)))
+    else:
+        form = PPMForm()
+
+    context = {
+        'asset': asset,
+        'form': form,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'assets/add_ppm.html', context)
+
