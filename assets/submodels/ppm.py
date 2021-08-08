@@ -1,14 +1,16 @@
 from django.db import models
-from ancillaries.models import Departments, Locations, Suppliers
-from assets.models import Assets
-from jobs.models import Job
+from django.contrib.auth.models import User
+from assets.submodels.assets import Assets
 
 class PPM(models.Model):
     """
     PPM model
     """
     asset = models.ForeignKey(Assets, on_delete=models.CASCADE)
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    job_title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     time_interval = models.IntegerField()
     active = models.BooleanField(default=True)
     
