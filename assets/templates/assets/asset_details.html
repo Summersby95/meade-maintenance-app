@@ -178,10 +178,10 @@
     </div>
     <div class="col-12">
         {% if profile.user_type.type|lower == "admin" or profile.user_type.type|lower == "manager" %}
-            <a href="#" class="btn action-button midnight-blue">
+            <a href="{% url 'edit_asset' asset.id %}" class="btn action-button midnight-blue">
                 <i class="fas fa-pen"></i> Edit Asset
             </a>
-            <a href="#" class="btn action-button btn-success">
+            <a href="{% url 'add_ppm' asset.id %}" class="btn action-button btn-success">
                 <i class="fas fa-plus"></i> Add PPM Job
             </a>
             <a href="#" class="btn action-button btn-danger">
