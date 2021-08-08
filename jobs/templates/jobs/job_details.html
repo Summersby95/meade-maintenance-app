@@ -65,10 +65,14 @@
                                     </span>
                                 </li>
                             {% endif %}
-                            <li class="list-group-item">
-                                <b>Asset</b>
-                                <span class="float-right">N/A</span>
-                            </li>
+                            {% if job.asset %}
+                                <li class="list-group-item">
+                                    <b>Asset</b>
+                                    <span class="float-right">
+                                        <a href="{% url 'asset_details' job.asset.id %}">{{ job.asset }}</a>
+                                    </span>
+                                </li>
+                            {% endif %}
                             <li class="list-group-item">
                                 <b>Description</b>
                                 <p class="float-right">{{ job.description }}</p>
@@ -90,7 +94,7 @@
                 Job Steps
             </h4>
             <div class="card-body">
-                <table class="table">
+                <table class="table table-responsive-sm">
                     <tbody>
                         {% for step in job_steps %}
                             <tr>
