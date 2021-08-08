@@ -15,19 +15,19 @@
             <div class="card-body">
                 <table class="table" id="dataTable">
                     <thead>
-                        <th class="col">#</th>
-                        <th class="col">Project Title</th>
-                        <th class="col">Due Date</th>
-                        <th class="col">Status</th>
-                        <th class="col">Location</th>
-                        <th class="col">Open Jobs</th>
-                        <th class="col">Completed Jobs</th>
-                        <th class="col">Actions</th>
+                        <th>#</th>
+                        <th>Project Title</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Open Jobs</th>
+                        <th>Completed Jobs</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody>
                         {% for project in projects %}
                             <tr>
-                                <th scope="row">{{ project.id }}</th>
+                                <td>{{ project.id }}</td>
                                 <td>{{ project.title }}</td>
                                 <td>{{ project.due_date }}</td>
                                 <td>{{ project.status }}</td>
