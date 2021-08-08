@@ -48,8 +48,9 @@ INSTALLED_APPS = [
     'ancillaries',
     'profiles',
     'home',
-    'crispy_forms',
     'projects',
+    'assets',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
