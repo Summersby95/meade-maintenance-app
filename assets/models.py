@@ -1,3 +1,3 @@
 from django.db import models
-from assets.submodels.assets import *
-from assets.submodels.ppm import *
+from assets.submodels.assets import Assets, AssetTypes
+from assets.submodels.ppm import PPM
