@@ -15,7 +15,7 @@ class PPM(models.Model):
     active = models.BooleanField(default=True)
     
     def __str__(self):
-        return self.asset.asset_name
+        return self.job_title
     
     class Meta:
         verbose_name_plural = "PPMs"
