@@ -148,7 +148,7 @@
     <div class="col-12">
         <div class="card content-card">
             <h4 class="card-header">
-                Other Jobs
+                Jobs
             </h4>
             <div class="card-body">
                 <table class="table table-responsive-sm">
@@ -164,7 +164,7 @@
                             <tr>
                                 <td>{{ job.id }}</td>
                                 <td>
-                                    <a href="{% url 'job_detail' job.id %}">{{ job.job_title }}</a>
+                                    <a href="{% url 'job_detail' job.id %}">{{ job }}</a>
                                 </td>
                                 <td>{{ job.status }}</td>
                                 <td>{{ job.created_by }}</td>
