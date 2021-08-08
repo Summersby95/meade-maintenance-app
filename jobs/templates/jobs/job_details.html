@@ -73,6 +73,14 @@
                                     </span>
                                 </li>
                             {% endif %}
+                            {% if job.ppm %}
+                                <li class="list-group-item">
+                                    <b>PPM</b>
+                                    <span class="float-right">
+                                        <a href="{% url 'ppm_details' job.ppm.id %}">{{ job.asset }}</a>
+                                    </span>
+                                </li>
+                            {% endif %}
                             <li class="list-group-item">
                                 <b>Description</b>
                                 <p class="float-right">{{ job.description }}</p>
