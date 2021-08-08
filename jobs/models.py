@@ -3,6 +3,7 @@ from ancillaries.models import *
 from projects.models import Project
 from django.contrib.auth.models import User
 from datetime import timedelta
+from assets.submodels.assets import Assets
 
 
 class JobStatus(models.Model):
@@ -45,6 +46,7 @@ class Job(models.Model):
     type = models.ForeignKey(JobTypes, null=True, on_delete=models.SET_NULL)
     status = models.ForeignKey(JobStatus, null=True, on_delete=models.SET_NULL, default=1)
     project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.SET_NULL)
+    asset = models.ForeignKey(Assets, null=True, blank=True, on_delete=models.SET_NULL)
     priority = models.ForeignKey(JobPriority, null=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
