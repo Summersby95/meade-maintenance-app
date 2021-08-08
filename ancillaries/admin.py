@@ -12,3 +12,4 @@ class LocationAdmin(admin.ModelAdmin):
 
 admin.site.register(Departments, DepartmentAdmin)
 admin.site.register(Locations, LocationAdmin)
+admin.site.register(Suppliers)
