@@ -159,3 +159,18 @@ def add_ppm(request, asset_id):
 
     return render(request, 'assets/add_ppm.html', context)
 
+
+@login_required
+def ppm_details(request, ppm_id):
+    """ View to see details of a specific PPM """
+    ppm = get_object_or_404(PPM, pk=ppm_id)
+    jobs = Job.objects.filter(ppm=ppm)
+
+    
+    context = {
+        'ppm': ppm,
+        'jobs': jobs,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'assets/ppm_details.html', context)
