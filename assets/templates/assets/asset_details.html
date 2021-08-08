@@ -1,0 +1,175 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="col-12">
+        <div class="card content-card">
+            <h4 class="card-header">
+                Asset #{{ asset.id }}
+            </h4>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <b>Asset Name</b>
+                                <span class="float-right">{{ asset.asset_name }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Asset Type</b>
+                                <span class="float-right">{{ asset.asset_type }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Department</b>
+                                <span class="float-right">{{ asset.department }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Location</b>
+                                <span class="float-right">{{ asset.location }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Supplier</b>
+                                <span class="float-right">{{ asset.supplier }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <b>Installation Date</b>
+                                <span class="float-right">{{ asset.installation_date }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Description</b>
+                                <p class="float-right">{{ asset.description }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Barcode</b>
+                                <span class="float-right">{{ asset.barcode }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Active</b>
+                                <span class="float-right">{{ asset.active }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card content-card">
+            <h4 class="card-header">
+                Project Time Statistics
+            </h4>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>PPM Jobs Completed</b>
+                        <span class="float-right">0</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Jobs Logged</b>
+                        <span class="float-right">{{ jobs|length }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Users Involved</b>
+                        <span class="float-right">0</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Total PPM Time Logged</b>
+                        <span class="float-right">0</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Jobs Completed</b>
+                        <span class="float-right">0</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card content-card">
+            <h4 class="card-header">
+                Parts Used
+            </h4>
+            <div class="card-body">
+                <table class="table table-responsive-sm">
+                    <tbody>
+                        <thead>
+                            <th>Part Name:</th>
+                            <th>Barcode:</th>
+                            <th>Quantity:</th>
+                        </thead>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card content-card">
+            <h4 class="card-header">
+                PPM Jobs
+            </h4>
+            <div class="card-body">
+                <table class="table table-responsive-sm">
+                    <tbody>
+                        <thead>
+                            <th>Job Number:</th>
+                            <th>Job Title:</th>
+                            <th>Created By:</th>
+                            <th>Interval:</th>
+                            <th>Active:</th>
+                        </thead>
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card content-card">
+            <h4 class="card-header">
+                Other Jobs
+            </h4>
+            <div class="card-body">
+                <table class="table table-responsive-sm">
+                    <thead>
+                        <th>Job Number:</th>
+                        <th>Job Title:</th>
+                        <th>Status:</th>
+                        <th>Created By:</th>
+                        <th>Job Date:</th>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                            <tr>
+                                <td>{{ job.id }}</td>
+                                <td>
+                                    <a href="{% url 'job_detail' job.id %}">{{ job.job_title }}</a>
+                                </td>
+                                <td>{{ job.status }}</td>
+                                <td>{{ job.created_by }}</td>
+                                <td>{{ job.created_on }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        {% if profile.user_type.type|lower == "admin" or profile.user_type.type|lower == "manager" %}
+            <a href="#" class="btn action-button midnight-blue">
+                <i class="fas fa-pen"></i> Edit Asset
+            </a>
+            <a href="#" class="btn action-button btn-success">
+                <i class="fas fa-plus"></i> Add PPM Job
+            </a>
+            <a href="#" class="btn action-button btn-danger">
+                <i class="fas fa-times"></i> Make Asset Inactive
+            </a>
+        {% endif %}
+    </div>
+    
+{% endblock %}
