@@ -1,9 +1,6 @@
 from django import forms
 from .models import Project
-
-
-class DateInput(forms.DateInput):
-    input_type = 'date'
+from ancillaries.forms import DateInput
 
 
 class ProjectForm(forms.ModelForm):
