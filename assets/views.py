@@ -10,6 +10,11 @@ app_context = {
             'href': 'active_assets',
             'text': 'Active Assets',
         },
+        {
+        {
+            'href': 'inactive_assets',
+            'text': 'Inactive Assets',
+        },
     ]
 }
 
@@ -18,6 +23,19 @@ app_context = {
 def active_assets(request):
     """ View to see active assets """
     assets = Assets.objects.filter(active=True)
+
+    context = {
+        'assets': assets,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'assets/assets_table.html', context)
+
+
+@login_required
+def inactive_assets(request):
+    """ View to see inactive assets """
+    assets = Assets.objects.filter(active=False)
 
     context = {
         'assets': assets,
