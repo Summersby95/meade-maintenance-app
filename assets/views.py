@@ -12,3 +12,15 @@ app_context = {
     ]
 }
 
+
+@login_required
+def active_assets(request):
+    """ View to see active assets """
+    assets = Assets.objects.filter(active=True)
+
+    context = {
+        'assets': assets,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'assets/assets_table.html', context)
