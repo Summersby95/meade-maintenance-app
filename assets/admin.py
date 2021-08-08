@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import Assets, AssetTypes, PPM
 
 
 class AssetAdmin(admin.ModelAdmin):
@@ -15,7 +15,7 @@ class AssetAdmin(admin.ModelAdmin):
 class PPMAdmin(admin.ModelAdmin):
     list_display = [
         'asset',
-        'job',
+        'job_title',
         'time_interval',
         'active',
     ]
