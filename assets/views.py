@@ -102,3 +102,24 @@ def create_asset(request):
     return render(request, 'assets/create_asset.html', context)
 
 
+@login_required
+def edit_asset(request, asset_id):
+    """ View to edit an existing asset """
+    asset = get_object_or_404(Assets, pk=asset_id)
+    if request.method == 'POST':
+        form = AssetForm(request.POST, instance=asset)
+        if form.is_valid():
+            asset = form.save()
+            return redirect(reverse('asset_details', args=(asset.id,)))
+    else:
+        form = AssetForm(instance=asset)
+
+    context = {
+        'asset': asset,
+        'form': form,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'assets/edit_asset.html', context)
+
+
