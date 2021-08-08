@@ -15,18 +15,18 @@
             <div class="card-body">
                 <table class="table" id="dataTable">
                     <thead>
-                        <th class="col">Job Number</th>
-                        <th class="col">Title</th>
-                        <th class="col">Department</th>
-                        <th class="col">Priority</th>
-                        <th class="col">Status</th>
-                        <th class="col">Employee</th>
-                        <th class="col">Actions</th>
+                        <th>Job Number</th>
+                        <th>Title</th>
+                        <th>Department</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Employee</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody>
                         {% for job in jobs %}
                             <tr>
-                                <th scope="row">{{ job.id }}</th>
+                                <td>{{ job.id }}</td>
                                 <td>{{ job.job_title }}</td>
                                 <td>{{ job.department }}</td>
                                 <td>{{ job.priority }}</td>
