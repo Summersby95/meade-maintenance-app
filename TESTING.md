@@ -11,3 +11,4 @@
 7. **Extending User Model To Include Custom Fields Not Saving Correctly** - *Fix:* Create custom save method on the custom all-auth signup form to process fields and create an instance of the *UserProfile* model
 8. **Circular Import In Assets Models File Due To Interdependancy of Models** - *Fix:* The *Job* model has a foreign key to the *Assets* model, the *PPM* model has a foreign key relationship to the *Assets* and *Jobs* models. Having the *Assets* model and *PPM* models in the same *models.py* file was giving a circular import due to the relationships between the models. As such I had to segregate the models into two seperate files in the *submodels* directory to prevent the circular import error.
 9. **Tables overflowing horizontally in details pages on mobile views** - *Fix:* Add *table-responsive-sm* class to tables
+10. **Not Able To Accurately Record Which Jobs Are PPM's** - *Fix:* Change PPM model structure to be a job template.
