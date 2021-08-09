@@ -111,6 +111,14 @@
         </div>
     </div>
     <div class="col-12">
-        
+        <a href="{% url 'edit_stock_item' item.id %}" class="btn action-button midnight-blue">
+            <i class="fas fa-pen"></i> Edit Item
+        </a>
+        <a href="{% url 'create_item_stock_transfer' item.id %}" class="btn action-button purple">
+            <i class="far fa-calendar"></i> Withdraw Stock
+        </a>
+        <a href="{% url 'create_item_stock_receipt' item.id %}" class="btn action-button btn-success">
+            <i class="fas fa-plus"></i> Receive Stock
+        </a>
     </div>
 {% endblock %}
