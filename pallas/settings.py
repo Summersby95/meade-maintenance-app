@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'home',
     'projects',
     'assets',
+    'stocks',
     'crispy_forms',
 ]
 
