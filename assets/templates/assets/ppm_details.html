@@ -63,7 +63,7 @@
                         <th>Job Title:</th>
                         <th>Status:</th>
                         <th>Created By:</th>
-                        <th>Job Date:</th>
+                        <th>Due Date:</th>
                     </thead>
                     <tbody>
                         {% for job in jobs %}
@@ -75,7 +75,7 @@
                                     </td>
                                     <td>{{ job.status }}</td>
                                     <td>{{ job.created_by }}</td>
-                                    <td>{{ job.created_on }}</td>
+                                    <td>{{ job.due_date }}</td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
@@ -96,7 +96,7 @@
                         <th>Job Title:</th>
                         <th>Status:</th>
                         <th>Created By:</th>
-                        <th>Job Date:</th>
+                        <th>Due Date:</th>
                     </thead>
                     <tbody>
                         {% for job in jobs %}
@@ -108,7 +108,7 @@
                                     </td>
                                     <td>{{ job.status }}</td>
                                     <td>{{ job.created_by }}</td>
-                                    <td>{{ job.created_on }}</td>
+                                    <td>{{ job.due_date }}</td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
