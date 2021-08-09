@@ -12,3 +12,13 @@ class StockItemForm(forms.ModelForm):
         super(StockItemForm, self).__init__(*args, **kwargs)
 
 
+class StockReceiptsForm(forms.ModelForm):
+    class Meta:
+        model = StockReceipts
+        exclude = ('created_by', 'created_on',)
+        widgets = {
+            'date_received': DateInput()
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super(StockReceiptsForm, self).__init__(*args, **kwargs)
