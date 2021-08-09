@@ -32,6 +32,10 @@
                                 <span class="float-right">{{ job.status }}</span>
                             </li>
                             <li class="list-group-item">
+                                <b>Due Date</b>
+                                <span class="float-right">{{ job.due_date }}</span>
+                            </li>
+                            <li class="list-group-item">
                                 <b>Assigned To</b>
                                 <span class="float-right">
                                     {% if job.assigned_to.all|length > 0 %}
