@@ -84,13 +84,25 @@
                         <th>User</th>
                         <th>Quantity</th>
                         <th>Job</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody>
                         {% for transfer in stock_transfers %}
                             <tr>
                                 <td>{{ transfer.user }}</td>
                                 <td>{{ transfer.quantity }}</td>
-                                <td>{{ transfer.job }}</td>
+                                <td>
+                                    {% if transfer.job %}
+                                        <a href="{% url 'job_detail' transfer.job.id %}">
+                                            {{ transfer.job }}
+                                        </a>
+                                    {% else %} 
+                                        {{ transfer.job }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'edit_stock_transfer' transfer.id %}">Edit</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
