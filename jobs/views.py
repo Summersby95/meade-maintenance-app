@@ -84,13 +84,14 @@ def job_details(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
 
     job_steps = JobSteps.objects.filter(job=job_id)
-
     job_times = JobTimes.objects.filter(job=job_id)
+    job_transfers = StockTransfer.objects.filter(job=job_id)
 
     context = {
         'job': job,
         'job_steps': job_steps,
         'job_times': job_times,
+        'job_transfers': job_transfers,
     }
     context = {**context, **app_context}
 
