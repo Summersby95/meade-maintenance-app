@@ -28,3 +28,8 @@ def create_job_from_ppm_signal(sender, instance, created, **kwargs):
     if created:
         create_job_from_ppm(instance, datetime.date.today())
 
+
+@receiver(post_save, sender=Job)
+def duplicate_job_if_ppm(sender, instance, created, **kwargs):
+    if created==False and instance.ppm and instance.status.status == "Completed":
+        create_job_from_ppm(instance.ppm, datetime.date.today()+datetime.timedelta(days=instance.ppm.time_interval))
