@@ -116,6 +116,27 @@ def create_stock_receipt(request):
 
 
 @login_required
+def create_item_stock_receipt(request, stock_id):
+    """ View to create stock receipt for a stock item. """
+    item = get_object_or_404(StockItem, pk=stock_id)
+    if request.method == 'POST':
+        form = StockReceiptsForm(request.POST, initial={'item': item})
+        if form.is_valid():
+            receipt = form.save(commit=False)
+            receipt.created_by = request.user
+            receipt.save()
+            return redirect(reverse(stock_item_details, args=[item.id]))
+    else:
+        form = StockReceiptsForm(initial={'item': item})
+
+    context = {
+        'form': form,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/create_stock_receipt.html', context)
+
+@login_required
 def create_stock_transfer(request):
     """ View to create stock transfer """
     if request.method == 'POST':
