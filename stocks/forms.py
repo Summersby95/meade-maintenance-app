@@ -22,3 +22,13 @@ class StockReceiptsForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(StockReceiptsForm, self).__init__(*args, **kwargs)
+
+
+class StockTransferForm(forms.ModelForm):
+
+    class Meta:
+        model = StockTransfer
+        exclude = ('user', 'created_on',)
+    
+    def __init__(self, *args, **kwargs):
+        super(StockTransferForm, self).__init__(*args, **kwargs)
