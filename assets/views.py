@@ -135,18 +135,6 @@ def add_ppm(request, asset_id):
             ppm.created_by = request.user
             ppm.save()
 
-            Job.objects.create(
-                job_title=ppm.job_title,
-                department=asset.department,
-                type=JobTypes.objects.get(type='General Maintenance'),
-                status=JobStatus.objects.get(status='Not Started'),
-                asset=asset,
-                ppm=ppm,
-                created_by=request.user,
-                priority=JobPriority.objects.get(priority='Medium'),
-                description=ppm.description,
-            )
-
             return redirect(reverse('asset_details', args=(asset.id,)))
     else:
         form = PPMForm()
