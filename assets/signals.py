@@ -1,0 +1,23 @@
+import datetime
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+from .models import PPM
+from jobs.models import Job, JobStatus, JobTypes, JobPriority
+
+
+def create_job_from_ppm(ppm, due_date):
+    """ Function to create a new job from a PPM. """
+    Job.objects.create(
+        job_title=ppm.job_title,
+        department=ppm.asset.department,
+        type=JobTypes.objects.get(type='General Maintenance'),
+        status=JobStatus.objects.get(status='Not Started'),
+        due_date=due_date,
+        asset=ppm.asset,
+        ppm=ppm,
+        created_by=ppm.created_by,
+        priority=JobPriority.objects.get(priority='Medium'),
+        description=ppm.description,
+    )
+
+
