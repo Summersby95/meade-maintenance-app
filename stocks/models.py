@@ -51,3 +51,21 @@ class StockItem(models.Model):
         verbose_name = 'Stock Item'
         verbose_name_plural = 'Stock Items'
 
+
+class StockReceipts(models.Model):
+    """ Stock Transaction Model """
+    item = models.ForeignKey(StockItem, on_delete=models.SET_NULL, null=True)
+    supplier = models.ForeignKey(Suppliers, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(null=True)
+    date_received = models.DateField(null=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    created_on = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.item.name
+    
+    class Meta:
+        verbose_name = 'Stock Receipt'
+        verbose_name_plural = 'Stock Receipts'
+
+
