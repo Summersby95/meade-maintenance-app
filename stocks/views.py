@@ -201,3 +201,23 @@ def create_item_stock_transfer(request, stock_id):
     return render(request, 'stocks/create_stock_transfer.html', context)
 
 
+@login_required
+def edit_stock_transfer(request, transfer_id):
+    """ View to edit stock transfer """
+    transfer = get_object_or_404(StockTransfer, pk=transfer_id)
+    if request.method == 'POST':
+        form = StockTransferForm(request.POST, instance=transfer)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+    else:
+        form = StockTransferForm(instance=transfer)
+
+    context = {
+        'form': form,
+        'transfer': transfer,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/edit_stock_transfer.html', context)
+
