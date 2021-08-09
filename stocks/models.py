@@ -69,3 +69,17 @@ class StockReceipts(models.Model):
         verbose_name_plural = 'Stock Receipts'
 
 
+class StockTransfer(models.Model):
+    """ Stock Withdrawl Model """
+    item = models.ForeignKey(StockItem, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    created_on = models.DateField(auto_now_add=True)
+    job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.item.name
+    
+    class Meta:
+        verbose_name = 'Stock Transfer'
+        verbose_name_plural = 'Stock Transfers'
