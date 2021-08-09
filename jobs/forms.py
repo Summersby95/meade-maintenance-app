@@ -1,6 +1,7 @@
 from django import forms
 from .models import Job, JobPriority, JobTimes, JobTypes, JobSteps
 from datetime import datetime, timedelta
+from ancillaries.forms import DateInput
 
 class JobForm(forms.ModelForm):
 
@@ -11,12 +12,16 @@ class JobForm(forms.ModelForm):
             'department',
             'type',
             'priority',
+            'due_date',
             'description',
             'project',
             'asset',
             'assigned_to',
             'created_by',
         ]
+        widgets = {
+            'due_date': DateInput()
+        }
     
     def __init__(self, *args, **kwargs):
         self.profile = kwargs.pop('profile')
