@@ -14,6 +14,10 @@ app_context = {
             'href': 'create_stock_item',
             'text': 'Create Stock Item',
         },
+        {
+            'href': 'create_stock_receipt',
+            'text': 'Receive Stock',
+        },
     ]
 }
 
@@ -63,5 +67,26 @@ def create_stock_item(request):
     context = {**context, **app_context}
 
     return render(request, 'stocks/create_stock_item.html', context)
+
+
+@login_required
+def create_stock_receipt(request):
+    """ View to create stock receipt """
+    if request.method == 'POST':
+        form = StockReceiptsForm(request.POST)
+        if form.is_valid():
+            receipt = form.save(commit=False)
+            receipt.created_by = request.user
+            receipt.save()
+            return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+    else:
+        form = StockReceiptsForm()
+
+    context = {
+        'form': form,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/create_stock_receipt.html', context)
 
 
