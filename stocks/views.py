@@ -74,6 +74,27 @@ def create_stock_item(request):
 
 
 @login_required
+def edit_stock_item(request, stock_id):
+    """ View to edit stock item """
+    item = get_object_or_404(StockItem, pk=stock_id)
+    if request.method == 'POST':
+        form = StockItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse(stock_item_details, args=[item.id]))
+    else:
+        form = StockItemForm(instance=item)
+
+    context = {
+        'form': form,
+        'item': item,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/edit_stock_item.html', context)
+
+
+@login_required
 def create_stock_receipt(request):
     """ View to create stock receipt """
     if request.method == 'POST':
