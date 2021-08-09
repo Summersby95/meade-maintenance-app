@@ -22,6 +22,14 @@ app_context = {
             'href': 'create_stock_transfer',
             'text': 'Withdraw Stock',
         },
+        {
+            'href': 'user_unassigned_stock',
+            'text': 'My Unassigned Stock',
+        },
+        {
+            'href': 'user_assigned_stock',
+            'text': 'My Assigned Stock',
+        },
     ]
 }
 
