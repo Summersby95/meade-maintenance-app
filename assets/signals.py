@@ -21,3 +21,10 @@ def create_job_from_ppm(ppm, due_date):
     )
 
 
+@receiver(post_save, sender=PPM)
+def create_job_from_ppm_signal(sender, instance, created, **kwargs):
+    """ Signal to create a job from a PPM. """
+    print(instance)
+    if created:
+        create_job_from_ppm(instance, datetime.date.today())
+
