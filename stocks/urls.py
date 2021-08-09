@@ -13,4 +13,5 @@ urlpatterns = [
     path('transfer_stock/', views.create_stock_transfer, name='create_stock_transfer'),
     path('transfer_stock/item/<int:stock_id>/', views.create_item_stock_transfer, name='create_item_stock_transfer'),
     path('transfer_stock/edit/<int:transfer_id>/', views.edit_stock_transfer, name='edit_stock_transfer'),
+    path('my_unassigned_stock/', views.user_unassigned_stock, name='user_unassigned_stock'),
 ]
