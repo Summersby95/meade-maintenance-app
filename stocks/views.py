@@ -18,6 +18,10 @@ app_context = {
             'href': 'create_stock_receipt',
             'text': 'Receive Stock',
         },
+        {
+            'href': 'create_stock_transfer',
+            'text': 'Withdraw Stock',
+        },
     ]
 }
 
@@ -90,3 +94,22 @@ def create_stock_receipt(request):
     return render(request, 'stocks/create_stock_receipt.html', context)
 
 
+@login_required
+def create_stock_transfer(request):
+    """ View to create stock transfer """
+    if request.method == 'POST':
+        form = StockTransferForm(request.POST)
+        if form.is_valid():
+            transfer = form.save(commit=False)
+            transfer.user = request.user
+            transfer.save()
+            return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+    else:
+        form = StockTransferForm()
+
+    context = {
+        'form': form,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/create_stock_transfer.html', context)
