@@ -98,7 +98,7 @@
             <a href="{% url 'active_assets' %}" class="nav-link {% if nbar == 'assets' %}active{% endif %}">Assets</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link {% if nbar == 'stocks' %}active{% endif %}">Stocks</a>
+            <a href="{% url 'inventory_view' %}" class="nav-link {% if nbar == 'stocks' %}active{% endif %}">Stocks</a>
         </li>
         {% if profile.user_type|lower == "admin" %}
             <li class="nav-item">
