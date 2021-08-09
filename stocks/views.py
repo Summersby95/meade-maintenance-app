@@ -221,3 +221,18 @@ def edit_stock_transfer(request, transfer_id):
 
     return render(request, 'stocks/edit_stock_transfer.html', context)
 
+
+@login_required
+def user_unassigned_stock(request):
+    """ View to list unassigned stock items. """
+    transfers = StockTransfer.objects.filter(
+        user=request.user,
+        job=None,
+    )
+    context = {
+        'transfers': transfers,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/stock_transfer_table.html', context)
+
