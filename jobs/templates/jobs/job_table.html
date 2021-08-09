@@ -21,17 +21,19 @@
                         <th>Priority</th>
                         <th>Status</th>
                         <th>Created By</th>
+                        <th>Due Date</th>
                         <th>Actions</th>
                     </thead>
                     <tbody>
                         {% for job in jobs %}
                             <tr>
                                 <td>{{ job.id }}</td>
-                                <td>{{ job.job_title }}</td>
+                                <td>{{ job }}</td>
                                 <td>{{ job.department }}</td>
                                 <td>{{ job.priority }}</td>
                                 <td>{{ job.status }}</td>
                                 <td>{{ job.created_by }}</td>
+                                <td>{{ job.due_date }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Job Controls">
                                         <a href="{% url 'job_detail' job.id %}" class="btn btn-success">
