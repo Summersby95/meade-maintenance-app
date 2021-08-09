@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="card content-card">
+            <h4 class="card-header">
+                Stock Assignment View
+            </h4>
+            <div class="card-body">
+                <table class="table" id="dataTable">
+                    <thead>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>User</th>
+                        <th>Withdrawl Date</th>
+                        <th>Job</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody>
+                        {% for transfer in transfers %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'stock_item_details' transfer.item.id %}">
+                                        {{ transfer.item }}
+                                    </a>
+                                </td>
+                                <td>{{ transfer.quantity }}</td>
+                                <td>{{ transfer.user }}</td>
+                                <td>{{ transfer.created_on }}</td>
+                                <td>
+                                    {% if transfer.job %}
+                                        <a href="{% url 'job_detail' transfer.job.id %}">
+                                            {{ transfer.job }}
+                                        </a>
+                                    {% else %} 
+                                        {{ transfer.job }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Actions">
+                                        <a href="{% url 'edit_stock_transfer' transfer.id %}" class="btn btn-success">
+                                            <i class="far fa-eye"></i> Edit
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.js"></script>
+    <script src="{% static 'js/datatables.js' %}"></script>
+{% endblock %}
