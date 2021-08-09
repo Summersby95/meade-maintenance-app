@@ -174,11 +174,11 @@
             </h4>
             <div class="card-body">
                 <table class="table table-responsive-sm">
+                    <thead>
+                        <th>User</th>
+                        <th>Time Spent</th>
+                    </thead>
                     <tbody>
-                        <thead>
-                            <th>User</th>
-                            <th>Time Spent</th>
-                        </thead>
                         {% for log in job_times %}
                             <tr>
                                 <td>{{ log.user }}</td>
