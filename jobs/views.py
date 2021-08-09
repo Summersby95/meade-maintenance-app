@@ -1,11 +1,12 @@
-from jobs.decorators import custom_user_test, job_cancel_check, job_edit_check
 from django.shortcuts import get_object_or_404, render, redirect, reverse
+from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from jobs.decorators import custom_user_test, job_cancel_check, job_edit_check
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
-from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from profiles.models import UserProfile
 from projects.models import Project
+from stocks.models import StockTransfer
 
 app_context = {
     'nbar': 'jobs',
