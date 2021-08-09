@@ -10,6 +10,10 @@ app_context = {
             'href': 'inventory_view',
             'text': 'Inventory View',
         },
+        {
+            'href': 'create_stock_item',
+            'text': 'Create Stock Item',
+        },
     ]
 }
 
@@ -40,4 +44,24 @@ def stock_item_details(request, stock_id):
     context = {**context, **app_context}
 
     return render(request, 'stocks/stock_item_details.html', context)
+
+
+@login_required
+def create_stock_item(request):
+    """ View to create stock item """
+    if request.method == 'POST':
+        form = StockItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse(stock_item_details, args=[form.instance.id]))
+    else:
+        form = StockItemForm()
+
+    context = {
+        'form': form,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/create_stock_item.html', context)
+
 
