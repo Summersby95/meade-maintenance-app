@@ -46,6 +46,7 @@ class Job(models.Model):
     department = models.ForeignKey(Departments, null=True, on_delete=models.SET_NULL)
     type = models.ForeignKey(JobTypes, null=True, on_delete=models.SET_NULL)
     status = models.ForeignKey(JobStatus, null=True, on_delete=models.SET_NULL, default=1)
+    due_date = models.DateField(null=True, blank=True)
     project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.SET_NULL)
     asset = models.ForeignKey(Assets, null=True, blank=True, on_delete=models.SET_NULL)
     ppm = models.ForeignKey(PPM, null=True, blank=True, on_delete=models.SET_NULL)
