@@ -236,3 +236,17 @@ def user_unassigned_stock(request):
 
     return render(request, 'stocks/stock_transfer_table.html', context)
 
+
+@login_required
+def user_assigned_stock(request):
+    """ View to list assigned stock items. """
+    transfers = StockTransfer.objects.filter(
+        user=request.user,
+        job__isnull=False,
+    )
+    context = {
+        'transfers': transfers,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/stock_transfer_table.html', context)
