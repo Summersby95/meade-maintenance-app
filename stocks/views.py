@@ -177,3 +177,27 @@ def create_stock_transfer(request):
     context = {**context, **app_context}
 
     return render(request, 'stocks/create_stock_transfer.html', context)
+
+
+@login_required
+def create_item_stock_transfer(request, stock_id):
+    """ View to create stock transfer for a stock item. """
+    item = get_object_or_404(StockItem, pk=stock_id)
+    if request.method == 'POST':
+        form = StockTransferForm(request.POST, initial={'item': item})
+        if form.is_valid():
+            transfer = form.save(commit=False)
+            transfer.user = request.user
+            transfer.save()
+            return redirect(reverse(stock_item_details, args=[item.id]))
+    else:
+        form = StockTransferForm(initial={'item': item})
+
+    context = {
+        'form': form,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/create_stock_transfer.html', context)
+
+
