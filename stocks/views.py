@@ -113,11 +113,14 @@ def edit_stock_item(request, stock_id):
 
     context = {
         'form': form,
-        'item': item,
+        'action': reverse(edit_stock_item, args=[item.id]),
+        'header': 'Edit Stock Item',
+        'submit_text': 'Update Item',
+        'cancel': reverse(stock_item_details, args=[item.id]),
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/edit_stock_item.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
