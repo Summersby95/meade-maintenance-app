@@ -253,11 +253,14 @@ def edit_stock_transfer(request, transfer_id):
 
     context = {
         'form': form,
-        'transfer': transfer,
+        'action': reverse(edit_stock_transfer, args=[transfer.id]),
+        'header': 'Edit Stock Transfer',
+        'submit_text': 'Update Stock Transfer',
+        'cancel': reverse(stock_item_details, args=[transfer.item.id]),
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/edit_stock_transfer.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
