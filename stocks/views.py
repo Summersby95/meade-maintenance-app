@@ -392,8 +392,11 @@ def edit_supplier(request, supplier_id):
 
     context = {
         'form': form,
-        'supplier': supplier,
+        'action': reverse(edit_supplier, args=[supplier.id]),
+        'header': 'Edit Supplier',
+        'submit_text': 'Update Supplier',
+        'cancel': reverse(supplier_details, args=[supplier.id]),
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/edit_supplier.html', context)
+    return render(request, 'includes/form.html', context)
