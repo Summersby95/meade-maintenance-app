@@ -303,3 +303,23 @@ def supplier_details(request, supplier_id):
 
     return render(request, 'stocks/supplier_details.html', context)
 
+
+@login_required
+def create_supplier(request):
+    """ View to create supplier. """
+    if request.method == 'POST':
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            supplier = form.save()
+            return redirect(reverse(supplier_details, args=[supplier.id]))
+    else:
+        form = SupplierForm()
+
+    context = {
+        'form': form,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/create_supplier.html', context)
+
+
