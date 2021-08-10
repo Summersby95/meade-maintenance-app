@@ -160,10 +160,14 @@ def create_item_stock_receipt(request, stock_id):
 
     context = {
         'form': form,
+        'action': reverse(create_stock_receipt),
+        'header': 'Receive Stock',
+        'submit_text': 'Receive Stock',
+        'cancel': reverse(stock_item_details, args=[item.id]),
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/create_stock_receipt.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
