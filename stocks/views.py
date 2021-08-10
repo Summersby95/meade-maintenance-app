@@ -347,10 +347,14 @@ def create_supplier(request):
 
     context = {
         'form': form,
+        'action': reverse(create_supplier),
+        'header': 'Create Supplier',
+        'submit_text': 'Create Supplier',
+        'cancel': reverse(supplier_list),
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/create_supplier.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
