@@ -15,4 +15,6 @@ urlpatterns = [
     path('transfer_stock/edit/<int:transfer_id>/', views.edit_stock_transfer, name='edit_stock_transfer'),
     path('my_unassigned_stock/', views.user_unassigned_stock, name='user_unassigned_stock'),
     path('my_assigned_stock/', views.user_assigned_stock, name='user_assigned_stock'),
+    path('supplier_list/', views.supplier_list, name='supplier_list'),
+    path('supplier/<int:supplier_id>/', views.supplier_details, name='supplier_details'),
 ]
