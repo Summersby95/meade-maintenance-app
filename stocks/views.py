@@ -230,10 +230,14 @@ def create_item_stock_transfer(request, stock_id):
 
     context = {
         'form': form,
+        'action': reverse(create_stock_transfer),
+        'header': 'Withdraw Stock',
+        'submit_text': 'Withdraw Stock',
+        'cancel': reverse(stock_item_details, args=[item.id]),
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/create_stock_transfer.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
