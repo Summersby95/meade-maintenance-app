@@ -18,4 +18,14 @@ app_context = {
 }
 
 
-# Create your views here.
+@login_required
+def staff_list(request):
+    staff_list = UserProfile.objects.all()
+
+    context = {
+        'staff_list': staff_list,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'profiles/staff_list.html', context)
+
