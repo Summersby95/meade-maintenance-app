@@ -261,3 +261,25 @@ def user_assigned_stock(request):
     context = {**context, **app_context}
 
     return render(request, 'stocks/stock_transfer_table.html', context)
+
+
+@login_required
+def supplier_list(request):
+    """ View to list suppliers. """
+    suppliers = Suppliers.objects.all()
+    for supplier in suppliers:
+        supplier.stock_receipts = StockReceipts.objects.filter(
+            supplier=supplier,
+        ).count()
+        supplier.assets = Assets.objects.filter(
+            supplier=supplier,
+        ).count()
+    
+    context = {
+        'suppliers': suppliers,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/supplier_table.html', context)
+
+
