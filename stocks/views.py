@@ -357,15 +357,7 @@ def create_supplier(request):
 def create_supplier_stock_receipt(request, supplier_id):
     """ View to create stock receipt for a stock item. """
     supplier = get_object_or_404(Suppliers, pk=supplier_id)
-    if request.method == 'POST':
-        form = StockReceiptsForm(request.POST, initial={'supplier': supplier})
-        if form.is_valid():
-            receipt = form.save(commit=False)
-            receipt.created_by = request.user
-            receipt.save()
-            return redirect(reverse(supplier_details, args=[supplier.id]))
-    else:
-        form = StockReceiptsForm(initial={'supplier': supplier})
+    form = StockReceiptsForm(initial={'supplier': supplier})
 
     context = {
         'form': form,
