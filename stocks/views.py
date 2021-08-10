@@ -283,3 +283,23 @@ def supplier_list(request):
     return render(request, 'stocks/supplier_table.html', context)
 
 
+@login_required
+def supplier_details(request, supplier_id):
+    """ View to show supplier details. """
+    supplier = get_object_or_404(Suppliers, pk=supplier_id)
+    stock_receipts = StockReceipts.objects.filter(
+        supplier=supplier,
+    )
+    assets = Assets.objects.filter(
+        supplier=supplier,
+    )
+
+    context = {
+        'supplier': supplier,
+        'stock_receipts': stock_receipts,
+        'assets': assets,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/supplier_details.html', context)
+
