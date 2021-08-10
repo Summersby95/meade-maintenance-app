@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from jobs.decorators import custom_user_test, job_cancel_check, job_edit_check
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
@@ -119,8 +120,10 @@ def create_job(request):
                     else:
                         print(step_form.errors)
 
+            messages.success(request, "Job Successfully Created!")
             return redirect(reverse(job_details, args=[job.id]))
         else:
+            messages.error(request, "Error Creating Job! Please Try Again")
             print(form.errors)
     else:
         form = JobForm(profile=profile)
@@ -155,8 +158,10 @@ def create_project_job(request, project_id):
                     else:
                         print(step_form.errors)
 
+            messages.success(request, "Job Successfully Created!")
             return redirect(reverse(job_details, args=[job.id]))
         else:
+            messages.error(request, "Error Creating Job! Please Try Again")
             print(form.errors)
     else:
         form = JobForm(profile=profile, initial={'project': project})
@@ -194,8 +199,11 @@ def edit_job(request, job_id):
                         step_form.save()
                     else:
                         print(step_form.errors)
+            
+            messages.success(request, "Job Successfully Updated!")
             return redirect(reverse(job_details, args=[job.id]))
         else:
+            messages.error(request, "Error Updating Job! Please Try Again")
             print(form.errors)
     else:
         form = JobForm(instance=job, profile=profile)
@@ -221,8 +229,10 @@ def create_time_log(request, job_id):
         if form.is_valid():
             job_time = JobTimes(job=job, **form.cleaned_data)
             job_time.save()
+            messages.success(request, "Time Log Successfully Created!")
             return redirect(reverse(job_details, args=[job_id]))
         else:
+            messages.error(request, "Error Creating Time Log! Please Try Again")
             print(form.errors)
     else:
         form = JobTimesForm()
@@ -243,6 +253,7 @@ def mark_completed(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
     job.status = get_object_or_404(JobStatus, status='Completed')
     job.save()
+    messages.success(request, "Job Successfully Marked Completed!")
     return redirect(reverse(job_details, args=[job_id]))
 
 
@@ -253,6 +264,7 @@ def reopen_job(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
     job.status = get_object_or_404(JobStatus, status='Started')
     job.save()
+    messages.success(request, "Job Successfully Reopened!")
     return redirect(reverse(job_details, args=[job_id]))
 
 
@@ -263,4 +275,5 @@ def cancel_job(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
     job.status = get_object_or_404(JobStatus, status='Cancelled')
     job.save()
+    messages.success(request, "Job Successfully Cancelled!")
     return redirect(reverse(job_details, args=[job_id]))
