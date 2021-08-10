@@ -183,11 +183,14 @@ def edit_stock_receipt(request, receipt_id):
 
     context = {
         'form': form,
-        'receipt': receipt,
+        'action': reverse(edit_stock_receipt, args=[receipt.id]),
+        'header': 'Edit Stock Receipt',
+        'submit_text': 'Update Stock Receipt',
+        'cancel': reverse(stock_item_details, args=[receipt.item.id]),
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/edit_stock_receipt.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
