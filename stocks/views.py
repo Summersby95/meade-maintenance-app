@@ -81,7 +81,10 @@ def create_stock_item(request):
         form = StockItemForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Stock Item Successfully Created!')
             return redirect(reverse(stock_item_details, args=[form.instance.id]))
+        else:
+            messages.error(request, 'Error Creating Stock Item! Please Try Again')
     else:
         form = StockItemForm()
 
@@ -101,7 +104,10 @@ def edit_stock_item(request, stock_id):
         form = StockItemForm(request.POST, instance=item)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Item Updated Successfully!')
             return redirect(reverse(stock_item_details, args=[item.id]))
+        else:
+            messages.error(request, 'Error Updating Item! Please Try Again')
     else:
         form = StockItemForm(instance=item)
 
@@ -123,7 +129,10 @@ def create_stock_receipt(request):
             receipt = form.save(commit=False)
             receipt.created_by = request.user
             receipt.save()
+            messages.success(request, 'Stock Receipt Created Successfully!')
             return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+        else:
+            messages.error(request, 'Error Creating Stock Receipt! Please Try Again')
     else:
         form = StockReceiptsForm()
 
@@ -165,7 +174,10 @@ def edit_stock_receipt(request, receipt_id):
         form = StockReceiptsForm(request.POST, instance=receipt)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Stock Receipt Updated Successfully!')
             return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+        else:
+            messages.error(request, 'Error Updating Stock Receipt! Please Try Again!')
     else:
         form = StockReceiptsForm(instance=receipt)
 
@@ -187,7 +199,10 @@ def create_stock_transfer(request):
             transfer = form.save(commit=False)
             transfer.user = request.user
             transfer.save()
+            messages.success(request, 'Stock Withdrawl Successful!')
             return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+        else:
+            messages.error(request, 'Stock Withdrawl Failed! Please Try Again')
     else:
         form = StockTransferForm()
 
@@ -229,7 +244,10 @@ def edit_stock_transfer(request, transfer_id):
         form = StockTransferForm(request.POST, instance=transfer)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Stock Transfer Updated Successfully!')
             return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+        else:
+            messages.error(request, 'Error Updating Stock Transfer! Please Try Again')
     else:
         form = StockTransferForm(instance=transfer)
 
@@ -320,7 +338,10 @@ def create_supplier(request):
         form = SupplierForm(request.POST)
         if form.is_valid():
             supplier = form.save()
+            messages.success(request, 'Supplier Created Successfully!')
             return redirect(reverse(supplier_details, args=[supplier.id]))
+        else:
+            messages.error(request, 'Error Creating Supplier! Please Try Again')
     else:
         form = SupplierForm()
 
@@ -362,7 +383,10 @@ def edit_supplier(request, supplier_id):
         form = SupplierForm(request.POST, instance=supplier)
         if form.is_valid():
             form.save()
-            return redirect(reverse(supplier_details, args=[form.instance.supplier.id]))
+            messages.success(request, 'Supplier Successfully Updated!')
+            return redirect(reverse(supplier_details, args=[supplier.id]))
+        else:
+            messages.error(request, 'Error Updating Supplier! Please Try Again')
     else:
         form = SupplierForm(instance=supplier)
 
