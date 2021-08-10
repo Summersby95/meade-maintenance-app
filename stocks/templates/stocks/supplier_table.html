@@ -1,53 +1,28 @@
-{% extends "main.html" %}
-{% load static %}
-
-{% block extracss %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.css"/>
-{% endblock %}
-
-{% block content %}
-    <div class="col-md-12">
-        <div class="card content-card">
-            <h4 class="card-header">
-                Supplier List
-            </h4>
-            <div class="card-body">
-                <table class="table" id="dataTable">
-                    <thead>
-                        <th>#</th>
-                        <th>Supplier</th>
-                        <th>Assets</th>
-                        <th>Stock Receipts</th>
-                        <th>Actions</th>
-                    </thead>
-                    <tbody>
-                        {% for supplier in suppliers %}
-                            <tr>
-                                <td>{{ supplier.id }}</td>
-                                <td>{{ supplier }}</td>
-                                <td>{{ supplier.assets }}</td>
-                                <td>{{ supplier.stock_receipts }}</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Job Controls">
-                                        <a href="{% url 'supplier_details' supplier.id %}" class="btn btn-success">
-                                            <i class="far fa-eye"></i> View
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                  </table>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block extrajs %}
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.js"></script>
-    <script src="{% static 'js/datatables.js' %}"></script>
+{% extends "includes/datatable.html" %}
+{% block table_header %}Supplier List{% endblock %}
+{% block table_content %}
+<thead>
+    <th>#</th>
+    <th>Supplier</th>
+    <th>Assets</th>
+    <th>Stock Receipts</th>
+    <th>Actions</th>
+</thead>
+<tbody>
+    {% for supplier in suppliers %}
+        <tr>
+            <td>{{ supplier.id }}</td>
+            <td>{{ supplier }}</td>
+            <td>{{ supplier.assets }}</td>
+            <td>{{ supplier.stock_receipts }}</td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Job Controls">
+                    <a href="{% url 'supplier_details' supplier.id %}" class="btn btn-success">
+                        <i class="far fa-eye"></i> View
+                    </a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
 {% endblock %}
