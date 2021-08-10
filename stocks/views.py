@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from ancillaries.models import Suppliers
 from assets.models import Assets
 from .models import StockItem, StockReceipts, StockTransfer
