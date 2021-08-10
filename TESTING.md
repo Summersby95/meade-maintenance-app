@@ -12,3 +12,5 @@
 8. **Circular Import In Assets Models File Due To Interdependancy of Models** - *Fix:* The *Job* model has a foreign key to the *Assets* model, the *PPM* model has a foreign key relationship to the *Assets* and *Jobs* models. Having the *Assets* model and *PPM* models in the same *models.py* file was giving a circular import due to the relationships between the models. As such I had to segregate the models into two seperate files in the *submodels* directory to prevent the circular import error.
 9. **Tables overflowing horizontally in details pages on mobile views** - *Fix:* Add *table-responsive-sm* class to tables
 10. **Not Able To Accurately Record Which Jobs Are PPM's** - *Fix:* Change PPM model structure to be a job template.
+11. **Repetitive Templating** - *Fix:* Create base templates for different template structures
+12. **Unnecessary POST Handlers** - *Fix:* Some views call an instance of a form just to set an initial parameter but get passed to a different view as the POST form handler, as such, having POST handlers on the initial views was unneccessary
