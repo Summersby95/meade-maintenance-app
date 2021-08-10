@@ -1,10 +1,10 @@
 import datetime
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from .models import Assets, AssetTypes, PPM
+from django.contrib import messages
+from .models import Assets, PPM
 from .forms import AssetForm, PPMForm
-from jobs.models import Job, JobPriority, JobStatus, JobTimes, JobTypes
-from django.db.models import Q
+from jobs.models import Job, JobTimes
 
 app_context = {
     'nbar': 'assets',
@@ -58,6 +58,7 @@ def asset_details(request, asset_id):
     ppms = PPM.objects.filter(asset=asset)
     jobs = Job.objects.filter(asset=asset)
 
+    # FIX
     total_time = datetime.timedelta()
     users = []
     for job in jobs:
@@ -90,7 +91,10 @@ def create_asset(request):
         form = AssetForm(request.POST)
         if form.is_valid():
             asset = form.save()
+            messages.success(request, 'Asset Created Successfully')
             return redirect(reverse('asset_details', args=(asset.id,)))
+        else:
+            messages.error(request, 'Error Creating Asset! Please Try Again')
     else:
         form = AssetForm()
 
@@ -110,7 +114,10 @@ def edit_asset(request, asset_id):
         form = AssetForm(request.POST, instance=asset)
         if form.is_valid():
             asset = form.save()
+            messages.success(request, 'Asset Updated Successfully')
             return redirect(reverse('asset_details', args=(asset.id,)))
+        else:
+            messages.error(request, 'Error Updating Asset! Please Try Again')
     else:
         form = AssetForm(instance=asset)
 
@@ -135,7 +142,10 @@ def add_ppm(request, asset_id):
             ppm.created_by = request.user
             ppm.save()
 
+            messages.success(request, 'PPM Created Successfully')
             return redirect(reverse('asset_details', args=(asset.id,)))
+        else:
+            messages.error(request, 'Error Creating PPM! Please Try Again')
     else:
         form = PPMForm()
 
@@ -153,7 +163,6 @@ def ppm_details(request, ppm_id):
     """ View to see details of a specific PPM """
     ppm = get_object_or_404(PPM, pk=ppm_id)
     jobs = Job.objects.filter(ppm=ppm)
-
     
     context = {
         'ppm': ppm,
