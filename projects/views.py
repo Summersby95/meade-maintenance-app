@@ -1,6 +1,7 @@
 import datetime
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Project, ProjectStatus
 from jobs.models import Job, JobTimes
 from profiles.models import UserProfile
@@ -40,6 +41,7 @@ def project_details(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     jobs = Job.objects.filter(project=project)
 
+    # FIX
     total_time = datetime.timedelta()
     users = []
     for job in jobs:
@@ -74,8 +76,10 @@ def create_project(request):
         
         if form.is_valid():
             project = form.save()
+            messages.success(request, 'Project Created!')
             return redirect(reverse(project_details, args=[project.id]))
         else:
+            messages.error(request, 'There was an error creating your project')
             print(form.errors)
     else:
         form = ProjectForm(profile=profile)
@@ -98,8 +102,10 @@ def edit_project(request, project_id):
         
         if form.is_valid():
             project = form.save()
+            messages.success(request, 'Project Updated!')
             return redirect(reverse(project_details, args=[project.id]))
         else:
+            messages.error(request, 'There was an error updating your project')
             print(form.errors)
     else:
         form = ProjectForm(profile=profile, instance=project)
@@ -119,6 +125,7 @@ def mark_project_completed(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     project.status = get_object_or_404(ProjectStatus, status='Completed')
     project.save()
+    messages.success(request, 'Project Successfully Marked Completed!')
     return redirect(reverse(project_details, args=[project_id]))
 
 
@@ -128,6 +135,7 @@ def cancel_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     project.status = get_object_or_404(ProjectStatus, status='Cancelled')
     project.save()
+    messages.info(request, 'Project Successfully Cancelled')
     return redirect(reverse(project_details, args=[project_id]))
 
 
@@ -137,4 +145,5 @@ def reopen_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     project.status = get_object_or_404(ProjectStatus, status='In Progress')
     project.save()
+    messages.success(request, 'Project Successfully Reopened!')
     return redirect(reverse(project_details, args=[project_id]))
