@@ -102,7 +102,7 @@
         </li>
         {% if profile.user_type|lower == "admin" %}
             <li class="nav-item">
-                <a href="#" class="nav-link {% if nbar == 'people' %}active{% endif %}">People</a>
+                <a href="{% url 'staff_list' %}" class="nav-link {% if nbar == 'people' %}active{% endif %}">People</a>
             </li>
         {% endif %}
     </ul>
