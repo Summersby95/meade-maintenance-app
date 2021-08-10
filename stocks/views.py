@@ -345,3 +345,22 @@ def create_supplier_stock_receipt(request, supplier_id):
     return render(request, 'stocks/create_stock_receipt.html', context)
 
 
+@login_required
+def edit_supplier(request, supplier_id):
+    """ View to edit stock transfer """
+    supplier = get_object_or_404(Suppliers, pk=supplier_id)
+    if request.method == 'POST':
+        form = SupplierForm(request.POST, instance=supplier)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse(supplier_details, args=[form.instance.supplier.id]))
+    else:
+        form = SupplierForm(instance=supplier)
+
+    context = {
+        'form': form,
+        'supplier': supplier,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/edit_supplier.html', context)
