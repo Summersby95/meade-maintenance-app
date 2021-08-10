@@ -1,7 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect, reverse
-from .models import StockItem, StockReceipts, StockTransfer
 from django.contrib.auth.decorators import login_required
+from ancillaries.models import Suppliers
+from assets.models import Assets
+from .models import StockItem, StockReceipts, StockTransfer
 from .forms import StockItemForm, StockReceiptsForm, StockTransferForm
+from ancillaries.forms import SupplierForm
 
 app_context = {
     'nbar' : 'stocks',
