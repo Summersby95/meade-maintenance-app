@@ -33,6 +33,14 @@ app_context = {
             'href': 'user_assigned_stock',
             'text': 'My Assigned Stock',
         },
+        {
+            'href': 'supplier_list',
+            'text': 'Supplier List',
+        },
+        {
+            'href': 'create_supplier',
+            'text': 'Create Supplier',
+        }
     ]
 }
 
