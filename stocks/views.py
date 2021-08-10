@@ -90,10 +90,14 @@ def create_stock_item(request):
 
     context = {
         'form': form,
+        'action': reverse(create_stock_item),
+        'header': 'Create Stock Item',
+        'submit_text': 'Create Item',
+        'cancel': reverse(inventory_view),
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/create_stock_item.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
