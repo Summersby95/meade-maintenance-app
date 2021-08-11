@@ -1,0 +1,23 @@
+{% if project.status.status != 'Completed' and project.status.status != 'Cancelled' %}
+    <a href="{% url 'edit_project' project.id %}" class="btn action-button midnight-blue">
+        <i class="fas fa-pen"></i> Edit Project
+    </a>
+    <a href="{% url 'mark_project_completed' project.id %}" class="btn action-button btn-info">
+        <i class="fas fa-check"></i> Mark Completed
+    </a>
+    <a href="{% url 'create_project_job' project.id %}" class="btn action-button btn-success">
+        <i class="fas fa-plus"></i> Create Project Job
+    </a>
+    <a href="{% url 'cancel_project' project.id %}" class="btn action-button btn-danger">
+        <i class="fas fa-times"></i> Cancel Project
+    </a>
+{% else %}
+    <a href="{% url 'reopen_project' project.id %}" class="btn action-button btn-success">
+        <i class="fas fa-plus"></i> Reopen Project
+    </a>
+    {% if project.status.status != 'Cancelled' %}
+        <a href="{% url 'cancel_project' project.id %}" class="btn action-button btn-danger">
+            <i class="fas fa-times"></i> Cancel Project
+        </a>
+    {% endif %}
+{% endif %}
