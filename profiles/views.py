@@ -2,7 +2,9 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.db.models import Q, Sum
+from django.conf import settings
 from .models import UserProfile
+from .forms import BonusOrderForm
 from jobs.models import Job, JobStatus, JobTimes
 from stocks.models import StockTransfer
 
@@ -116,3 +118,20 @@ def staff_detail(request, staff_id):
     return render(request, 'includes/details.html', context)
 
 
+@login_required
+def user_bonus(request, staff_id):
+    employee = UserProfile.objects.get(id=staff_id)
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+
+    bonus_form = BonusOrderForm()
+
+    context = {
+        'employee': employee,
+        'form': bonus_form,
+        'stripe_public_key': stripe_public_key,
+        'client_secret': 'test secret'
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'profiles/user_bonus.html', context)
