@@ -68,10 +68,25 @@ def stock_item_details(request, stock_id):
         'item': item,
         'stock_receipts': stock_receipts,
         'stock_transfers': stock_transfers,
+        'card_tabs': [
+            {
+                'header': f'Stock Item #{item.id}',
+                'template': 'stocks/stock_item_details_card.html'
+            },
+            {
+                'header': 'Stock Receipts',
+                'template': 'stocks/stock_receipts_table.html'
+            },
+            {
+                'header': 'Stock Withdrawls',
+                'template': 'stocks/stock_withdrawls_table.html'
+            },
+        ],
+        'actions': 'stocks/stock_item_details_actions.html',
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/stock_item_details.html', context)
+    return render(request, 'includes/details.html', context)
 
 
 @login_required
