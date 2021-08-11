@@ -186,9 +186,13 @@
                                 <td>{{ transfer.quantity }}</td>
                                 <td>{{ transfer.created_on }}</td>
                                 <td>
-                                    <a href="{% url 'job_detail' transfer.job.id %}">
-                                        {{ transfer.job }}
-                                    </a>
+                                    {% if transfer.job %}
+                                        <a href="{% url 'job_detail' transfer.job.id %}">
+                                            {{ transfer.job }}
+                                        </a>
+                                    {% else %}
+                                        Unassigned
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
