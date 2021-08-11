@@ -21,6 +21,9 @@
                 </div>
             </div>
         </div>
+        {% if extra_form %}
+            {% include "includes/card-12.html" with card_header=extra_form_header card_content=extra_form %}
+        {% endif %}
         <button type="submit" class="btn action-button btn-success">
             <i class="fas fa-check"></i> {{ submit_text }}
         </button>
@@ -28,4 +31,10 @@
             <i class="fas fa-times"></i> Cancel
         </a>
     </form>
+{% endblock %}
+
+{% block extrajs %}
+    {% if form_js %}
+        <script src="{% static form_js %}"></script>
+    {% endif %}
 {% endblock %}
