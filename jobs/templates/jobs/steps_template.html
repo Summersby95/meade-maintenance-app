@@ -1,0 +1,30 @@
+<table class="table" id="stepsTable">
+    {% if job_steps %}
+        {% for step in job_steps %}
+            <tr>
+                <th>{{ step.step_number }}.</th>
+                <td>
+                    <input class="form-control"  name="step_{{ step.step_number }}" id="step_{{ step.step_number }}" value="{{ step.step }}" required>
+                </td>
+                <td>
+                    <button type="button" class="btn step-up" data-step="{{ step.step_number }}">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn step-down" data-step="{{ step.step_number }}">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn step-delete text-danger" data-step="{{ step.step_number }}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+<button type="button" class="btn" id="stepAdd">
+    <i class="fas fa-plus"></i> Add Step
+</button>
