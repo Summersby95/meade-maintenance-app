@@ -126,12 +126,15 @@ def edit_asset(request, asset_id):
         form = AssetForm(instance=asset)
 
     context = {
-        'asset': asset,
         'form': form,
+        'action': reverse(edit_asset, args=(asset.id,)),
+        'header': 'Edit Stock Item',
+        'submit_text': 'Update Item',
+        'cancel': reverse(asset_details, args=(asset.id,)),
     }
     context = {**app_context, **context}
 
-    return render(request, 'assets/edit_asset.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
