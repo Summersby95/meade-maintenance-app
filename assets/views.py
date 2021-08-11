@@ -100,10 +100,14 @@ def create_asset(request):
 
     context = {
         'form': form,
+        'action': reverse(create_asset),
+        'header': 'Create Asset',
+        'submit_text': 'Create Asset',
+        'cancel': reverse(active_assets),
     }
     context = {**app_context, **context}
 
-    return render(request, 'assets/create_asset.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
