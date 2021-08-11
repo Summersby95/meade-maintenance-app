@@ -1,57 +1,32 @@
-{% extends "main.html" %}
-{% load static %}
-
-{% block extracss %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.css"/>
-{% endblock %}
-
-{% block content %}
-    <div class="col-md-12">
-        <div class="card content-card">
-            <h4 class="card-header">
-                Ongoing Projects
-            </h4>
-            <div class="card-body">
-                <table class="table" id="dataTable">
-                    <thead>
-                        <th>#</th>
-                        <th>Project Title</th>
-                        <th>Due Date</th>
-                        <th>Status</th>
-                        <th>Location</th>
-                        <th>Open Jobs</th>
-                        <th>Completed Jobs</th>
-                        <th>Actions</th>
-                    </thead>
-                    <tbody>
-                        {% for project in projects %}
-                            <tr>
-                                <td>{{ project.id }}</td>
-                                <td>{{ project.title }}</td>
-                                <td>{{ project.due_date }}</td>
-                                <td>{{ project.status }}</td>
-                                <td>{{ project.location }}</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>
-                                    <a href="{% url 'project_details' project_id=project.id %}" class="btn btn-success">
-                                        <i class="far fa-eye"></i> View
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                  </table>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block extrajs %}
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.js"></script>
-    <script src="{% static 'js/datatables.js' %}"></script>
+{% extends "includes/datatable.html" %}
+{% block table_header %}Ongoing Projects{% endblock %}
+{% block table_content %}
+<thead>
+    <th>#</th>
+    <th>Project Title</th>
+    <th>Due Date</th>
+    <th>Status</th>
+    <th>Location</th>
+    <th>Open Jobs</th>
+    <th>Completed Jobs</th>
+    <th>Actions</th>
+</thead>
+<tbody>
+    {% for project in projects %}
+        <tr>
+            <td>{{ project.id }}</td>
+            <td>{{ project.title }}</td>
+            <td>{{ project.due_date }}</td>
+            <td>{{ project.status }}</td>
+            <td>{{ project.location }}</td>
+            <td>#</td>
+            <td>#</td>
+            <td>
+                <a href="{% url 'project_details' project_id=project.id %}" class="btn btn-success">
+                    <i class="far fa-eye"></i> View
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
 {% endblock %}
