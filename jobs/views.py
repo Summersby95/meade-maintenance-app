@@ -204,12 +204,18 @@ def edit_job(request, job_id):
     
     context = {
         'form': form,
-        'job': job,
         'job_steps': job_steps,
+        'action': reverse(edit_job, args=[job.id]),
+        'header': 'Edit Job',
+        'submit_text': 'Update Job',
+        'cancel': reverse(job_details, args=[job.id]),
+        'extra_form': 'jobs/steps_template.html',
+        'extra_form_header': 'Steps (Optional)',
+        'form_js': 'js/steps.js',
     }
     context = {**context, **app_context}
 
-    return render(request, 'jobs/edit_job.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
