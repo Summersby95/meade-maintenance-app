@@ -86,10 +86,14 @@ def create_project(request):
     
     context = {
         'form': form,
+        'action': reverse(create_project),
+        'header': 'Create Stock Item',
+        'submit_text': 'Create Item',
+        'cancel': reverse(ongoing_projects),
     }
     context = {**context, **app_context}
 
-    return render(request, 'projects/create_project.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
