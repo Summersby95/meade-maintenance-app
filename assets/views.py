@@ -157,12 +157,15 @@ def add_ppm(request, asset_id):
         form = PPMForm()
 
     context = {
-        'asset': asset,
         'form': form,
+        'action': reverse(add_ppm, args=(asset.id,)),
+        'header': 'Create Stock Item',
+        'submit_text': 'Create Item',
+        'cancel': reverse(asset_details, args=(asset.id,)),
     }
     context = {**app_context, **context}
 
-    return render(request, 'assets/add_ppm.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
