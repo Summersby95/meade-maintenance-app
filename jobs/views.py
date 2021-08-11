@@ -2,12 +2,15 @@ from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from jobs.decorators import custom_user_test, job_cancel_check, job_edit_check
+
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
+from .decorators import custom_user_test, job_cancel_check, job_edit_check
+
 from profiles.models import UserProfile
 from projects.models import Project
 from stocks.models import StockTransfer
+from projects.views import project_details
 
 app_context = {
     'nbar': 'jobs',
