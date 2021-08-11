@@ -25,4 +25,12 @@ class CustomSignupForm(SignupForm):
         return user
 
 
+class BonusOrderForm(forms.ModelForm):
+
+    class Meta:
+        model = UserBonusOrder
+        fields = ['bonus', 'message']
     
+    def __init__(self, *args, **kwargs):
+        super(BonusOrderForm, self).__init__(*args, **kwargs)
+        self.fields['bonus'].label = 'Bonus (Euros)'
