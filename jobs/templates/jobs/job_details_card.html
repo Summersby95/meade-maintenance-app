@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-12 col-lg-6">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <b>Job Title</b>
+                <span class="float-right">{{ job }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Department</b>
+                <span class="float-right">{{ job.department }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Job Type</b>
+                <span class="float-right">{{ job.type }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Priority</b>
+                <span class="float-right">{{ job.priority }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Status</b>
+                <span class="float-right">{{ job.status }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Due Date</b>
+                <span class="float-right">{{ job.due_date }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Assigned To</b>
+                <span class="float-right">
+                    {% if job.assigned_to.all|length > 0 %}
+                        <ul class="list-group list-group-flush">
+                            {% for ass_user in job.assigned_to.all %}
+                                <li class="list-group-item">{{ ass_user }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %} 
+                        Unassigned
+                    {% endif %}
+                </span>
+            </li>
+            <li class="list-group-item">
+                <b>Created By</b>
+                <span class="float-right">{{ job.created_by }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Created On</b>
+                <span class="float-right">{{ job.created_on }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-12 col-lg-6">
+        <ul class="list-group list-group-flush">
+            {% if job.project %}
+                <li class="list-group-item">
+                    <b>Project</b>
+                    <span class="float-right">
+                        <a href="{% url 'project_details' job.project.id %}">{{ job.project }}</a>
+                    </span>
+                </li>
+            {% endif %}
+            {% if job.asset %}
+                <li class="list-group-item">
+                    <b>Asset</b>
+                    <span class="float-right">
+                        <a href="{% url 'asset_details' job.asset.id %}">{{ job.asset }}</a>
+                    </span>
+                </li>
+            {% endif %}
+            {% if job.ppm %}
+                <li class="list-group-item">
+                    <b>PPM</b>
+                    <span class="float-right">
+                        <a href="{% url 'ppm_details' job.ppm.id %}">{{ job.ppm }}</a>
+                    </span>
+                </li>
+            {% endif %}
+            <li class="list-group-item">
+                <b>Description</b>
+                <p class="float-right">{{ job.description }}</p>
+            </li>
+            <li class="list-group-item">
+                <b>Attachments</b>
+                <span class="float-right">N/A</span>
+            </li>
+        </ul>
+    </div>
+</div>
