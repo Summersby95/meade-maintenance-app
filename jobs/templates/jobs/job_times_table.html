@@ -1,0 +1,14 @@
+<table class="table table-responsive-sm">
+    <thead>
+        <th>User</th>
+        <th>Time Spent</th>
+    </thead>
+    <tbody>
+        {% for log in job_times %}
+            <tr>
+                <td>{{ log.user }}</td>
+                <td>{{ log.time_diff }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
