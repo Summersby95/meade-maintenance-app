@@ -1,0 +1,22 @@
+<table class="table table-responsive-sm">
+    <thead>
+        <th>#</th>
+        <th>Job</th>
+        <th>Due Date</th>
+        <th>Status</th>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td>{{ job.id }}</td>
+                <td>
+                    <a href="{% url 'job_detail' job.id %}">
+                        {{ job }}
+                    </a>
+                </td>
+                <td>{{ job.due_date }}</td>
+                <td>{{ job.status }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
