@@ -1,0 +1,22 @@
+<table class="table table-responsive-sm">
+    <thead>
+        <th>Job</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Time Difference</th>
+    </thead>
+    <tbody>
+        {% for log in time_logs %}
+            <tr>
+                <td>
+                    <a href="{% url 'job_detail' log.job.id %}">
+                        {{ log.job }}
+                    </a>
+                </td>
+                <td>{{ log.time_start }}</td>
+                <td>{{ log.time_end }}</td>
+                <td>{{ log.time_diff }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
