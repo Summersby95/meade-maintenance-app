@@ -148,10 +148,17 @@ def create_project_job(request, project_id):
     
     context = {
         'form': form,
+        'action': reverse(create_job),
+        'header': 'Create Job',
+        'submit_text': 'Create Job',
+        'cancel': reverse(project_details, args=[project.id]),
+        'extra_form': 'jobs/steps_template.html',
+        'extra_form_header': 'Steps (Optional)',
+        'form_js': 'js/steps.js',
     }
     context = {**context, **app_context}
 
-    return render(request, 'jobs/create_job.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
