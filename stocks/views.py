@@ -353,10 +353,25 @@ def supplier_details(request, supplier_id):
         'supplier': supplier,
         'stock_receipts': stock_receipts,
         'assets': assets,
+        'card_tabs': [
+            {
+                'header': f'Supplier #{supplier.id}',
+                'template': 'stocks/supplier_details_card.html'
+            },
+            {
+                'header': 'Stock Receipts',
+                'template': 'stocks/stock_receipts_table.html'
+            },
+            {
+                'header': 'Assets',
+                'template': 'stocks/supplier_assets_table.html'
+            },
+        ],
+        'actions': 'stocks/supplier_details_actions.html',
     }
     context = {**context, **app_context}
 
-    return render(request, 'stocks/supplier_details.html', context)
+    return render(request, 'includes/details.html', context)
 
 
 @login_required
