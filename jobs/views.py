@@ -96,10 +96,29 @@ def job_details(request, job_id):
         'job_steps': job_steps,
         'job_times': job_times,
         'job_transfers': job_transfers,
+        'card_tabs': [
+            {
+                'header': f'Job #{job.id}',
+                'template': 'jobs/job_details_card.html'
+            },
+            {
+                'header': 'Job Steps',
+                'template': 'jobs/job_steps_table.html'
+            },
+            {
+                'header': 'Parts Used',
+                'template': 'projects/parts_used_card.html'
+            },
+            {
+                'header': 'Job Times',
+                'template': 'jobs/job_times_table.html'
+            },
+        ],
+        'actions': 'jobs/job_details_actions.html',
     }
     context = {**context, **app_context}
 
-    return render(request, 'jobs/job_details.html', context)
+    return render(request, 'includes/details.html', context)
 
 
 @login_required
