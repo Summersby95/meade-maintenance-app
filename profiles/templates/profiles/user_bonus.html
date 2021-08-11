@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form action="{% url 'user_bonus' employee.id %}" class="col-12 row" method="post">
+        {% csrf_token %}
+        <div class="col-12">
+            <div class="card content-card">
+                <h4 class="card-header">
+                    Give Employee Bonus
+                </h4>
+                <div class="card-body">
+                    {% include "profiles/employee_details_card.html" %}
+                    <hr>
+                    <div class="row">
+                        {% for field in form %}
+                            <div class="col-12 col-lg-6">
+                                {{ field | as_crispy_field }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card content-card">
+                <h4 class="card-header">
+                    Card Details
+                </h4>
+                <div class="card-body">
+                    <div class="mb-3" id="card-element"></div>
+                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn action-button btn-success">
+            <i class="fas fa-check"></i> Give Bonus
+        </button>
+        <a href="{% url 'staff_detail' employee.id %}" class="btn action-button btn-danger">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </form>
+{% endblock %}
+
+{% block extrajs %}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'js/stripe_elements.js' %}"></script>
+{% endblock %}
