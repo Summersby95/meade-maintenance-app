@@ -62,9 +62,28 @@ def project_details(request, project_id):
         'completed': completed,
         'average_time': average_time,
         'distinct_users': distinct_users,
+        'card_tabs': [
+            {
+                'header': f'Project #{project.id}',
+                'template': 'projects/project_details_card.html'
+            },
+            {
+                'header': 'Project Time Statistics',
+                'template': 'projects/project_time_statistics_card.html'
+            },
+            {
+                'header': 'Parts Used',
+                'template': 'projects/parts_used_card.html'
+            },
+            {
+                'header': 'Project Jobs',
+                'template': 'projects/project_jobs_card.html'
+            }
+        ],
+        'actions': 'projects/project_details_actions.html',
     }
     context = {**app_context, **context}
-    return render(request, 'projects/project_details.html', context)
+    return render(request, 'includes/details.html', context)
 
 
 @login_required
