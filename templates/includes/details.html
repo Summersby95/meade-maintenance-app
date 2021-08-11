@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+    {% for tab in card_tabs %}
+        {% if tab.card %}
+            {% include tab.card with card_header=tab.header card_content=tab.template %}
+        {% else %}
+            {% include "includes/card-12.html" with card_header=tab.header card_content=tab.template %}
+        {% endif %}
+    {% endfor %}
+    {% if actions %}
+        {% include actions %}
+    {% endif %}
+{% endblock %}
