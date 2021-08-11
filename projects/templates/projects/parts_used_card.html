@@ -1,14 +1,22 @@
 <table class="table table-responsive-sm">
     <thead>
-        <th>Part Name:</th>
-        <th>Barcode:</th>
-        <th>Quantity:</th>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>User</th>
+        <th>Added On</th>
     </thead>
     <tbody>
-        <tr>
-            <td>TBD</td>
-            <td></td>
-            <td></td>
-        </tr>
+        {% for transfer in job_transfers %}
+            <tr>
+                <td>
+                    <a href="{% url 'stock_item_details' transfer.item.id %}">
+                        {{ transfer.item }}
+                    </a>
+                </td>
+                <td>{{ transfer.quantity }}</td>
+                <td>{{ transfer.user }}</td>
+                <td>{{ transfer.created_on }}</td>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
