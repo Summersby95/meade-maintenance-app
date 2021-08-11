@@ -81,6 +81,35 @@ def staff_detail(request, staff_id):
         'hours_week': hours_week,
         'hours_month': hours_month,
         'hours_all': hours_all,
+        'card_tabs': [
+            {
+                'header': f'Employee #{employee.id}',
+                'template': 'profiles/employee_details_card.html'
+            },
+            {
+                'header': 'Job Statistics',
+                'template': 'profiles/employee_job_statistics_card.html',
+                'card': 'includes/card-6.html',
+            },
+            {
+                'header': 'Hours Logged',
+                'template': 'profiles/employee_hours_logged_card.html',
+                'card': 'includes/card-6.html',
+            },
+            {
+                'header': 'Jobs',
+                'template': 'profiles/employee_jobs_table_card.html',
+            },
+            {
+                'header': 'Stock Withdrawls',
+                'template': 'profiles/employee_stock_withdrawls_table_card.html',
+            },
+            {
+                'header': 'Time Logs',
+                'template': 'profiles/employee_time_logs_table_card.html',
+            },
+        ],
+        'actions': 'profiles/staff_detail_actions.html',
     }
     context = {**app_context, **context}
 
