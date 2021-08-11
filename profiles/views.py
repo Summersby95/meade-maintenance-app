@@ -113,6 +113,6 @@ def staff_detail(request, staff_id):
     }
     context = {**app_context, **context}
 
-    return render(request, 'profiles/staff_detail.html', context)
+    return render(request, 'includes/details.html', context)
 
 
