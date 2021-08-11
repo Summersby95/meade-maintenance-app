@@ -238,12 +238,15 @@ def create_time_log(request, job_id):
         form = JobTimesForm()
 
     context = {
-        'job_id': job_id,
         'form': form,
+        'action': reverse(create_time_log, args=[job_id]),
+        'header': 'Create Time Log',
+        'submit_text': 'Log Time',
+        'cancel': reverse(job_details, args=[job_id]),
     }
     context = {**context, **app_context}
 
-    return render(request, 'jobs/create_time_log.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
