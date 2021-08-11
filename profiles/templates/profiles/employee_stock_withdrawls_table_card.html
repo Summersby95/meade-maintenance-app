@@ -1,0 +1,30 @@
+<table class="table table-responsive-sm">
+    <thead>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Date</th>
+        <th>Job</th>
+    </thead>
+    <tbody>
+        {% for transfer in stock_withdrawls %}
+            <tr>
+                <td>
+                    <a href="{% url 'stock_item_details' transfer.item.id %}">
+                        {{ transfer.item }}
+                    </a>
+                </td>
+                <td>{{ transfer.quantity }}</td>
+                <td>{{ transfer.created_on }}</td>
+                <td>
+                    {% if transfer.job %}
+                        <a href="{% url 'job_detail' transfer.job.id %}">
+                            {{ transfer.job }}
+                        </a>
+                    {% else %}
+                        Unassigned
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
