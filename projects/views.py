@@ -116,11 +116,15 @@ def edit_project(request, project_id):
     
     context = {
         'form': form,
-        'project': project,
+        'action': reverse(edit_project, args=[project.id]),
+        'header': 'Edit Project',
+        'submit_text': 'Update Project',
+        'cancel': reverse(project_details, args=[project.id]),
+        
     }
     context = {**context, **app_context}
 
-    return render(request, 'projects/edit_project.html', context)
+    return render(request, 'includes/form.html', context)
 
 
 @login_required
