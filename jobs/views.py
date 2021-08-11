@@ -144,30 +144,7 @@ def create_project_job(request, project_id):
     """ View to create job for project """
     project = get_object_or_404(Project, pk=project_id)
     profile = get_object_or_404(UserProfile, user=request.user)
-    if request.method == 'POST':
-        form = JobForm(request.POST, profile=profile, initial={'project': project})
-        
-        if form.is_valid():
-            job = form.save()
-            for key, value in request.POST.items():
-                if 'step' in key:
-                    step_form = JobStepsForm({
-                        'job': job.id,
-                        'step_number': key.split('_')[1],
-                        'step': value,
-                    })
-                    if step_form.is_valid():
-                        step_form.save()
-                    else:
-                        print(step_form.errors)
-
-            messages.success(request, "Job Successfully Created!")
-            return redirect(reverse(job_details, args=[job.id]))
-        else:
-            messages.error(request, "Error Creating Job! Please Try Again")
-            print(form.errors)
-    else:
-        form = JobForm(profile=profile, initial={'project': project})
+    form = JobForm(profile=profile, initial={'project': project})
     
     context = {
         'form': form,
