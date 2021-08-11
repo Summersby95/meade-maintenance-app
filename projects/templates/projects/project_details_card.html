@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-12 col-lg-6">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <b>Project Title</b>
+                <span class="float-right">{{ project.title }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Department</b>
+                <span class="float-right">{{ project.location }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Due Date</b>
+                <span class="float-right">{{ project.due_date }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Created By</b>
+                <span class="float-right">{{ project.created_by }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Created On</b>
+                <span class="float-right">{{ project.created_on }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-12 col-lg-6">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <b>Status</b>
+                <span class="float-right">{{ project.status }}</span>
+            </li>
+            <li class="list-group-item">
+                <b>Description</b>
+                <p class="float-right">{{ project.description }}</p>
+            </li>
+        </ul>
+    </div>
+</div>
