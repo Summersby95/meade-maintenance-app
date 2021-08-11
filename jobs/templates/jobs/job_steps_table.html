@@ -1,0 +1,22 @@
+<table class="table table-responsive-sm">
+    <thead>
+        <th>Step No.</th>
+        <th>Step</th>
+        <th>Completed</th>
+    </thead>
+    <tbody>
+        {% for step in job_steps %}
+            <tr>
+                <th>{{ step.step_number }}.</th>
+                <td>{{ step.step }}</td>
+                <td>
+                    {% if step.completed %}
+                        <i class="far fa-check-circle text-success"></i>
+                    {% else %}
+                        <i class="far fa-times-circle text-danger"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
