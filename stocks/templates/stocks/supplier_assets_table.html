@@ -1,0 +1,22 @@
+<table class="table table-responsive-sm">
+    <thead>
+        <th>Asset Name</th>
+        <th>Asset Type</th>
+        <th>Department</th>
+        <th>Location</th>
+    </thead>
+    <tbody>
+        {% for asset in assets %}
+            <tr>
+                <td>
+                    <a href="{% url 'asset_details' asset.id %}">
+                        {{ asset }}
+                    </a>
+                </td>
+                <td>{{ asset.asset_type }}</td>
+                <td>{{ asset.department }}</td>
+                <td>{{ asset.location }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
