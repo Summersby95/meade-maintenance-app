@@ -26,3 +26,16 @@ class UserProfile(models.Model):
     
     def get_full_name(self):
         return self.first_name + " " + self.last_name
+
+
+class UserBonusOrder(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    bonus = models.DecimalField(max_digits=10, decimal_places=2)
+    message = models.TextField()
+    order_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
+    
+    class Meta:
+        verbose_name_plural = "User Bonus Orders"
