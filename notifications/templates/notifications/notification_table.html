@@ -1,0 +1,38 @@
+{% extends "includes/datatable.html" %}
+{% block table_header %}My Notifications{% endblock %}
+{% block table_content %}
+<thead>
+    <th>#</th>
+    <th>Type</th>
+    <th>Message</th>
+    <th>Created At</th>
+    <th>Actions</th>
+</thead>
+<tbody>
+    {% for notification in notification_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ notification.type }}</td>
+            <td>
+                {% if notification.type.type == "New Job Alert" %}
+                    You have been assigned a new job!
+                {% elif notification.type.type == "Stock Warning" %}
+                    A stock item is under it's stock alert level!
+                {% endif %}
+            </td>
+            <td>{{ notification.created_at }}</td>
+            <td>
+                {% if notification.type.type == "New Job Alert" %}
+                    <a href="{% url 'job_detail' notification.value %}">
+                        Job #{{ notification.value }}
+                    </a>
+                {% elif notification.type.type == "Stock Warning" %}
+                    <a href="{% url 'stock_item_details' notification.value %}">
+                        Stock Item #{{ notification.value }}
+                    </a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+{% endblock %}
