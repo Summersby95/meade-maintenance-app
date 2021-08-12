@@ -29,5 +29,19 @@ def notification_table(request):
     return render(request, 'includes/details.html', context)
 
 
+@login_required
+def read_notifications(request):
+    notificaiton_list = Notification.objects.filter(user=request.user, read=True)
+
+    context = {
+        'notification_list': notificaiton_list,
+        'card_tabs': [
+            {
+                'header': 'Recent Notifications',
+                'template': 'notifications/notification_table.html'
+            },
+        ],
     }
-    return render(request, 'notifications/notification_table.html', context)
+    context = {**context, **app_context}
+
+    return render(request, 'includes/details.html', context)
