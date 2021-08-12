@@ -178,3 +178,13 @@ header ul.nav {
     border: 1px solid #ccc;
     line-height: 50px;
 }
+
+/* Notification Icon */
+.notification-icon {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+}
