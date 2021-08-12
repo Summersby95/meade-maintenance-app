@@ -140,3 +140,32 @@ def user_bonus(request, staff_id):
     context = {**app_context, **context}
 
     return render(request, 'profiles/user_bonus.html', context)
+
+
+@login_required
+@require_http_methods(['POST'])
+def create_checkout_session(request, staff_id):
+    employee = UserProfile.objects.get(id=staff_id)
+    checkout_success_url = "http://" + str(request.get_host()) + "/people/bonus/" + str(employee.id) + "/success/{CHECKOUT_SESSION_ID}/"
+    bonus_amount = int(request.POST.get('bonus')) * 100
+    checkout_session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price_data': {
+                'currency': 'eur',
+                'product_data': {
+                    'name': f'Bonus for {employee.get_full_name()}',
+                },
+                'unit_amount': bonus_amount,
+            },
+            'quantity': 1,
+        }],
+        mode='payment',
+        success_url=checkout_success_url,
+        cancel_url=request.build_absolute_uri(reverse(bonus_cancel, args=[staff_id])),
+    )
+    print(request.get_host())
+
+    return redirect(checkout_session.url, code=303)
+
+
