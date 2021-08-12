@@ -29,7 +29,7 @@ class BonusOrderForm(forms.ModelForm):
 
     class Meta:
         model = UserBonusOrder
-        fields = ['bonus', 'message']
+        fields = ['bonus']
     
     def __init__(self, *args, **kwargs):
         super(BonusOrderForm, self).__init__(*args, **kwargs)
