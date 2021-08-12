@@ -8,12 +8,21 @@
         </a>
 
         {% if user.is_authenticated %}
-            <div class="dropdown ml-auto d-none d-md-block">
-                <a role="button" class="nav-link dropdown-toggle" id="logoutDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user-alt"></i> {{ user.username }}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="logoutDropdown">
-                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+            
+            <div class="ml-auto d-none d-md-block">
+                <div class="dropleft">
+                    <a role="button" class="nav-link dropdown-toggle" id="logoutDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if notification_count != 0 %}
+                            <span class="notification-icon">{{ notification_count }}</span>
+                        {% endif %} 
+                        {{ profile.first_name }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="logoutDropdown">
+                        {% if notification_count != 0 %}
+                            <a href="{% url 'notification_table' %}" class="dropdown-item text-danger">{{ notification_count }} Outstanding Notifications</a>
+                        {% endif %}
+                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                    </div>
                 </div>
             </div>
             <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle Navigation">
