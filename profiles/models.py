@@ -31,7 +31,6 @@ class UserProfile(models.Model):
 class UserBonusOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     bonus = models.DecimalField(max_digits=10, decimal_places=2)
-    message = models.TextField()
     order_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
