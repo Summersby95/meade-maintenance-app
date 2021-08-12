@@ -1,38 +1,33 @@
-{% extends "includes/datatable.html" %}
-{% block table_header %}My Notifications{% endblock %}
-{% block table_content %}
-<thead>
-    <th>#</th>
-    <th>Type</th>
-    <th>Message</th>
-    <th>Created At</th>
-    <th>Actions</th>
-</thead>
-<tbody>
-    {% for notification in notification_list %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ notification.type }}</td>
-            <td>
+<table class="table table-responsive-sm">
+    <tbody>
+        {% for notification in notification_list %}
+            <tr>
                 {% if notification.type.type == "New Job Alert" %}
-                    You have been assigned a new job!
+                    <td>
+                        <i class="fas fa-tools fa-2x text-info"></i>
+                    </td>
+                    <td>
+                        You have been assigned a new job!
+                    </td>
+                    <td>
+                        <a href="{% url 'job_detail' notification.value %}">
+                            Job #{{ notification.value }}
+                        </a>
+                    </td>
                 {% elif notification.type.type == "Stock Warning" %}
-                    A stock item is under it's stock alert level!
+                    <td>
+                        <i class="fas fa-cubes fa-2x text-warning"></i>
+                    </td>
+                    <td>
+                        A stock item is under it's stock alert level!
+                    </td>
+                    <td>
+                        <a href="{% url 'stock_item_details' notification.value %}">
+                            Stock Item #{{ notification.value }}
+                        </a>
+                    </td>
                 {% endif %}
-            </td>
-            <td>{{ notification.created_at }}</td>
-            <td>
-                {% if notification.type.type == "New Job Alert" %}
-                    <a href="{% url 'job_detail' notification.value %}">
-                        Job #{{ notification.value }}
-                    </a>
-                {% elif notification.type.type == "Stock Warning" %}
-                    <a href="{% url 'stock_item_details' notification.value %}">
-                        Stock Item #{{ notification.value }}
-                    </a>
-                {% endif %}
-            </td>
-        </tr>
-    {% endfor %}
-</tbody>
-{% endblock %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
