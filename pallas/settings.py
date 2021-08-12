@@ -83,6 +83,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'profiles.contexts.user_profile',
+                'notifications.contexts.notification_count',
             ],
         },
     },
