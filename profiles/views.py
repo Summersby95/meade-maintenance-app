@@ -203,3 +203,9 @@ def bonus_success(request, staff_id, checkout_session_id):
     messages.success(request, f'Bonus Payment Success For {customer.name}!')
     return render(request, "includes/details.html", context)
 
+
+@login_required
+def bonus_cancel(request, staff_id):
+    employee = get_object_or_404(UserProfile, id=staff_id)
+    messages.error(request, f'Bonus Payment Cancelled For {employee.get_full_name()}!')
+    return redirect(reverse(staff_detail, args=[staff_id]))
