@@ -2,6 +2,14 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Notification
 
+app_context = {
+    'links': [
+        {
+            'href': 'notification_table',
+            'text': 'Unread Notifications',
+        },
+    ],
+}
 
 @login_required
 def notification_table(request):
