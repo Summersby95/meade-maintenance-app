@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'projects',
     'assets',
     'stocks',
+    'notifications',
     'crispy_forms',
 ]
 
