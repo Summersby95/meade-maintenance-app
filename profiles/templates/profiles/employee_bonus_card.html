@@ -1,0 +1,18 @@
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <b>Employee Name</b>
+        <span class="float-right">{{ employee.get_full_name }}</span>
+    </li>
+    <li class="list-group-item">
+        <b>Customer Name</b>
+        <span class="float-right">{{ customer.name }}</span>
+    </li>
+    <li class="list-group-item">
+        <b>Email</b>
+        <span class="float-right">{{ session.customer_details.email }}</span>
+    </li>
+    <li class="list-group-item">
+        <b>Amount</b>
+        <span class="float-right">&euro; {{ amount_total }}</span>
+    </li>
+</ul>
