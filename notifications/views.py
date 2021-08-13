@@ -39,7 +39,7 @@ def notification_table(request):
 
 @login_required
 def read_notifications(request):
-    notificaiton_list = Notification.objects.filter(user=request.user, read=True)
+    notificaiton_list = Notification.objects.filter(user=request.user, read=True).order_by("created_at")[:20]
 
     context = {
         'notification_list': notificaiton_list,
