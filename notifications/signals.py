@@ -29,3 +29,13 @@ def create_notification(user, notification_type, job=None, stock_item=None):
             )
 
 
+@receiver(m2m_changed, sender=Job.assigned_to.through)
+def job_alert(sender, instance, pk_set, action, **kwargs):
+    """
+    Function to create notification for job.
+    """
+    if action == 'post_add':
+        for job_user in instance.assigned_to.all():
+            create_notification(job_user, 'Job Alert', job=instance)
+
+
