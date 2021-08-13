@@ -1,33 +1,46 @@
 <table class="table table-responsive-sm">
     <tbody>
-        {% for notification in notification_list %}
-            <tr>
-                {% if notification.type.type == "New Job Alert" %}
+        {% if notification_list %}
+            {% for notification in notification_list %}
+                <tr>
+                    {% if notification.type.type == "New Job Alert" %}
+                        <td>
+                            <i class="fas fa-tools fa-2x text-info"></i>
+                        </td>
+                        <td>
+                            You have been assigned a new job!
+                        </td>
+                        <td>
+                            {% if notification.job %}
+                                <a href="{% url 'job_detail' notification.job.id %}">
+                                    Job #{{ notification.job.id }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    {% elif notification.type.type == "Stock Warning" %}
+                        <td>
+                            <i class="fas fa-cubes fa-2x text-warning"></i>
+                        </td>
+                        <td>
+                            A stock item is under it's stock alert level!
+                        </td>
+                        <td>
+                            {% if notification.stock_item %}
+                                <a href="{% url 'stock_item_details' notification.stock_item.id %}">
+                                    Stock Item #{{ notification.stock_item.id }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
                     <td>
-                        <i class="fas fa-tools fa-2x text-info"></i>
+                        {{ notification.time_since }}
                     </td>
-                    <td>
-                        You have been assigned a new job!
-                    </td>
-                    <td>
-                        <a href="{% url 'job_detail' notification.value %}">
-                            Job #{{ notification.value }}
-                        </a>
-                    </td>
-                {% elif notification.type.type == "Stock Warning" %}
-                    <td>
-                        <i class="fas fa-cubes fa-2x text-warning"></i>
-                    </td>
-                    <td>
-                        A stock item is under it's stock alert level!
-                    </td>
-                    <td>
-                        <a href="{% url 'stock_item_details' notification.value %}">
-                            Stock Item #{{ notification.value }}
-                        </a>
-                    </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
+                </tr>
+            {% endfor %}
+        {% else %}
+            <td class="text-center">
+                <i class="far fa-grin-beam text-success"></i> You're all caught up!
+            </td>
+        {% endif %}
     </tbody>
 </table>
