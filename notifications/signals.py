@@ -39,3 +39,16 @@ def job_alert(sender, instance, pk_set, action, **kwargs):
             create_notification(job_user, 'Job Alert', job=instance)
 
 
+@receiver(post_save, sender=StockTransfer)
+def stock_alert(sender, instance, created, **kwargs):
+    """
+    Function to create notification for stock.
+    """
+    if instance.item.get_current_stock() < instance.item.stock_alert:
+        notify_users = UserProfile.objects.filter(
+            Q(user_type=UserTypes.objects.get(type='Stock Controller')) |
+            Q(user_type=UserTypes.objects.get(type='Manager')) |
+            Q(user_type=UserTypes.objects.get(type='Admin'))
+        )
+        for stock_user in notify_users:
+            create_notification(stock_user.user, 'Stock Alert', stock_item=instance.item)
