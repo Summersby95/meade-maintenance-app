@@ -17,7 +17,11 @@ app_context = {
 
 @login_required
 def notification_table(request):
-    notificaiton_list = Notification.objects.filter(user=request.user, read=False)
+    notificaiton_list = Notification.objects.filter(user=request.user, read=False).order_by("created_at")
+
+    for notification in notificaiton_list:
+        notification.read = True
+        notification.save()
 
     context = {
         'notification_list': notificaiton_list,
