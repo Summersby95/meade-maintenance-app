@@ -8,6 +8,10 @@ app_context = {
             'href': 'notification_table',
             'text': 'Unread Notifications',
         },
+        {
+            'href': 'read_notifications',
+            'text': 'Read Notifications',
+        }
     ],
 }
 
