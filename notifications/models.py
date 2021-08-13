@@ -32,6 +32,23 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.user.username
-    
+
+    def time_since(self):
+        """
+        Time since notification was created
+        """
+        time_since = datetime.datetime.now().astimezone() - self.created_at
+        hours = time_since.seconds // 3600
+        minutes = (time_since.seconds // 60) % 60
+        seconds = time_since.seconds % 60
+        if hours > 0:
+            time_since = str(hours) + " hours ago"
+        elif minutes > 0:
+            time_since = str(minutes) + " minutes ago"
+        else:
+            time_since = str(seconds) + " seconds ago"
+        
+        return time_since
+
     class Meta:
         verbose_name_plural = "Notifications"
