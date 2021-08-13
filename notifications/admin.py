@@ -14,7 +14,8 @@ class NotificationAdmin(admin.ModelAdmin):
         'type',
         'created_at',
         'read',
-        'value',
+        'job',
+        'stock_item',
     ]
 
 
