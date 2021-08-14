@@ -134,7 +134,7 @@ def user_bonus(request, staff_id):
         'form': bonus_form,
     }
     context = {**app_context, **context}
-
+    
     return render(request, 'profiles/user_bonus.html', context)
 
 
