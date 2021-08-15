@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
 
+
 class JobAdmin(admin.ModelAdmin):
     list_display = (
         'job_title',
