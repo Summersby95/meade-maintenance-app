@@ -33,3 +33,35 @@ var jobsTodayChart = new Chart(jtc, {
         }
     }
 });
+
+var jwc = document.getElementById('jobsWeekChart').getContext('2d');
+var jobsWeekChart = new Chart(jwc, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Completed',
+            'Outstanding'
+        ],
+        datasets: [{
+            label: 'Jobs Week',
+            data: [
+                chart_data.jobs.week.completed_week, 
+                chart_data.jobs.week.started_week
+            ],
+            backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'This Week'
+            }
+        }
+    }
+});
+
