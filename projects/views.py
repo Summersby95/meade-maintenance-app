@@ -25,7 +25,9 @@ app_context = {
 @login_required
 def ongoing_projects(request):
     """ View to see ongoing projects. """
-    projects = Project.objects.filter(status=ProjectStatus.objects.get(status='Pending')).order_by('-due_date')
+    projects = Project.objects.filter(
+        status=ProjectStatus.objects.get(status='Pending')
+    ).order_by('-due_date')
 
     context = {
         'projects': projects,
@@ -50,7 +52,7 @@ def project_details(request, project_id):
             total_time += job_time.time_end - job_time.time_start
             if job_time.user.username not in users:
                 users.append(job_time.user.username)
-    
+
     completed = sum(job.status.status == 'Completed' for job in jobs)
     average_time = total_time / len(jobs) if len(jobs) > 0 else 0
     distinct_users = len(users)
@@ -92,7 +94,7 @@ def create_project(request):
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
         form = ProjectForm(request.POST, profile=profile)
-        
+
         if form.is_valid():
             project = form.save()
             messages.success(request, 'Project Created!')
@@ -102,7 +104,7 @@ def create_project(request):
             print(form.errors)
     else:
         form = ProjectForm(profile=profile)
-    
+
     context = {
         'form': form,
         'action': reverse(create_project),
@@ -122,7 +124,7 @@ def edit_project(request, project_id):
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
         form = ProjectForm(request.POST, instance=project, profile=profile)
-        
+
         if form.is_valid():
             project = form.save()
             messages.success(request, 'Project Updated!')
@@ -132,14 +134,13 @@ def edit_project(request, project_id):
             print(form.errors)
     else:
         form = ProjectForm(profile=profile, instance=project)
-    
+
     context = {
         'form': form,
         'action': reverse(edit_project, args=[project.id]),
         'header': 'Edit Project',
         'submit_text': 'Update Project',
         'cancel': reverse(project_details, args=[project.id]),
-        
     }
     context = {**context, **app_context}
 
