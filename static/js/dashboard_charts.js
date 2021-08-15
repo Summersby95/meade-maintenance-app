@@ -65,3 +65,33 @@ var jobsWeekChart = new Chart(jwc, {
     }
 });
 
+var htc = document.getElementById('hoursTodayChart').getContext('2d');
+var hoursTodayChart = new Chart(htc, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Projects',
+            'General'
+        ],
+        datasets: [{
+            label: 'Hours Today',
+            data: [
+                chart_data.hours.today.project_hours, 
+                chart_data.hours.today.total_hours - chart_data.hours.today.project_hours
+            ],
+            backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Hours Today'
+            }
+        }
+    }
+});
