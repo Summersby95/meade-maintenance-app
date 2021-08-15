@@ -1,5 +1,11 @@
+import datetime
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q, Sum
+
+from jobs.models import Job, JobStatus, JobTimes
+from projects.models import Project, ProjectStatus
 
 
 app_context = {
@@ -9,10 +15,6 @@ app_context = {
             'href': 'dashboard',
             'text': 'Dashboard',
         },
-        # {
-        #     'href': 'create_job',
-        #     'text': 'Reports',
-        # },
     ],
 }
 
