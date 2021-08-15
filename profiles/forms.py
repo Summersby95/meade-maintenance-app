@@ -7,10 +7,12 @@ from .models import *
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
-    department = forms.ModelChoiceField(queryset=Departments.objects.all(), required=True)
-    user_type = forms.ModelChoiceField(queryset=UserTypes.objects.all(), required=True)
+    department = forms.ModelChoiceField(queryset=Departments.objects.all(),
+                                        required=True)
+    user_type = forms.ModelChoiceField(queryset=UserTypes.objects.all(),
+                                       required=True)
     phone_number = forms.CharField(max_length=15, required=True)
-    
+
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         profile = UserProfile(
@@ -30,7 +32,7 @@ class BonusOrderForm(forms.ModelForm):
     class Meta:
         model = UserBonusOrder
         fields = ['bonus']
-    
+
     def __init__(self, *args, **kwargs):
         super(BonusOrderForm, self).__init__(*args, **kwargs)
         self.fields['bonus'].label = 'Bonus (Euros)'
