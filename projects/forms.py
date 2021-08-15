@@ -14,7 +14,7 @@ class ProjectForm(forms.ModelForm):
         widgets = {
             'due_date': DateInput(),
         }
-    
+
     def __init__(self, *args, **kwargs):
         self.profile = kwargs.pop('profile')
         super(ProjectForm, self).__init__(*args, **kwargs)
