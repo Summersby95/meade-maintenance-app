@@ -14,7 +14,7 @@ class NotificationType(models.Model):
 
     def __str__(self):
         return self.type
-    
+
     class Meta:
         verbose_name_plural = "Notification Types"
 
@@ -24,11 +24,14 @@ class Notification(models.Model):
     Notification Model
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    type = models.ForeignKey(NotificationType, on_delete=models.SET_NULL, null=True)
+    type = models.ForeignKey(NotificationType, on_delete=models.SET_NULL,
+                             null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
-    job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True, blank=True)
-    stock_item = models.ForeignKey(StockItem, on_delete=models.SET_NULL, null=True, blank=True)
+    job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True,
+                            blank=True)
+    stock_item = models.ForeignKey(StockItem, on_delete=models.SET_NULL,
+                                   null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -47,7 +50,7 @@ class Notification(models.Model):
             time_since = str(minutes) + " minutes ago"
         else:
             time_since = str(seconds) + " seconds ago"
-        
+
         return time_since
 
     class Meta:
