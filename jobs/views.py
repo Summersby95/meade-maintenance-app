@@ -35,16 +35,18 @@ app_context = {
 def outstanding_jobs(request):
     """ View to see outstanding jobs for user """
     profile = get_object_or_404(UserProfile, user=request.user)
-    
+
     if str(profile.user_type).lower() in ("admin", "manager"):
         jobs = Job.objects.filter(
-            (Q(status=JobStatus.objects.get(status='Not Started')) | Q(status=JobStatus.objects.get(status='Started')))
+            (Q(status=JobStatus.objects.get(status='Not Started')) |
+             Q(status=JobStatus.objects.get(status='Started')))
             & Q(ppm=None)
         )
     else:
         jobs = Job.objects.filter(
             (Q(assigned_to=request.user) | Q(assigned_to=None)) &
-            (Q(status=JobStatus.objects.get(status='Not Started')) | Q(status=JobStatus.objects.get(status='Started')))
+            (Q(status=JobStatus.objects.get(status='Not Started')) |
+             Q(status=JobStatus.objects.get(status='Started')))
             & Q(ppm=None)
         )
 
@@ -60,16 +62,18 @@ def outstanding_jobs(request):
 def outstanding_ppms(request):
     """ View to see outstanding ppms for user """
     profile = get_object_or_404(UserProfile, user=request.user)
-    
+
     if str(profile.user_type).lower() in ("admin", "manager"):
         jobs = Job.objects.filter(
-            (Q(status=JobStatus.objects.get(status='Not Started')) | Q(status=JobStatus.objects.get(status='Started')))
+            (Q(status=JobStatus.objects.get(status='Not Started')) |
+             Q(status=JobStatus.objects.get(status='Started')))
             & ~Q(ppm=None)
         )
     else:
         jobs = Job.objects.filter(
             (Q(assigned_to=request.user) | Q(assigned_to=None)) &
-            (Q(status=JobStatus.objects.get(status='Not Started')) | Q(status=JobStatus.objects.get(status='Started')))
+            (Q(status=JobStatus.objects.get(status='Not Started')) |
+             Q(status=JobStatus.objects.get(status='Started')))
             & ~Q(ppm=None)
         )
 
@@ -84,7 +88,7 @@ def outstanding_ppms(request):
 @login_required
 def job_details(request, job_id):
     """ View to see details of a job """
-    
+
     job = get_object_or_404(Job, pk=job_id)
 
     job_steps = JobSteps.objects.filter(job=job_id)
@@ -127,7 +131,7 @@ def create_job(request):
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
         form = JobForm(request.POST, profile=profile)
-        
+
         if form.is_valid():
             job = form.save()
             for key, value in request.POST.items():
@@ -149,7 +153,7 @@ def create_job(request):
             print(form.errors)
     else:
         form = JobForm(profile=profile)
-    
+
     context = {
         'form': form,
         'action': reverse(create_job),
@@ -171,7 +175,7 @@ def create_project_job(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     profile = get_object_or_404(UserProfile, user=request.user)
     form = JobForm(profile=profile, initial={'project': project})
-    
+
     context = {
         'form': form,
         'action': reverse(create_job),
@@ -212,7 +216,7 @@ def edit_job(request, job_id):
                         step_form.save()
                     else:
                         print(step_form.errors)
-            
+
             messages.success(request, "Job Successfully Updated!")
             return redirect(reverse(job_details, args=[job.id]))
         else:
@@ -220,7 +224,7 @@ def edit_job(request, job_id):
             print(form.errors)
     else:
         form = JobForm(instance=job, profile=profile)
-    
+
     context = {
         'form': form,
         'job_steps': job_steps,
@@ -241,7 +245,7 @@ def edit_job(request, job_id):
 @custom_user_test(job_edit_check, login_url='/jobs/', redirect_field_name=None)
 def create_time_log(request, job_id):
     """ View to create time log """
-    job=get_object_or_404(Job, pk=job_id)
+    job = get_object_or_404(Job, pk=job_id)
 
     if request.method == 'POST':
         form = JobTimesForm(request.POST)
@@ -251,7 +255,9 @@ def create_time_log(request, job_id):
             messages.success(request, "Time Log Successfully Created!")
             return redirect(reverse(job_details, args=[job_id]))
         else:
-            messages.error(request, "Error Creating Time Log! Please Try Again")
+            messages.error(
+                request, "Error Creating Time Log! Please Try Again"
+            )
             print(form.errors)
     else:
         form = JobTimesForm()
@@ -280,7 +286,8 @@ def mark_completed(request, job_id):
 
 
 @login_required
-@custom_user_test(job_cancel_check, login_url='/jobs/', redirect_field_name=None)
+@custom_user_test(job_cancel_check, login_url='/jobs/',
+                  redirect_field_name=None)
 def reopen_job(request, job_id):
     """ View to reopen job """
     job = get_object_or_404(Job, pk=job_id)
@@ -291,7 +298,8 @@ def reopen_job(request, job_id):
 
 
 @login_required
-@custom_user_test(job_cancel_check, login_url='/jobs/', redirect_field_name=None)
+@custom_user_test(job_cancel_check, login_url='/jobs/',
+                  redirect_field_name=None)
 def cancel_job(request, job_id):
     """ View to cancel job """
     job = get_object_or_404(Job, pk=job_id)
