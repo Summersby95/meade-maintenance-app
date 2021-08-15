@@ -1,11 +1,12 @@
 from django.db import models
 
+
 class Departments(models.Model):
     department_name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.department_name
-    
+
     class Meta:
         verbose_name_plural = "Departments"
 
@@ -16,7 +17,7 @@ class Locations(models.Model):
 
     def __str__(self):
         return self.location_name
-    
+
     class Meta:
         verbose_name_plural = "Locations"
 
@@ -26,6 +27,6 @@ class Suppliers(models.Model):
 
     def __str__(self):
         return self.supplier_name
-    
+
     class Meta:
         verbose_name_plural = "Suppliers"
