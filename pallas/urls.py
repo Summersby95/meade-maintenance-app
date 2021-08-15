@@ -14,4 +14,4 @@ urlpatterns = [
     path('stocks/', include('stocks.urls')),
     path('people/', include('profiles.urls')),
     path('notifications/', include('notifications.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
