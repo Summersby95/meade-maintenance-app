@@ -1,14 +1,17 @@
 import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from django.contrib import messages
 from django.db.models import Q, Sum
 from django.conf import settings
+
 from .models import UserBonusOrder, UserProfile
 from .forms import BonusOrderForm
 from jobs.models import Job, JobStatus, JobTimes
 from stocks.models import StockTransfer
+
 import stripe
 
 
@@ -40,40 +43,52 @@ def staff_list(request):
 @login_required
 def staff_detail(request, staff_id):
     employee = UserProfile.objects.get(id=staff_id)
-    jobs = Job.objects.filter(Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user))
+    jobs = Job.objects.filter(
+        Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
+    )
     stock_withdrawls = StockTransfer.objects.filter(user=employee.user)
     time_logs = JobTimes.objects.filter(user=employee.user)
 
-    cancelled_jobs = jobs.filter(status=JobStatus.objects.get(status='Cancelled')).count()
-    completed_jobs = jobs.filter(status=JobStatus.objects.get(status='Completed')).count()
-    started_jobs = jobs.filter(status=JobStatus.objects.get(status='Started')).count()
-    outstanding_jobs = jobs.filter(~Q(status=JobStatus.objects.get(status='Completed'))).count()
+    cancelled_jobs = jobs.filter(
+        Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
+    ).count()
+    completed_jobs = jobs.filter(
+        status=JobStatus.objects.get(status='Completed')
+    ).count()
+    started_jobs = jobs.filter(
+        status=JobStatus.objects.get(status='Started')
+    ).count()
+    outstanding_jobs = jobs.filter(
+        ~Q(status=JobStatus.objects.get(status='Completed'))
+    ).count()
 
     hours_today = sum(
         [time.time_diff() for time in time_logs.filter(
             time_start__date=datetime.date.today()
-        )], 
+        )],
         datetime.timedelta()
     )
     hours_week = sum(
         [time.time_diff() for time in time_logs.filter(
             time_start__date__range=[
-                datetime.date.today() - datetime.timedelta(days=7), 
+                datetime.date.today() - datetime.timedelta(days=7),
                 datetime.date.today()
             ]
-        )], 
+        )],
         datetime.timedelta()
     )
     hours_month = sum(
         [time.time_diff() for time in time_logs.filter(
             time_start__date__range=[
-                datetime.date.today() - datetime.timedelta(days=30), 
+                datetime.date.today() - datetime.timedelta(days=30),
                 datetime.date.today()
             ]
-        )], 
+        )],
         datetime.timedelta()
     )
-    hours_all = sum([time.time_diff() for time in time_logs], datetime.timedelta())
+    hours_all = sum(
+        [time.time_diff() for time in time_logs], datetime.timedelta()
+    )
 
     context = {
         'employee': employee,
@@ -109,7 +124,8 @@ def staff_detail(request, staff_id):
             },
             {
                 'header': 'Stock Withdrawls',
-                'template': 'profiles/employee_stock_withdrawls_table_card.html',
+                'template': ('profiles/'
+                             'employee_stock_withdrawls_table_card.html'),
             },
             {
                 'header': 'Time Logs',
@@ -134,7 +150,7 @@ def user_bonus(request, staff_id):
         'form': bonus_form,
     }
     context = {**app_context, **context}
-    
+
     return render(request, 'profiles/user_bonus.html', context)
 
 
@@ -142,7 +158,14 @@ def user_bonus(request, staff_id):
 @require_http_methods(['POST'])
 def create_checkout_session(request, staff_id):
     employee = UserProfile.objects.get(id=staff_id)
-    checkout_success_url = "http://" + str(request.get_host()) + "/people/bonus/" + str(employee.id) + "/success/{CHECKOUT_SESSION_ID}/"
+    url_vars = [
+        "http://",
+        str(request.get_host()),
+        "/people/bonus/",
+        str(employee.id),
+        "/success/{CHECKOUT_SESSION_ID}/"
+    ]
+    checkout_success_url = ''.join(url_vars)
     bonus_amount = int(request.POST.get('bonus')) * 100
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -158,7 +181,9 @@ def create_checkout_session(request, staff_id):
         }],
         mode='payment',
         success_url=checkout_success_url,
-        cancel_url=request.build_absolute_uri(reverse(bonus_cancel, args=[staff_id])),
+        cancel_url=request.build_absolute_uri(
+            reverse(bonus_cancel, args=[staff_id])
+        ),
     )
     print(request.get_host())
 
@@ -173,10 +198,10 @@ def bonus_success(request, staff_id, checkout_session_id):
     else:
         messages.error(request, "Something went wrong. Please try again.")
         return redirect(reverse(staff_detail, args=[staff_id]))
-    
+
     customer = stripe.Customer.retrieve(session.customer)
     amount_total = format((int(session.amount_total)/100), '.2f')
-    
+
     UserBonusOrder.objects.create(
         user=request.user,
         bonus=amount_total,
@@ -203,5 +228,7 @@ def bonus_success(request, staff_id, checkout_session_id):
 @login_required
 def bonus_cancel(request, staff_id):
     employee = get_object_or_404(UserProfile, id=staff_id)
-    messages.error(request, f'Bonus Payment Cancelled For {employee.get_full_name()}!')
+    messages.error(
+        request, f'Bonus Payment Cancelled For {employee.get_full_name()}!'
+    )
     return redirect(reverse(staff_detail, args=[staff_id]))
