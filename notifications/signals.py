@@ -4,7 +4,7 @@ from django.dispatch import receiver
 from .models import Notification, NotificationType
 from jobs.models import Job
 from stocks.models import StockTransfer, StockReceipts, StockItem
-from profiles.models import UserTypes, UserProfile 
+from profiles.models import UserTypes, UserProfile
 
 
 def create_notification(user, notification_type, job=None, stock_item=None):
@@ -51,4 +51,5 @@ def stock_alert(sender, instance, created, **kwargs):
             Q(user_type=UserTypes.objects.get(type='Admin'))
         )
         for stock_user in notify_users:
-            create_notification(stock_user.user, 'Stock Alert', stock_item=instance.item)
+            create_notification(stock_user.user, 'Stock Alert',
+                                stock_item=instance.item)
