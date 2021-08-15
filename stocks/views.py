@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 from ancillaries.models import Suppliers
 from assets.models import Assets
 from .models import StockItem, StockReceipts, StockTransfer
@@ -8,7 +9,7 @@ from .forms import StockItemForm, StockReceiptsForm, StockTransferForm
 from ancillaries.forms import SupplierForm
 
 app_context = {
-    'nbar' : 'stocks',
+    'nbar': 'stocks',
     'links': [
         {
             'href': 'inventory_view',
@@ -97,9 +98,12 @@ def create_stock_item(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Stock Item Successfully Created!')
-            return redirect(reverse(stock_item_details, args=[form.instance.id]))
+            return redirect(reverse(stock_item_details,
+                            args=[form.instance.id]))
         else:
-            messages.error(request, 'Error Creating Stock Item! Please Try Again')
+            messages.error(
+                request, 'Error Creating Stock Item! Please Try Again'
+            )
     else:
         form = StockItemForm()
 
@@ -152,9 +156,13 @@ def create_stock_receipt(request):
             receipt.created_by = request.user
             receipt.save()
             messages.success(request, 'Stock Receipt Created Successfully!')
-            return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+            return redirect(
+                reverse(stock_item_details, args=[form.instance.item.id])
+            )
         else:
-            messages.error(request, 'Error Creating Stock Receipt! Please Try Again')
+            messages.error(
+                request, 'Error Creating Stock Receipt! Please Try Again'
+            )
     else:
         form = StockReceiptsForm()
 
@@ -197,9 +205,13 @@ def edit_stock_receipt(request, receipt_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Stock Receipt Updated Successfully!')
-            return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+            return redirect(reverse(
+                stock_item_details, args=[form.instance.item.id]
+            ))
         else:
-            messages.error(request, 'Error Updating Stock Receipt! Please Try Again!')
+            messages.error(
+                request, 'Error Updating Stock Receipt! Please Try Again!'
+            )
     else:
         form = StockReceiptsForm(instance=receipt)
 
@@ -225,7 +237,9 @@ def create_stock_transfer(request):
             transfer.user = request.user
             transfer.save()
             messages.success(request, 'Stock Withdrawl Successful!')
-            return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+            return redirect(reverse(
+                stock_item_details, args=[form.instance.item.id]
+            ))
         else:
             messages.error(request, 'Stock Withdrawl Failed! Please Try Again')
     else:
@@ -270,9 +284,13 @@ def edit_stock_transfer(request, transfer_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Stock Transfer Updated Successfully!')
-            return redirect(reverse(stock_item_details, args=[form.instance.item.id]))
+            return redirect(
+                reverse(stock_item_details, args=[form.instance.item.id])
+            )
         else:
-            messages.error(request, 'Error Updating Stock Transfer! Please Try Again')
+            messages.error(
+                request, 'Error Updating Stock Transfer! Please Try Again'
+            )
     else:
         form = StockTransferForm(instance=transfer)
 
@@ -329,7 +347,7 @@ def supplier_list(request):
         supplier.assets = Assets.objects.filter(
             supplier=supplier,
         ).count()
-    
+
     context = {
         'suppliers': suppliers,
     }
@@ -384,7 +402,9 @@ def create_supplier(request):
             messages.success(request, 'Supplier Created Successfully!')
             return redirect(reverse(supplier_details, args=[supplier.id]))
         else:
-            messages.error(request, 'Error Creating Supplier! Please Try Again')
+            messages.error(
+                request, 'Error Creating Supplier! Please Try Again'
+            )
     else:
         form = SupplierForm()
 
@@ -429,7 +449,9 @@ def edit_supplier(request, supplier_id):
             messages.success(request, 'Supplier Successfully Updated!')
             return redirect(reverse(supplier_details, args=[supplier.id]))
         else:
-            messages.error(request, 'Error Updating Supplier! Please Try Again')
+            messages.error(
+                request, 'Error Updating Supplier! Please Try Again'
+            )
     else:
         form = SupplierForm(instance=supplier)
 
