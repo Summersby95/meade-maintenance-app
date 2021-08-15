@@ -3,3 +3,4 @@ ms4/
 *.pyc
 __pycache__
 env.py
+*.vscode
