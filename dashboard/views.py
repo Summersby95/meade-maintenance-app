@@ -79,4 +79,84 @@ def dashboard(request):
             datetime.timedelta()
         ),
     }
+
+    charts = {
+        'jobs': {
+            'today': {
+                'completed_today': Job.objects.filter(
+                    status=JobStatus.objects.get(status='Completed'),
+                    created_on__date=datetime.datetime.now().date()
+                ).count(),
+                'started_today': Job.objects.filter(
+                    ~Q(status=JobStatus.objects.get(status='Completed')),
+                    created_on__date=datetime.datetime.now().date()
+                ).count(),
+            },
+            'week': {
+                'completed_week': Job.objects.filter(
+                    status=JobStatus.objects.get(status='Completed'),
+                    created_on__range=(
+                        datetime.datetime.now() - datetime.timedelta(days=7),
+                        datetime.datetime.now()
+                    )
+                ).count(),
+                'started_week': Job.objects.filter(
+                    ~Q(status=JobStatus.objects.get(status='Completed')),
+                    created_on__range=(
+                        datetime.datetime.now() - datetime.timedelta(days=7),
+                        datetime.datetime.now()
+                    )
+                ).count(),
+            },
+        },
+        'hours': {
+            'today': {
+                'project_hours': sum(
+                    [jt.time_diff() for jt in JobTimes.objects.filter(
+                        ~Q(job__project=None),
+                        time_start__date=datetime.datetime.now().date()
+                    )],
+                    datetime.timedelta()
+                ).seconds//3600,
+                'total_hours': sum(
+                    [jt.time_diff() for jt in JobTimes.objects.filter(
+                        time_start__date=datetime.datetime.now().date()
+                    )],
+                    datetime.timedelta()
+                ).seconds//3600,
+            },
+            'week': {
+                'project_hours': sum(
+                    [jt.time_diff() for jt in JobTimes.objects.filter(
+                        ~Q(job__project=None),
+                        time_start__range=(
+                            (datetime.datetime.now() -
+                             datetime.timedelta(days=7)),
+                            datetime.datetime.now()
+                        )
+                    )],
+                    datetime.timedelta()
+                ).seconds//3600,
+                'total_hours': sum(
+                    [jt.time_diff() for jt in JobTimes.objects.filter(
+                        time_start__range=(
+                            (datetime.datetime.now() -
+                             datetime.timedelta(days=7)),
+                            datetime.datetime.now()
+                        )
+                    )],
+                    datetime.timedelta()
+                ).seconds//3600,
+            },
+        },
+    }
+
+    context = {
+        'jobs': jobs,
+        'projects': projects,
+        'people': people,
+        'charts': charts,
+    }
+    context = {**context, **app_context}
+
     return render(request, 'dashboard/dashboard.html', context)
