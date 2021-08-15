@@ -95,3 +95,34 @@ var hoursTodayChart = new Chart(htc, {
         }
     }
 });
+
+var hwc = document.getElementById('hoursWeekChart').getContext('2d');
+var hoursWeekChart = new Chart(hwc, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Projects',
+            'General'
+        ],
+        datasets: [{
+            label: 'Hours Week',
+            data: [
+                chart_data.hours.week.project_hours, 
+                chart_data.hours.week.total_hours - chart_data.hours.week.project_hours
+            ],
+            backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Hours This Week'
+            }
+        }
+    }
+});
