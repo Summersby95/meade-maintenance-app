@@ -1,7 +1,10 @@
-from django import forms
-from .models import Job, JobPriority, JobTimes, JobTypes, JobSteps
 from datetime import datetime, timedelta
+
+from django import forms
+
+from .models import Job, JobPriority, JobTimes, JobTypes, JobSteps
 from ancillaries.forms import DateInput
+
 
 class JobForm(forms.ModelForm):
 
@@ -22,13 +25,17 @@ class JobForm(forms.ModelForm):
         widgets = {
             'due_date': DateInput()
         }
-    
+
     def __init__(self, *args, **kwargs):
         self.profile = kwargs.pop('profile')
         super(JobForm, self).__init__(*args, **kwargs)
-        self.fields['priority'].initial = JobPriority.objects.get(priority='Medium')
+        self.fields['priority'].initial = JobPriority.objects.get(
+            priority='Medium'
+        )
         self.fields['department'].initial = self.profile.department
-        self.fields['type'].initial = JobTypes.objects.get(type='General Maintenance')
+        self.fields['type'].initial = JobTypes.objects.get(
+            type='General Maintenance'
+        )
         self.fields['created_by'].initial = self.profile.user.id
         self.fields['created_by'].widget.attrs['hidden'] = True
         self.fields['created_by'].label = ""
@@ -44,17 +51,17 @@ class JobStepsForm(forms.ModelForm):
     class Meta:
         model = JobSteps
         fields = ['job', 'step_number', 'step']
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
 
 class JobTimesForm(forms.ModelForm):
-    
+
     class Meta:
         model = JobTimes
         exclude = ['job']
-    
+
     time_start = forms.DateTimeField(
         input_formats=['%d/%m/%Y %H:%M'],
         widget=forms.DateTimeInput(),
@@ -65,7 +72,6 @@ class JobTimesForm(forms.ModelForm):
         widget=forms.DateTimeInput(),
         initial=datetime.now() + timedelta(hours=1)
     )
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
