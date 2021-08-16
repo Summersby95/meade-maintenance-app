@@ -142,8 +142,7 @@ def completed_ppms(request):
     else:
         jobs = Job.objects.filter(
             (Q(assigned_to=request.user) | Q(assigned_to=None)) &
-            (Q(status=JobStatus.objects.get(status='Not Started')) |
-             Q(status=JobStatus.objects.get(status='Started')))
+            Q(status=JobStatus.objects.get(status='Completed'))
             & ~Q(ppm=None)
         )
 
