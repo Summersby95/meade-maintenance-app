@@ -86,6 +86,9 @@ TEMPLATES = [
                 'profiles.contexts.user_profile',
                 'notifications.contexts.notification_count',
             ],
+            'libraries': {
+                'auth_tests': 'ancillaries.templatetags.auth_tests'
+            }
         },
     },
 ]
