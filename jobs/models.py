@@ -97,7 +97,10 @@ class JobTimes(models.Model):
         return self.job.job_title
 
     def time_diff(self):
-        return self.time_end - self.time_start
+        if self.time_end is not None:
+            return self.time_end - self.time_start
+        else:
+            return "In Progress"
 
     class Meta:
         verbose_name_plural = 'Job Times'
