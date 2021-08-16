@@ -293,6 +293,24 @@ def create_item_stock_transfer(request, stock_id):
 
 
 @login_required
+def create_job_stock_transfer(request, job_id):
+    """ View to create stock transfer for a job. """
+    job = get_object_or_404(Job, pk=job_id)
+    form = StockTransferForm(initial={'job': job})
+
+    context = {
+        'form': form,
+        'action': reverse(create_stock_transfer),
+        'header': 'Withdraw Stock',
+        'submit_text': 'Withdraw Stock',
+        'cancel': reverse(job_details, args=[job.id]),
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'includes/form.html', context)
+
+
+@login_required
 def edit_stock_transfer(request, transfer_id):
     """ View to edit stock transfer """
     transfer = get_object_or_404(StockTransfer, pk=transfer_id)
