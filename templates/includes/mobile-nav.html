@@ -1,0 +1,91 @@
+{% load auth_tests %}
+{% manager_test as is_manager %}
+{% stock_test as is_stock %}
+<ul class="navbar-nav ml-auto d-md-none">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="dashboardDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dashboard
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
+            <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="jobsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Jobs
+        </a>
+        <div class="dropdown-menu" aria-labelledby="jobsDropdown">
+            <a class="dropdown-item" href="{% url 'outstanding_jobs' %}">Outstanding Jobs</a>
+            <a href="{% url 'outstanding_ppms' %}" class="dropdown-item">Outstanding PPMs</a>
+            <a class="dropdown-item" href="{% url 'create_job' %}">Create Job</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="projectsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Projects
+        </a>
+        <div class="dropdown-menu" aria-labelledby="projectsDropdown">
+            <a class="dropdown-item" href="{% url 'ongoing_projects' %}">Ongoing Projects</a>
+            {% if is_manager %}
+                <a class="dropdown-item" href="{% url 'create_project' %}">Create Project</a>
+            {% endif %}
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="assetsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Assets
+        </a>
+        <div class="dropdown-menu" aria-labelledby="assetsDropdown">
+            <a class="dropdown-item" href="{% url 'active_assets' %}">Active Assets</a>
+            {% if is_manager %}
+                <a href="{% url 'create_asset' %}" class="dropdown-item">Create New Asset</a>
+                <a href="{% url 'inactive_assets' %}" class="dropdown-item">Inactive Assets</a>
+            {% endif %}
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="stocksDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Stocks
+        </a>
+        <div class="dropdown-menu" aria-labelledby="stocksDropdown">
+            <a class="dropdown-item" href="{% url 'inventory_view' %}">Inventory View</a>
+            <a href="{% url 'create_stock_transfer' %}" class="dropdown-item">Withdraw Stock</a>
+            <a href="{% url 'user_unassigned_stock' %}" class="dropdown-item">User Unassigned Stock</a>
+            <a href="{% url 'user_assigned_stock' %}" class="dropdown-item">User Assigned Stock</a>
+            {% if is_stock %}
+                <a href="{% url 'create_stock_item' %}" class="dropdown-item">Create Stock Item</a>
+                <a href="{% url 'create_stock_receipt' %}" class="dropdown-item">Receive Stock</a>
+                <a href="{% url 'supplier_list' %}" class="dropdown-item">Supplier List</a>
+                <a href="{% url 'create_supplier' %}" class="dropdown-item">Create Supplier</a>
+            {% endif %}
+        </div>
+    </li>
+    {% if is_manager %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="peopleDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                People
+            </a>
+            <div class="dropdown-menu" aria-labelledby="peopleDropdown">
+                <a class="dropdown-item" href="{% url 'staff_list' %}">Staff List</a>
+            </div>
+        </li>
+    {% endif %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="mobileLogoutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% if notification_count != 0 %}
+                <span class="notification-icon">{{ notification_count }}</span>
+            {% endif %} 
+            {{ profile.first_name }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="mobileLogoutDropdown">
+            <a href="{% url 'notification_table' %}" class="dropdown-item text-danger">
+                {% if notification_count != 0 %}
+                    {{ notification_count }} Outstanding Notifications
+                {% else %}
+                    Notifications
+                {% endif %}
+            </a>
+            <a href="/accounts/logout" class="dropdown-item">Logout</a>
+        </div>
+    </li>
+</ul>
