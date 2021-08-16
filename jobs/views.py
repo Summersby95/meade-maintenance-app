@@ -84,8 +84,26 @@ def outstanding_ppms(request):
 
     if str(profile.user_type).lower() in ("admin", "manager"):
         jobs = Job.objects.filter(
-            (Q(status=JobStatus.objects.get(status='Not Started')) |
-             Q(status=JobStatus.objects.get(status='Started')))
+            ~Q(status=JobStatus.objects.get(status='Completed')) &
+            ~Q(status=JobStatus.objects.get(status='Cancelled'))
+            & ~Q(ppm=None)
+        )
+    else:
+        jobs = Job.objects.filter(
+            (Q(assigned_to=request.user) | Q(assigned_to=None)) &
+            ~Q(status=JobStatus.objects.get(status='Completed')) &
+            ~Q(status=JobStatus.objects.get(status='Cancelled'))
+            & ~Q(ppm=None)
+        )
+
+    context = {
+        'jobs': jobs,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'jobs/job_table.html', context)
+
+
             & ~Q(ppm=None)
         )
     else:
