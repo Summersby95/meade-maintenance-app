@@ -164,11 +164,18 @@ def job_details(request, job_id):
     job_times = JobTimes.objects.filter(job=job_id)
     job_transfers = StockTransfer.objects.filter(job=job_id)
 
+    user_started = JobTimes.objects.filter(
+        job=job_id,
+        user=request.user,
+        time_end__isnull=True
+    ).count()
+
     context = {
         'job': job,
         'job_steps': job_steps,
         'job_times': job_times,
         'job_transfers': job_transfers,
+        'user_started': user_started,
         'card_tabs': [
             {
                 'header': f'Job #{job.id}',
