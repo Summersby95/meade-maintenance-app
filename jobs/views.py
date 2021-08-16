@@ -326,8 +326,10 @@ def create_time_log(request, job_id):
     if request.method == 'POST':
         form = JobTimesForm(request.POST)
         if form.is_valid():
-            job_time = JobTimes(job=job, **form.cleaned_data)
-            job_time.save()
+            time_log = form.save(commit=False)
+            time_log.job = job
+            time_log.user = request.user
+            time_log.save()
             messages.success(request, "Time Log Successfully Created!")
             return redirect(reverse(job_details, args=[job_id]))
         else:
