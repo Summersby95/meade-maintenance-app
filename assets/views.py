@@ -67,15 +67,15 @@ def asset_details(request, asset_id):
     total_time = datetime.timedelta()
     users = []
     for job in jobs:
-        job_times = JobTimes.objects.filter(job=job)
+        job_times = JobTimes.objects.filter(~Q(time_end=None), job=job)
         for job_time in job_times:
             total_time += job_time.time_end - job_time.time_start
             if job_time.user.username not in users:
                 users.append(job_time.user.username)
-    
+
     completed = sum(job.status.status == 'Completed' for job in jobs)
     distinct_users = len(users)
-    
+
     context = {
         'asset': asset,
         'ppms': ppms,
