@@ -8,6 +8,7 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = [
+            'created_by',
             'created_on',
             'status',
         ]
@@ -16,9 +17,4 @@ class ProjectForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        self.profile = kwargs.pop('profile')
         super(ProjectForm, self).__init__(*args, **kwargs)
-        self.fields['created_by'].initial = self.profile.user.id
-        self.fields['created_by'].widget.attrs['hidden'] = True
-        self.fields['created_by'].label = ""
-        self.fields['created_by'].widget.attrs['readonly'] = True
