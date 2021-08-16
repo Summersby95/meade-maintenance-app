@@ -56,3 +56,17 @@ def manager_test(request):
     return res
 
 
+def stock_test(request):
+    """
+    checks if user is a stock controller, manager or admin
+    """
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    res = False
+
+    if str(profile.user_type).lower() in (
+        'admin', 'manager', 'stock controller'
+    ):
+        res = True
+
+    return res
