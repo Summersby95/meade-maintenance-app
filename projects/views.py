@@ -101,6 +101,8 @@ def project_details(request, project_id):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/projects/',
+                  redirect_field_name=None)
 def create_project(request):
     """ View to create job """
     profile = get_object_or_404(UserProfile, user=request.user)
@@ -130,6 +132,8 @@ def create_project(request):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/projects/',
+                  redirect_field_name=None)
 def edit_project(request, project_id):
     """ View to edit job """
     project = get_object_or_404(Project, pk=project_id)
@@ -160,6 +164,8 @@ def edit_project(request, project_id):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/projects/',
+                  redirect_field_name=None)
 def mark_project_completed(request, project_id):
     """ View to mark job as completed """
     project = get_object_or_404(Project, pk=project_id)
@@ -170,6 +176,8 @@ def mark_project_completed(request, project_id):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/projects/',
+                  redirect_field_name=None)
 def cancel_project(request, project_id):
     """ View to mark job as completed """
     project = get_object_or_404(Project, pk=project_id)
@@ -180,6 +188,8 @@ def cancel_project(request, project_id):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/projects/',
+                  redirect_field_name=None)
 def reopen_project(request, project_id):
     """ View to mark job as completed """
     project = get_object_or_404(Project, pk=project_id)
