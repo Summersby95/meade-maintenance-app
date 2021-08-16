@@ -429,3 +429,19 @@ def stop_job_log(request, job_id):
     return redirect(reverse(job_details, args=[job_time.job.id]))
 
 
+@login_required
+def user_started_logs(request):
+    """ View to show logs that the user started """
+    time_logs = JobTimes.objects.filter(
+        user=request.user,
+        time_start__isnull=False,
+        time_end__isnull=True
+    ).order_by('-time_start')
+
+    context = {
+        'time_logs': time_logs,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'jobs/user_time_logs_table.html', context)
+
