@@ -13,16 +13,24 @@
         </button>
         <div class="collapse navbar-collapse ml-auto" id="loginNavbar">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="/accounts/login/" class="nav-link">
-                        <i class="fas fa-user-alt"></i> Login
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/accounts/signup/" class="nav-link">
-                        <i class="fab fa-wpforms"></i> Register
-                    </a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'dashboard' %}" class="nav-link">
+                            <i class="fab fa-wpforms"></i> Dashboard
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="/accounts/login/" class="nav-link">
+                            <i class="fas fa-user-alt"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/accounts/signup/" class="nav-link">
+                            <i class="fab fa-wpforms"></i> Register
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
