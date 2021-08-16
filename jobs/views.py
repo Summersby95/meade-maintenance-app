@@ -463,6 +463,7 @@ def user_completed_logs(request):
     return render(request, 'jobs/user_time_logs_table.html', context)
 
 
+@login_required
 def edit_time_log(request, time_log_id):
     """ View to edit time log """
     time_log = get_object_or_404(JobTimes, pk=time_log_id)
