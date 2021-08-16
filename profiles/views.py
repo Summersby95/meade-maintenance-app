@@ -11,6 +11,7 @@ from .models import UserBonusOrder, UserProfile
 from .forms import BonusOrderForm
 from jobs.models import Job, JobStatus, JobTimes
 from stocks.models import StockTransfer
+from ancillaries.decorators import custom_user_test, manager_test
 
 import stripe
 
@@ -29,6 +30,8 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/jobs/',
+                  redirect_field_name=None)
 def staff_list(request):
     staff_list = UserProfile.objects.all()
 
@@ -41,6 +44,8 @@ def staff_list(request):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/jobs/',
+                  redirect_field_name=None)
 def staff_detail(request, staff_id):
     employee = UserProfile.objects.get(id=staff_id)
     jobs = Job.objects.filter(
@@ -140,6 +145,8 @@ def staff_detail(request, staff_id):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/jobs/',
+                  redirect_field_name=None)
 def user_bonus(request, staff_id):
     employee = UserProfile.objects.get(id=staff_id)
 
@@ -155,6 +162,8 @@ def user_bonus(request, staff_id):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/jobs/',
+                  redirect_field_name=None)
 @require_http_methods(['POST'])
 def create_checkout_session(request, staff_id):
     employee = UserProfile.objects.get(id=staff_id)
@@ -191,6 +200,8 @@ def create_checkout_session(request, staff_id):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/jobs/',
+                  redirect_field_name=None)
 def bonus_success(request, staff_id, checkout_session_id):
     employee = get_object_or_404(UserProfile, id=staff_id)
     if stripe.checkout.Session.retrieve(checkout_session_id):
@@ -226,6 +237,8 @@ def bonus_success(request, staff_id, checkout_session_id):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/jobs/',
+                  redirect_field_name=None)
 def bonus_cancel(request, staff_id):
     employee = get_object_or_404(UserProfile, id=staff_id)
     messages.error(
