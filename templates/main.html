@@ -53,7 +53,7 @@
         <li class="nav-item">
             <a href="{% url 'inventory_view' %}" class="nav-link {% if nbar == 'stocks' %}active{% endif %}">Stocks</a>
         </li>
-        {% if profile.user_type|lower == "admin" %}
+        {% if is_manager %}
             <li class="nav-item">
                 <a href="{% url 'staff_list' %}" class="nav-link {% if nbar == 'people' %}active{% endif %}">People</a>
             </li>
@@ -66,9 +66,25 @@
             <div class="sidebar-sticky pt-3">
                 <ul class="nav flex-column">
                     {% for link in links %}
-                        <li class="nav-item">
-                            <a href="{% url link.href %}" class="nav-link">{{ link.text }}</a>
-                        </li>
+                        {% if link.test %}
+                            {% if link.test == 'is_manager' %}
+                                {% if is_manager %}
+                                    <li class="nav-item">
+                                        <a href="{% url link.href %}" class="nav-link">{{ link.text }}</a>
+                                    </li>
+                                {% endif %}
+                            {% elif link.test == 'is_stock' %}
+                                {% if is_stock %}
+                                    <li class="nav-item">
+                                        <a href="{% url link.href %}" class="nav-link">{{ link.text }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url link.href %}" class="nav-link">{{ link.text }}</a>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
