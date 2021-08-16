@@ -2,10 +2,13 @@ import datetime
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
+
 from .models import Project, ProjectStatus
 from jobs.models import Job, JobTimes
 from profiles.models import UserProfile
 from .forms import ProjectForm
+from ancillaries.decorators import custom_user_test, manager_test
 
 app_context = {
     'nbar': 'projects',
@@ -17,6 +20,15 @@ app_context = {
         {
             'href': 'create_project',
             'text': 'Create New Project',
+            'test': 'is_manager'
+        },
+        {
+            'href': 'completed_projects',
+            'text': 'Completed Projects',
+        },
+        {
+            'href': 'cancelled_projects',
+            'text': 'Cancelled Projects',
         }
     ]
 }
