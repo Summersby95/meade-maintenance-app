@@ -23,3 +23,24 @@ def stock_test(context):
     else:
         return False
 
+
+@register.simple_tag(takes_context=True)
+def job_test(context):
+    """
+    Template tag to check if user is an admin,
+    manager, created the job, was assigned to the job,
+    or the job is unassigned
+    """
+    job = context['job']
+    user = context['profile']
+    user_type = user.user_type.type.lower()
+    if user_type in ('admin', 'manager'):
+        return True
+    elif job.created_by == user:
+        return True
+    elif user.user in job.assigned_to.all():
+        return True
+    elif job.assigned_to.count() == 0:
+        return True
+    else:
+        return False
