@@ -44,7 +44,8 @@ def dashboard(request):
         'project_jobs': Job.objects.filter(~Q(project=None)).count(),
         'total_time_logged': sum(
             [jt.time_diff() for jt in JobTimes.objects.filter(
-                ~Q(job__project=None)
+                ~Q(job__project=None),
+                ~Q(time_end=None),
             )],
             datetime.timedelta()
         ),
@@ -56,12 +57,14 @@ def dashboard(request):
         ).values('user').distinct().count(),
         'hours_today': sum(
             [jt.time_diff() for jt in JobTimes.objects.filter(
-                time_start__date=datetime.datetime.now().date()
+                ~Q(time_end=None),
+                time_start__date=datetime.datetime.now().date(),
             )],
             datetime.timedelta()
         ),
         'hours_week': sum(
             [jt.time_diff() for jt in JobTimes.objects.filter(
+                ~Q(time_end=None),
                 time_start__range=(
                     datetime.datetime.now() - datetime.timedelta(days=7),
                     datetime.datetime.now()
@@ -71,6 +74,7 @@ def dashboard(request):
         ),
         'hours_month': sum(
             [jt.time_diff() for jt in JobTimes.objects.filter(
+                ~Q(time_end=None),
                 time_start__range=(
                     datetime.datetime.now() - datetime.timedelta(days=30),
                     datetime.datetime.now()
