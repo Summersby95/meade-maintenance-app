@@ -1,0 +1,41 @@
+{% extends "includes/datatable.html" %}
+{% block table_header %}Time Logs{% endblock %}
+{% block table_content %}
+<thead>
+    <th>Job</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Total Time</th>
+    <th>Actions</th>
+</thead>
+<tbody>
+    {% for log in time_logs %}
+        <tr>
+            <td>
+                <a href="{% url 'job_detail' log.job.id %}">
+                    {{ log.job }}
+                </a>
+            </td>
+            <td>{{ log.time_start }}</td>
+            <td>{{ log.time_end }}</td>
+            <td>{{ log.time_diff }}</td>
+            <td>
+                <div class="btn-group" role="group">
+                    {% if log.time_end == None %}
+                        <a href="{% url 'stop_job_log' log.job.id %}" class="btn btn-danger">
+                            <i class="fas fa-stopwatch"></i> Stop
+                        </a>
+                    {% else %}
+                        <a href="{% url 'edit_time_log' log.id %}" class="btn btn-info">
+                            <i class="fas fa-pencil-alt"></i> Edit
+                        </a>
+                        <a href="{% url 'delete_time_log' log.id %}" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+{% endblock %}
