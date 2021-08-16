@@ -117,6 +117,7 @@ def dashboard(request):
             'today': {
                 'project_hours': sum(
                     [jt.time_diff() for jt in JobTimes.objects.filter(
+                        ~Q(time_end=None),
                         ~Q(job__project=None),
                         time_start__date=datetime.datetime.now().date()
                     )],
@@ -124,6 +125,7 @@ def dashboard(request):
                 ).seconds//3600,
                 'total_hours': sum(
                     [jt.time_diff() for jt in JobTimes.objects.filter(
+                        ~Q(time_end=None),
                         time_start__date=datetime.datetime.now().date()
                     )],
                     datetime.timedelta()
@@ -132,6 +134,7 @@ def dashboard(request):
             'week': {
                 'project_hours': sum(
                     [jt.time_diff() for jt in JobTimes.objects.filter(
+                        ~Q(time_end=None),
                         ~Q(job__project=None),
                         time_start__range=(
                             (datetime.datetime.now() -
@@ -143,6 +146,7 @@ def dashboard(request):
                 ).seconds//3600,
                 'total_hours': sum(
                     [jt.time_diff() for jt in JobTimes.objects.filter(
+                        ~Q(time_end=None),
                         time_start__range=(
                             (datetime.datetime.now() -
                              datetime.timedelta(days=7)),
