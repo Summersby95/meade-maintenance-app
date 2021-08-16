@@ -39,3 +39,20 @@ def custom_user_test(test_func, login_url=None,
         return _wrapped_view
     return decorator
 
+
+def manager_test(request):
+    """
+    checks if the user is a manager or admin
+    """
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    res = False
+
+    if str(profile.user_type).lower() in (
+        'admin', 'manager'
+    ):
+        res = True
+
+    return res
+
+
