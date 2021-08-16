@@ -445,3 +445,20 @@ def user_started_logs(request):
 
     return render(request, 'jobs/user_time_logs_table.html', context)
 
+
+@login_required
+def user_completed_logs(request):
+    """ View to show logs that the user completed """
+    time_logs = JobTimes.objects.filter(
+        user=request.user,
+        time_start__isnull=False,
+        time_end__isnull=False
+    ).order_by('-time_end')
+
+    context = {
+        'time_logs': time_logs,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'jobs/user_time_logs_table.html', context)
+
