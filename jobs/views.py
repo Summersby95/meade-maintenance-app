@@ -104,6 +104,39 @@ def outstanding_ppms(request):
     return render(request, 'jobs/job_table.html', context)
 
 
+@login_required
+def completed_jobs(request):
+    """ View to see completed jobs for user """
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    if str(profile.user_type).lower() in ("admin", "manager"):
+        jobs = Job.objects.filter(
+            Q(status=JobStatus.objects.get(status='Completed'))
+            & Q(ppm=None)
+        )
+    else:
+        jobs = Job.objects.filter(
+            (Q(assigned_to=request.user) | Q(assigned_to=None)) &
+            Q(status=JobStatus.objects.get(status='Completed'))
+            & Q(ppm=None)
+        )
+
+    context = {
+        'jobs': jobs,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'jobs/job_table.html', context)
+
+
+@login_required
+def completed_ppms(request):
+    """ View to see completed ppms for user """
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    if str(profile.user_type).lower() in ("admin", "manager"):
+        jobs = Job.objects.filter(
+            Q(status=JobStatus.objects.get(status='Completed'))
             & ~Q(ppm=None)
         )
     else:
