@@ -52,7 +52,7 @@ def staff_detail(request, staff_id):
         Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
     )
     stock_withdrawls = StockTransfer.objects.filter(user=employee.user)
-    time_logs = JobTimes.objects.filter(user=employee.user)
+    time_logs = JobTimes.objects.filter(~Q(time_end=None), user=employee.user)
 
     cancelled_jobs = jobs.filter(
         Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
