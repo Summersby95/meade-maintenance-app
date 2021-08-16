@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -5,8 +7,9 @@ from django.contrib import messages
 
 from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
-from .decorators import custom_user_test, job_cancel_check, job_edit_check
+from .decorators import job_cancel_check, job_edit_check
 
+from ancillaries.decorators import custom_user_test
 from profiles.models import UserProfile
 from projects.models import Project
 from stocks.models import StockTransfer
@@ -24,9 +27,25 @@ app_context = {
             'text': 'Outstanding PPMs',
         },
         {
+            'href': 'completed_jobs',
+            'text': 'Completed Jobs',
+        },
+        {
+            'href': 'completed_ppms',
+            'text': 'Completed PPMs',
+        },
+        {
             'href': 'create_job',
             'text': 'Create Job',
         },
+        {
+            'href': 'user_started_logs',
+            'text': 'My Started Jobs',
+        },
+        {
+            'href': 'user_completed_logs',
+            'text': 'My Time Logs',
+        }
     ],
 }
 
