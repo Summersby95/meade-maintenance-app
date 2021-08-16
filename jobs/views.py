@@ -462,3 +462,35 @@ def user_completed_logs(request):
 
     return render(request, 'jobs/user_time_logs_table.html', context)
 
+
+def edit_time_log(request, time_log_id):
+    """ View to edit time log """
+    time_log = get_object_or_404(JobTimes, pk=time_log_id)
+    job = time_log.job
+    if request.method == 'POST':
+        form = JobTimesForm(request.POST, instance=time_log)
+        if form.is_valid():
+            time_log = form.save(commit=False)
+            time_log.save()
+            messages.success(request, "Time Log Successfully Updated!")
+            return redirect(reverse(job_details, args=[job.id]))
+        else:
+            messages.error(
+                request, "Error Updating Time Log! Please Try Again"
+            )
+            print(form.errors)
+    else:
+        form = JobTimesForm(instance=time_log)
+
+    context = {
+        'form': form,
+        'action': reverse(edit_time_log, args=[time_log_id]),
+        'header': 'Edit Time Log',
+        'submit_text': 'Save Time Log',
+        'cancel': reverse(job_details, args=[job.id]),
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'includes/form.html', context)
+
+
