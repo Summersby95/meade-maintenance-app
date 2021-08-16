@@ -98,6 +98,8 @@ def stock_item_details(request, stock_id):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def create_stock_item(request):
     """ View to create stock item """
     if request.method == 'POST':
@@ -127,6 +129,8 @@ def create_stock_item(request):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def edit_stock_item(request, stock_id):
     """ View to edit stock item """
     item = get_object_or_404(StockItem, pk=stock_id)
@@ -154,6 +158,8 @@ def edit_stock_item(request, stock_id):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def create_stock_receipt(request):
     """ View to create stock receipt """
     if request.method == 'POST':
@@ -186,6 +192,8 @@ def create_stock_receipt(request):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def create_item_stock_receipt(request, stock_id):
     """ View to create stock receipt for a stock item. """
     item = get_object_or_404(StockItem, pk=stock_id)
@@ -204,6 +212,8 @@ def create_item_stock_receipt(request, stock_id):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def edit_stock_receipt(request, receipt_id):
     """ View to edit stock receipt """
     receipt = get_object_or_404(StockReceipts, pk=receipt_id)
@@ -344,6 +354,8 @@ def user_assigned_stock(request):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def supplier_list(request):
     """ View to list suppliers. """
     suppliers = Suppliers.objects.all()
@@ -364,6 +376,8 @@ def supplier_list(request):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def supplier_details(request, supplier_id):
     """ View to show supplier details. """
     supplier = get_object_or_404(Suppliers, pk=supplier_id)
@@ -400,6 +414,8 @@ def supplier_details(request, supplier_id):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def create_supplier(request):
     """ View to create supplier. """
     if request.method == 'POST':
@@ -428,6 +444,8 @@ def create_supplier(request):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def create_supplier_stock_receipt(request, supplier_id):
     """ View to create stock receipt for a stock item. """
     supplier = get_object_or_404(Suppliers, pk=supplier_id)
@@ -446,6 +464,8 @@ def create_supplier_stock_receipt(request, supplier_id):
 
 
 @login_required
+@custom_user_test(stock_test, login_url='/stocks/',
+                  redirect_field_name=None)
 def edit_supplier(request, supplier_id):
     """ View to edit stock transfer """
     supplier = get_object_or_404(Suppliers, pk=supplier_id)
