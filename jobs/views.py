@@ -385,3 +385,32 @@ def cancel_job(request, job_id):
     job.save()
     messages.success(request, "Job Successfully Cancelled!")
     return redirect(reverse(job_details, args=[job_id]))
+
+
+@login_required
+@custom_user_test(job_edit_check, login_url='/jobs/',
+                  redirect_field_name=None)
+def start_job_log(request, job_id):
+    """ View to create inital time_log """
+    job = get_object_or_404(Job, pk=job_id)
+    start_check = JobTimes.objects.filter(
+        job=job,
+        user=request.user,
+        time_start__isnull=False,
+        time_end__isnull=True
+    ).count()
+
+    if start_check > 0:
+        messages.error(request, "You already have a start time"
+                       " log for this job!")
+        return redirect(reverse(job_details, args=[job_id]))
+
+    job_time = JobTimes(
+        job=job,
+        time_start=datetime.datetime.now(),
+        user=request.user,
+    )
+    job_time.save()
+    messages.success(request, "Time Log Successfully Started!")
+    return redirect(reverse(job_details, args=[job_id]))
+
