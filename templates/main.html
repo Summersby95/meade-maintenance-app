@@ -10,90 +10,32 @@
             <img src="{% static 'images/owl-icon.png' %}" alt="Logo" width="30" height="30">
             Pallas
         </a>
-            <div class="ml-auto d-none d-md-block">
-                <div class="dropleft">
-                    <a role="button" class="nav-link dropdown-toggle" id="logoutDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="ml-auto d-none d-md-block">
+            <div class="dropleft">
+                <a role="button" class="nav-link dropdown-toggle" id="logoutDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% if notification_count != 0 %}
+                        <span class="notification-icon">{{ notification_count }}</span>
+                    {% endif %} 
+                    {{ profile.first_name }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="logoutDropdown">
+                    <a href="{% url 'notification_table' %}" class="dropdown-item text-danger">
                         {% if notification_count != 0 %}
-                            <span class="notification-icon">{{ notification_count }}</span>
-                        {% endif %} 
-                        {{ profile.first_name }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="logoutDropdown">
-                        {% if notification_count != 0 %}
-                            <a href="{% url 'notification_table' %}" class="dropdown-item text-danger">{{ notification_count }} Outstanding Notifications</a>
+                            {{ notification_count }} Outstanding Notifications
+                        {% else %}
+                            Notifications
                         {% endif %}
-                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                    </div>
+                    </a>
+                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                 </div>
             </div>
-            <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle Navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse ml-auto d-md-none mobile-nav" id="mobileNavbar">
-                <ul class="navbar-nav ml-auto d-md-none">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{% url 'dashboard' %}" id="dashboardDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dashboard
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dashboardDropdown">
-                            <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{% url 'outstanding_jobs' %}" id="jobsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Jobs
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="jobsDropdown">
-                            <a class="dropdown-item" href="{% url 'outstanding_jobs' %}">Outstanding Jobs</a>
-                            <a class="dropdown-item" href="{% url 'create_job' %}">Create Job</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Projects
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="projectsDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="assetsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Assets
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="assetsDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="stocksDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Stocks
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="stocksDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                        </div>
-                    </li>
-                    {% if profile.user_type == "Admin" or profile.user_type == "Manager" %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="peopleDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                People
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="peopleDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                            </div>
-                        </li>
-                    {% endif %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="mobileLogoutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-circle">{{ notification_count }}</i>
-                            <i class="fas fa-user-alt"></i> {{ user.username }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="mobileLogoutDropdown">
-                            <a href="/accounts/logout" class="dropdown-item">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        {% endif %}
+        </div>
+        <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ml-auto d-md-none mobile-nav" id="mobileNavbar">
+            {% include 'includes/mobile-nav.html' %}
+        </div>
     </nav>
     <ul class="nav justify-content-center d-none d-md-flex">
         <li class="nav-item">
