@@ -38,7 +38,38 @@ app_context = {
 def ongoing_projects(request):
     """ View to see ongoing projects. """
     projects = Project.objects.filter(
-        status=ProjectStatus.objects.get(status='Pending')
+        ~Q(status=ProjectStatus.objects.get(status='Completed')),
+        ~Q(status=ProjectStatus.objects.get(status='Cancelled'))
+    ).order_by('-due_date')
+
+    context = {
+        'projects': projects,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'projects/projects_table.html', context)
+
+
+@login_required
+def completed_projects(request):
+    """ View to see completed projects. """
+    projects = Project.objects.filter(
+        status=ProjectStatus.objects.get(status='Completed')
+    ).order_by('-due_date')
+
+    context = {
+        'projects': projects,
+    }
+    context = {**app_context, **context}
+
+    return render(request, 'projects/projects_table.html', context)
+
+
+@login_required
+def cancelled_projects(request):
+    """ View to see completed projects. """
+    projects = Project.objects.filter(
+        status=ProjectStatus.objects.get(status='Cancelled')
     ).order_by('-due_date')
 
     context = {
