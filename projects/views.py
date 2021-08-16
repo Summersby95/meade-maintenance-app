@@ -107,17 +107,19 @@ def create_project(request):
     """ View to create job """
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
-        form = ProjectForm(request.POST, profile=profile)
+        form = ProjectForm(request.POST)
 
         if form.is_valid():
-            project = form.save()
+            project = form.save(commit=False)
+            project.created_by = request.user
+            project.save()
             messages.success(request, 'Project Created!')
             return redirect(reverse(project_details, args=[project.id]))
         else:
             messages.error(request, 'There was an error creating your project')
             print(form.errors)
     else:
-        form = ProjectForm(profile=profile)
+        form = ProjectForm()
 
     context = {
         'form': form,
@@ -139,7 +141,7 @@ def edit_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=project, profile=profile)
+        form = ProjectForm(request.POST, instance=project)
 
         if form.is_valid():
             project = form.save()
@@ -149,7 +151,7 @@ def edit_project(request, project_id):
             messages.error(request, 'There was an error updating your project')
             print(form.errors)
     else:
-        form = ProjectForm(profile=profile, instance=project)
+        form = ProjectForm(instance=project)
 
     context = {
         'form': form,
