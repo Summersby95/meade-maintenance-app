@@ -1,9 +1,13 @@
+{% load auth_tests %}
+{% stock_test as is_stock %}
 <table class="table table-responsive-sm">
     <thead>
         <th>User</th>
         <th>Quantity</th>
         <th>Job</th>
-        <th>Actions</th>
+        {% if is_stock %}
+            <th>Actions</th>
+        {% endif %}
     </thead>
     <tbody>
         {% for transfer in stock_transfers %}
@@ -19,9 +23,11 @@
                         {{ transfer.job }}
                     {% endif %}
                 </td>
-                <td>
-                    <a href="{% url 'edit_stock_transfer' transfer.id %}">Edit</a>
-                </td>
+                {% if is_stock %}
+                    <td>
+                        <a href="{% url 'edit_stock_transfer' transfer.id %}">Edit</a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </tbody>
