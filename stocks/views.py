@@ -7,6 +7,9 @@ from assets.models import Assets
 from .models import StockItem, StockReceipts, StockTransfer
 from .forms import StockItemForm, StockReceiptsForm, StockTransferForm
 from ancillaries.forms import SupplierForm
+from ancillaries.decorators import custom_user_test, manager_test, stock_test
+from jobs.models import Job
+from jobs.views import job_details
 
 app_context = {
     'nbar': 'stocks',
@@ -18,10 +21,12 @@ app_context = {
         {
             'href': 'create_stock_item',
             'text': 'Create Stock Item',
+            'test': 'is_stock'
         },
         {
             'href': 'create_stock_receipt',
             'text': 'Receive Stock',
+            'test': 'is_stock'
         },
         {
             'href': 'create_stock_transfer',
@@ -38,10 +43,12 @@ app_context = {
         {
             'href': 'supplier_list',
             'text': 'Supplier List',
+            'test': 'is_stock'
         },
         {
             'href': 'create_supplier',
             'text': 'Create Supplier',
+            'test': 'is_stock'
         }
     ]
 }
