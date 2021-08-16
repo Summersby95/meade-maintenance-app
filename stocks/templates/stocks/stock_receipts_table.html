@@ -1,10 +1,14 @@
+{% load auth_tests %}
+{% stock_test as is_stock %}
 <table class="table table-responsive-sm">
     <thead>
         <th>Supplier</th>
         <th>Quantity</th>
         <th>Date Received</th>
         <th>Received By</th>
-        <th>Actions</th>
+        {% if is_stock %}
+            <th>Actions</th>
+        {% endif %}
     </thead>
     <tbody>
         {% for receipt in stock_receipts %}
@@ -13,9 +17,11 @@
                 <td>{{ receipt.quantity }}</td>
                 <td>{{ receipt.date_received }}</td>
                 <td>{{ receipt.created_by }}</td>
-                <td>
-                    <a href="{% url 'edit_stock_receipt' receipt.id %}">Edit</a>
-                </td>
+                {% if is_stock %}
+                    <td>
+                        <a href="{% url 'edit_stock_receipt' receipt.id %}">Edit</a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </tbody>
