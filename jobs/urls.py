@@ -18,4 +18,12 @@ urlpatterns = [
          name='mark_completed'),
     path('reopen/<int:job_id>/', views.reopen_job, name='reopen_job'),
     path('cancel/<int:job_id>/', views.cancel_job, name='cancel_job'),
+    path('start/<int:job_id>/', views.start_job_log, name='start_job_log'),
+    path('stop/<int:job_id>/', views.stop_job_log, name='stop_job_log'),
+    path('started/', views.user_started_logs, name='user_started_logs'),
+    path('my_logs/', views.user_completed_logs, name='user_completed_logs'),
+    path('time_log/edit/<int:time_log_id>/', views.edit_time_log,
+         name='edit_time_log'),
+    path('time_log/delete/<int:time_log_id>', views.delete_time_log,
+         name='delete_time_log'),
 ]
