@@ -177,7 +177,9 @@
         </div>
     </div>
     <div class="col-12">
-        {% if profile.user_type.type|lower == "admin" or profile.user_type.type|lower == "manager" %}
+        {% load auth_tests %}
+        {% manager_test as is_manager %}
+        {% if is_manager %}
             <a href="{% url 'edit_asset' asset.id %}" class="btn action-button midnight-blue">
                 <i class="fas fa-pen"></i> Edit Asset
             </a>
