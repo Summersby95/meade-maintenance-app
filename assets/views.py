@@ -1,7 +1,10 @@
 import datetime
+
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
+
 from .models import Assets, PPM
 from .forms import AssetForm, PPMForm
 from jobs.models import Job, JobTimes
@@ -16,10 +19,12 @@ app_context = {
         {
             'href': 'create_asset',
             'text': 'Create New Asset',
+            'test': 'is_manager'
         },
         {
             'href': 'inactive_assets',
             'text': 'Inactive Assets',
+            'test': 'is_manager'
         },
     ]
 }
