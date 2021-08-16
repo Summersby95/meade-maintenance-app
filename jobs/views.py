@@ -414,3 +414,18 @@ def start_job_log(request, job_id):
     messages.success(request, "Time Log Successfully Started!")
     return redirect(reverse(job_details, args=[job_id]))
 
+
+@login_required
+@custom_user_test(job_edit_check, login_url='/jobs/',
+                  redirect_field_name=None)
+def stop_job_log(request, job_id):
+    """ View to stop time log """
+    job = get_object_or_404(Job, pk=job_id)
+    job_time = get_object_or_404(JobTimes, job=job, user=request.user,
+                                 time_end__isnull=True)
+    job_time.time_end = datetime.datetime.now()
+    job_time.save()
+    messages.success(request, "Time Log Successfully Stopped!")
+    return redirect(reverse(job_details, args=[job_time.job.id]))
+
+
