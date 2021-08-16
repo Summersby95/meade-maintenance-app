@@ -494,3 +494,11 @@ def edit_time_log(request, time_log_id):
     return render(request, 'includes/form.html', context)
 
 
+@login_required
+def delete_time_log(request, time_log_id):
+    """ View to delete time log """
+    time_log = get_object_or_404(JobTimes, pk=time_log_id)
+    job = time_log.job
+    time_log.delete()
+    messages.success(request, "Time Log Successfully Deleted!")
+    return redirect(reverse(job_details, args=[job.id]))
