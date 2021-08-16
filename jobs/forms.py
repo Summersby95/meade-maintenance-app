@@ -60,7 +60,7 @@ class JobTimesForm(forms.ModelForm):
 
     class Meta:
         model = JobTimes
-        exclude = ['job']
+        exclude = ['job', 'user']
 
     time_start = forms.DateTimeField(
         input_formats=['%d/%m/%Y %H:%M'],
