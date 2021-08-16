@@ -20,7 +20,7 @@ def job_edit_check(request):
         res = True
     elif job.created_by == request.user:
         res = True
-    elif job.assigned_to == request.user:
+    elif request.user in job.assigned_to.all():
         res = True
     elif job.assigned_to is None and job.department == profile.department:
         res = True
@@ -43,7 +43,7 @@ def job_cancel_check(request):
         res = True
     elif job.created_by == request.user:
         res = True
-    elif job.assigned_to == request.user:
+    elif request.user in job.assigned_to.all():
         res = True
 
     return res
