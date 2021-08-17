@@ -72,6 +72,7 @@ def outstanding_jobs(request):
 
     context = {
         'jobs': jobs,
+        'table_header': 'Outstanding Jobs',
     }
     context = {**context, **app_context}
 
@@ -99,6 +100,7 @@ def outstanding_ppms(request):
 
     context = {
         'jobs': jobs,
+        'table_header': 'Outstanding PPMs',
     }
     context = {**context, **app_context}
 
@@ -124,6 +126,7 @@ def completed_jobs(request):
 
     context = {
         'jobs': jobs,
+        'table_header': 'Completed Jobs',
     }
     context = {**context, **app_context}
 
@@ -149,6 +152,7 @@ def completed_ppms(request):
 
     context = {
         'jobs': jobs,
+        'table_header': 'Completed PPMs',
     }
     context = {**context, **app_context}
 
