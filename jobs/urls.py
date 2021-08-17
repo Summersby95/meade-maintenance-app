@@ -26,4 +26,6 @@ urlpatterns = [
          name='edit_time_log'),
     path('time_log/delete/<int:time_log_id>', views.delete_time_log,
          name='delete_time_log'),
+    path('complete_steps/<int:job_id>/', views.complete_job_steps,
+         name='complete_job_steps'),
 ]
