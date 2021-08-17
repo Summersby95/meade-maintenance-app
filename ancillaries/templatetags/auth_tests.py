@@ -36,7 +36,7 @@ def job_test(context):
     user_type = user.user_type.type.lower()
     if user_type in ('admin', 'manager'):
         return True
-    elif job.created_by == user:
+    elif job.created_by == user.user:
         return True
     elif user.user in job.assigned_to.all():
         return True
