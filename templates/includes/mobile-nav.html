@@ -17,7 +17,10 @@
         <div class="dropdown-menu" aria-labelledby="jobsDropdown">
             <a class="dropdown-item" href="{% url 'outstanding_jobs' %}">Outstanding Jobs</a>
             <a href="{% url 'outstanding_ppms' %}" class="dropdown-item">Outstanding PPMs</a>
+            <a href="{% url 'completed_jobs' %}" class="dropdown-item">Completed Job</a>
             <a class="dropdown-item" href="{% url 'create_job' %}">Create Job</a>
+            <a href="{% url 'user_started_logs' %}" class="dropdown-item">My Started Time Logs</a>
+            <a href="{% url 'user_completed_logs' %}" class="dropdown-item">My Time Logs</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -29,6 +32,8 @@
             {% if is_manager %}
                 <a class="dropdown-item" href="{% url 'create_project' %}">Create Project</a>
             {% endif %}
+            <a href="{% url 'completed_projects' %}" class="dropdown-item">Completed Projects</a>
+            <a href="{% url 'cancelled_projects' %}" class="dropdown-item">Cancelled Projects</a>
         </div>
     </li>
     <li class="nav-item dropdown">
