@@ -57,3 +57,15 @@ def stock_alert(sender, instance, created, **kwargs):
         for stock_user in notify_users:
             create_notification(stock_user.user, 'Stock Alert',
                                 stock_item=instance.item)
+
+
+@receiver(post_save, sender=StockTransfer)
+def unassigned_stock_alert(sender, instance, created, **kwargs):
+    """
+    Function to create notification for unassigned stock
+    """
+    if created:
+        if instance.job is None:
+            create_notification(instance.user, 'Unassigned Stock Alert')
+
+
