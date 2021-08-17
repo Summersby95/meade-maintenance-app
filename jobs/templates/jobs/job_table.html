@@ -10,7 +10,11 @@
     <div class="col-md-12">
         <div class="card content-card">
             <h4 class="card-header">
-                Outstanding Jobs
+                {% if table_header %}
+                    {{ table_header }}
+                {% else %}
+                    Outstanding Jobs
+                {% endif %}
             </h4>
             <div class="card-body">
                 <table class="table" id="dataTable">
