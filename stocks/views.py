@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from profiles.models import UserProfile
 from ancillaries.models import Suppliers
 from assets.models import Assets
 from .models import StockItem, StockReceipts, StockTransfer
@@ -365,6 +366,23 @@ def user_assigned_stock(request):
     )
     context = {
         'transfers': transfers,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'stocks/stock_transfer_table.html', context)
+
+
+@login_required
+@custom_user_test(manager_test, login_url='/stocks/',
+                  redirect_field_name=None)
+def user_withdrawls(request, user_id):
+    """ View to list withdrawls for a user. """
+    employee = get_object_or_404(UserProfile, pk=user_id)
+    transfers = StockTransfer.objects.filter(user=employee.user)
+
+    context = {
+        'transfers': transfers,
+        'table_title': f'{employee.get_full_name()}\'s Stock Withdrawls'
     }
     context = {**context, **app_context}
 
