@@ -87,9 +87,10 @@
                 {% if notification_count != 0 %}
                     {{ notification_count }} Outstanding Notifications
                 {% else %}
-                    Notifications
+                    Unread Notifications
                 {% endif %}
             </a>
+            <a href="{% url 'read_notifications' %}" class="dropdown-item">Read Notifications</a>
             <a href="/accounts/logout" class="dropdown-item">Logout</a>
         </div>
     </li>
