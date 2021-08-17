@@ -100,9 +100,15 @@ def project_details(request, project_id):
             total_time += job_time.time_end - job_time.time_start
             if job_time.user.username not in users:
                 users.append(job_time.user.username)
+    total_time = total_time - datetime.timedelta(
+        microseconds=total_time.microseconds
+    )
 
     completed = sum(job.status.status == 'Completed' for job in jobs)
     average_time = total_time / len(jobs) if len(jobs) > 0 else 0
+    average_time = average_time - datetime.timedelta(
+        microseconds=average_time.microseconds
+    )
     distinct_users = len(users)
 
     context = {
