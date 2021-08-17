@@ -98,7 +98,8 @@ class JobTimes(models.Model):
 
     def time_diff(self):
         if self.time_end is not None:
-            return self.time_end - self.time_start
+            delta = self.time_end - self.time_start
+            return delta - timedelta(microseconds=delta.microseconds)
         else:
             return "In Progress"
 
