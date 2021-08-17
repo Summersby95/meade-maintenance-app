@@ -12,6 +12,27 @@
                 </a>
             </div>
             <div class="card-body">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == 25 %}
+                            <div class="alert alert-success text-center" role="alert">
+                                <strong>Success:</strong> {{ message }} <i class="fas fa-check"></i>
+                            </div>
+                        {% elif message.level == 20 %}
+                            <div class="alert alert-info text-center" role="alert">
+                                <strong>Info:</strong> {{ message }} <i class="fas fa-info-circle"></i>
+                            </div>
+                        {% elif message.level == 30 %}
+                            <div class="alert alert-warning text-center" role="alert">
+                                <strong>Warning:</strong> {{ message }} <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                        {% elif message.level == 40 %}
+                            <div class="alert alert-danger text-center" role="alert">
+                                <strong>Error:</strong> {{ message }} <i class="fas fa-times-circle"></i>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 {% block content %}
                 {% endblock %}
             </div>
