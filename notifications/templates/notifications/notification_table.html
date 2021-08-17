@@ -1,4 +1,4 @@
-<table class="table table-responsive-sm">
+<table class="table">
     <tbody>
         {% if notification_list %}
             {% for notification in notification_list %}
@@ -31,8 +31,48 @@
                                 </a>
                             {% endif %}
                         </td>
+                    {% elif notification.type.type == "Unassigned Stock" %}
+                        <td>
+                            <i class="fas fa-box fa-2x text-danger"></i>
+                        </td>
+                        <td>
+                            You have unassigned stock withdrawn!
+                        </td>
+                        <td>
+                            <a href="{% url 'user_unassigned_stock' %}">
+                                Unassigned Stock
+                            </a>
+                        </td>
+                    {% elif notification.type.type == "Job Started" %}
+                        <td>
+                            <i class="fas fa-hammer fa-2x text-success"></i>
+                        </td>
+                        <td>
+                            You have started a time log for a job!
+                        </td>
+                        <td>
+                            {% if notification.job %}
+                                <a href="{% url 'job_detail' notification.job.id %}">
+                                    Job #{{ notification.job.id }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    {% elif notification.type.type == "Job Created" %}
+                        <td>
+                            <i class="fas fa-plus-circle fa-2x text-warning"></i>
+                        </td>
+                        <td>
+                            You have created a new job!
+                        </td>
+                        <td>
+                            {% if notification.job %}
+                                <a href="{% url 'job_detail' notification.job.id %}">
+                                    Job #{{ notification.job.id }}
+                                </a>
+                            {% endif %}
+                        </td>
                     {% endif %}
-                    <td>
+                    <td class="d-none d-lg-block">
                         {{ notification.time_since }}
                     </td>
                 </tr>
