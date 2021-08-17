@@ -1,5 +1,11 @@
 {% extends "includes/datatable.html" %}
-{% block table_header %}Stock Assignment{% endblock %}
+{% block table_header %}
+    {% if table_title %}
+        {{ table_title }}
+    {% else %}
+        Stock Assignment
+    {% endif %}
+{% endblock %}
 {% block table_content %}
 <thead>
     <th>Item Name</th>
