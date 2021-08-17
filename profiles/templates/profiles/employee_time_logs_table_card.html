@@ -20,3 +20,8 @@
         {% endfor %}
     </tbody>
 </table>
+{% if time_logs|length > 0 %}
+    <a href="{% url 'user_logs' employee.id %}" class="btn btn-info btn-lg btn-block">
+        View All <i class="fas fa-arrow-down"></i>
+    </a>
+{% endif %}
