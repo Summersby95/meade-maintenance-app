@@ -484,6 +484,27 @@ def user_completed_logs(request):
 
 
 @login_required
+@custom_user_test(manager_test, login_url='/jobs/',
+                  redirect_field_name=None)
+def user_logs(request, user_id):
+    """ View to show logs that the user completed """
+    employee = get_object_or_404(UserProfile, pk=user_id)
+    time_logs = JobTimes.objects.filter(
+        user=employee.user,
+        time_start__isnull=False,
+        time_end__isnull=False
+    ).order_by('-time_start')
+
+    context = {
+        'time_logs': time_logs,
+        'table_title': '{}\'s Time Logs'.format(employee.get_full_name())
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'jobs/user_time_logs_table.html', context)
+
+
+@login_required
 def edit_time_log(request, time_log_id):
     """ View to edit time log """
     time_log = get_object_or_404(JobTimes, pk=time_log_id)
