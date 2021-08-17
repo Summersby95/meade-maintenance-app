@@ -22,7 +22,7 @@ def job_edit_check(request):
         res = True
     elif request.user in job.assigned_to.all():
         res = True
-    elif job.assigned_to is None and job.department == profile.department:
+    elif job.assigned_to.count() == 0:
         res = True
 
     return res
