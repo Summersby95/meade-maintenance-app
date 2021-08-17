@@ -1,5 +1,11 @@
 {% extends "includes/datatable.html" %}
-{% block table_header %}Projects{% endblock %}
+{% block table_header %}
+    {% if table_title %}
+        {{ table_title }}
+    {% else %}
+        Projects
+    {% endif %}
+{% endblock %}
 {% block table_content %}
 <thead>
     <th>#</th>
