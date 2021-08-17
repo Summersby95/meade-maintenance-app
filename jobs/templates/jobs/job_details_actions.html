@@ -3,9 +3,6 @@
     {% job_test as job_auth %}
     {% if job_auth %}
         {% if job.status.status != 'Completed' and job.status.status != 'Cancelled' %}
-            <a href="{% url 'edit_job' job.id %}" class="btn action-button midnight-blue">
-                <i class="fas fa-pen"></i> Edit Job
-            </a>
             {% if user_started == 0 %}
                 <a href="{% url 'start_job_log' job.id %}" class="btn action-button blue">
                     <i class="far fa-clock"></i> Start Job
@@ -15,8 +12,16 @@
                     <i class="far fa-clock"></i> Stop Job
                 </a>
             {% endif %}
+            {% if job_steps|length > 0 %}
+                <a href="{% url 'complete_job_steps' job.id %}" class="btn action-button btn-warning">
+                    <i class="far fa-calendar"></i> Complete Steps
+                </a>
+            {% endif %}
             <a href="{% url 'create_time_log' job.id %}" class="btn action-button purple">
                 <i class="far fa-calendar"></i> Log Time
+            </a>
+            <a href="{% url 'edit_job' job.id %}" class="btn action-button midnight-blue">
+                <i class="fas fa-pen"></i> Edit Job
             </a>
             <a href="{% url 'mark_completed' job.id %}" class="btn action-button btn-success">
                 <i class="fas fa-check"></i> Mark Completed
