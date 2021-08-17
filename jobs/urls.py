@@ -23,6 +23,7 @@ urlpatterns = [
     path('stop/<int:job_id>/', views.stop_job_log, name='stop_job_log'),
     path('started/', views.user_started_logs, name='user_started_logs'),
     path('my_logs/', views.user_completed_logs, name='user_completed_logs'),
+    path('time_log/<int:user_id>', views.user_logs, name='user_logs'),
     path('time_log/edit/<int:time_log_id>/', views.edit_time_log,
          name='edit_time_log'),
     path('time_log/delete/<int:time_log_id>', views.delete_time_log,
