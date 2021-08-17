@@ -288,3 +288,4 @@ TBC
 * [Django - Authentication](https://docs.djangoproject.com/en/3.2/topics/auth/default/)
 * [Django - Make Form Field Readonly](https://stackoverflow.com/questions/324477/in-a-django-form-how-do-i-make-a-field-readonly-or-disabled-so-that-it-cannot)
 * [Django - Pass User Object To Form](https://stackoverflow.com/questions/43347566/how-to-pass-user-object-to-forms-in-django)
+* [Django - m2m_changed Signal](https://docs.djangoproject.com/en/3.2/ref/signals/#m2m-changed)
