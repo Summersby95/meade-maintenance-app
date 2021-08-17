@@ -112,7 +112,7 @@ def staff_detail(request, staff_id):
         'employee': employee,
         'jobs': jobs,
         'stock_withdrawls': stock_withdrawls,
-        'time_logs': time_logs,
+        'time_logs': time_logs_list,
         'cancelled_jobs': cancelled_jobs,
         'completed_jobs': completed_jobs,
         'started_jobs': started_jobs,
