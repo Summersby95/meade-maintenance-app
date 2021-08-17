@@ -84,3 +84,10 @@ def started_job_alert(sender, instance, created, **kwargs):
             create_notification(instance.user, 'Started Job', job=instance.job)
 
 
+@receiver(post_save, sender=Job)
+def created_job_alert(sender, instance, created, **kwargs):
+    """
+    Function to notify users of created jobs
+    """
+    if created:
+        create_notification(instance.created_by, 'Job Created', job=instance)
