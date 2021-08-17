@@ -37,6 +37,7 @@ def active_assets(request):
 
     context = {
         'assets': assets,
+        'table_title': 'Active Assets',
     }
     context = {**app_context, **context}
 
@@ -50,6 +51,7 @@ def inactive_assets(request):
 
     context = {
         'assets': assets,
+        'table_title': 'Inactive Assets',
     }
     context = {**app_context, **context}
 
