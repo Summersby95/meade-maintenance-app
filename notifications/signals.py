@@ -13,7 +13,11 @@ def create_notification(user, notification_type, job=None, stock_item=None):
     """
     if notification_type == 'Job Alert':
         if job:
-            count = Notification.objects.filter(user=user, job=job).count()
+            count = Notification.objects.filter(
+                user=user,
+                job=job,
+                type=NotificationType.objects.get(type='New Job Alert')
+            ).count()
             if count == 0:
                 Notification.objects.create(
                     user=user,
