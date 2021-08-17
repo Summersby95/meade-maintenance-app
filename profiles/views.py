@@ -137,16 +137,20 @@ def staff_detail(request, staff_id):
                 'card': 'includes/card-6.html',
             },
             {
-                'header': 'Jobs',
+                'header': ('Jobs (Showing ' + str(len(jobs)) + ' of ' +
+                           str(total_jobs) + ')'),
                 'template': 'profiles/employee_jobs_table_card.html',
             },
             {
-                'header': 'Stock Withdrawls',
+                'header': ('Stock Withdrawls (Showing ' +
+                           str(len(stock_withdrawls)) + ' of ' +
+                           str(total_stock_withdrawls) + ')'),
                 'template': ('profiles/'
                              'employee_stock_withdrawls_table_card.html'),
             },
             {
-                'header': 'Time Logs',
+                'header': ('Time Logs (Showing ' + str(len(time_logs_list)) +
+                           ' of ' + str(len(time_logs)) + ')'),
                 'template': 'profiles/employee_time_logs_table_card.html',
             },
         ],
