@@ -15,7 +15,6 @@
     <th>Department</th>
     <th>Location</th>
     <th>Supplier</th>
-    <th>PPM Jobs</th>
     <th>Actions</th>
 </thead>
 <tbody>
@@ -27,7 +26,6 @@
             <td>{{ asset.department }}</td>
             <td>{{ asset.location }}</td>
             <td>{{ asset.supplier }}</td>
-            <td>#</td>
             <td>
                 <a href="{% url 'asset_details' asset.id %}" class="btn btn-success">
                     <i class="far fa-eye"></i> View
