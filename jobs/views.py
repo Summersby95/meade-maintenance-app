@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,7 @@ from .models import Job, JobStatus, JobSteps, JobTimes
 from .forms import JobForm, JobStepsForm, JobTimesForm
 from .decorators import job_cancel_check, job_edit_check
 
-from ancillaries.decorators import custom_user_test
+from ancillaries.decorators import custom_user_test, manager_test
 from profiles.models import UserProfile
 from projects.models import Project
 from stocks.models import StockTransfer
@@ -148,6 +149,25 @@ def completed_ppms(request):
 
     context = {
         'jobs': jobs,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'jobs/job_table.html', context)
+
+
+@login_required
+@custom_user_test(manager_test, login_url='/jobs/', redirect_field_name=None)
+def user_jobs(request, user_id):
+    """ View to see jobs for user """
+    employee = get_object_or_404(UserProfile, id=user_id)
+
+    jobs = Job.objects.filter(
+        Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
+    ).distinct().order_by('-created_on')
+
+    context = {
+        'jobs': jobs,
+        'table_header': f'{employee.get_full_name()}\'s Jobs',
     }
     context = {**context, **app_context}
 
