@@ -36,6 +36,13 @@ def create_notification(user, notification_type, job=None, stock_item=None):
             user=user,
             type=NotificationType.objects.get(type='Unassigned Stock'),
         )
+    elif notification_type == 'Started Job':
+        if job:
+            Notification.objects.create(
+                user=user,
+                type=NotificationType.objects.get(type='Job Started'),
+                job=Job.objects.get(id=job.id)
+            )
 
 
 @receiver(m2m_changed, sender=Job.assigned_to.through)
