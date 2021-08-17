@@ -1,0 +1,49 @@
+{% extends "main.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form action="{% url 'complete_job_steps' job.id %}" class="row" method="post">
+        {% csrf_token %}
+        <div class="col-12">
+            <div class="card content-card">
+                <h4 class="card-header">
+                    Job Steps - Job #{{job.id}}
+                </h4>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-responsive-sm">
+                            <thead>
+                                <th>Step No.</th>
+                                <th>Step</th>
+                                <th>Completed</th>
+                            </thead>
+                            <tbody>
+                                {% for step in job_steps %}
+                                    <tr>
+                                        <th>{{ step.step_number }}.</th>
+                                        <td>{{ step.step }}</td>
+                                        <td>
+                                            {% if step.completed %}
+                                                <input type="checkbox" name="step_{{ step.step_number }}_checkbox" id="step_{{ step.step_number }}_checkbox" checked>
+                                            {% else %}
+                                                <input type="checkbox" name="step_{{ step.step_number }}_checkbox" id="step_{{ step.step_number }}_checkbox">
+                                            {% endif %}
+                                            
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn action-button btn-success">
+            <i class="fas fa-check"></i> Update Steps
+        </button>
+        <a href="{% url 'job_detail' job.id %}" class="btn action-button btn-danger">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </form>
+{% endblock %}
