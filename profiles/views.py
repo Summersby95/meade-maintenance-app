@@ -63,18 +63,22 @@ def staff_detail(request, staff_id):
     ).order_by('-time_start')[:10]
     time_logs = JobTimes.objects.filter(~Q(time_end=None), user=employee.user)
 
-    cancelled_jobs = jobs.filter(
-        Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
-    ).count()
-    completed_jobs = jobs.filter(
-        status=JobStatus.objects.get(status='Completed')
-    ).count()
-    started_jobs = jobs.filter(
-        status=JobStatus.objects.get(status='Started')
-    ).count()
-    outstanding_jobs = jobs.filter(
-        ~Q(status=JobStatus.objects.get(status='Completed'))
-    ).count()
+    cancelled_jobs = Job.objects.filter(
+        Q(status=JobStatus.objects.get(status='Cancelled')) &
+        (Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user))
+    ).distinct().count()
+    completed_jobs = Job.objects.filter(
+        Q(status=JobStatus.objects.get(status='Completed')) &
+        (Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user))
+    ).distinct().count()
+    started_jobs = Job.objects.filter(
+        Q(status=JobStatus.objects.get(status='Started')) &
+        (Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user))
+    ).distinct().count()
+    outstanding_jobs = Job.objects.filter(
+        ~Q(status=JobStatus.objects.get(status='Cancelled')) &
+        (Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user))
+    ).distinct().count()
 
     hours_today = sum(
         [time.time_diff() for time in time_logs.filter(
