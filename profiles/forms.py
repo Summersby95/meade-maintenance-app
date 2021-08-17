@@ -26,6 +26,13 @@ class CustomSignupForm(SignupForm):
         profile.save()
         return user
 
+    def __init__(self, *args, **kwargs):
+        super(CustomSignupForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs['placeholder'] = 'First Name'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Last Name'
+        self.fields['phone_number'].widget.attrs['placeholder'] = 'Phone '
+        'Number'
+
 
 class BonusOrderForm(forms.ModelForm):
 
