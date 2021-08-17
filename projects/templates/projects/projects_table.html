@@ -13,8 +13,6 @@
     <th>Due Date</th>
     <th>Status</th>
     <th>Location</th>
-    <th>Open Jobs</th>
-    <th>Completed Jobs</th>
     <th>Actions</th>
 </thead>
 <tbody>
@@ -25,8 +23,6 @@
             <td>{{ project.due_date }}</td>
             <td>{{ project.status }}</td>
             <td>{{ project.location }}</td>
-            <td>#</td>
-            <td>#</td>
             <td>
                 <a href="{% url 'project_details' project_id=project.id %}" class="btn btn-success">
                     <i class="far fa-eye"></i> View
