@@ -40,7 +40,7 @@ app_context = {
         },
         {
             'href': 'user_started_logs',
-            'text': 'My Started Jobs',
+            'text': 'My Started Time Logs',
         },
         {
             'href': 'user_completed_logs',
@@ -503,3 +503,31 @@ def delete_time_log(request, time_log_id):
     time_log.delete()
     messages.success(request, "Time Log Successfully Deleted!")
     return redirect(reverse(job_details, args=[job.id]))
+
+
+@login_required
+@custom_user_test(job_edit_check, login_url='/jobs/',
+                  redirect_field_name=None)
+def complete_job_steps(request, job_id):
+    """ View to complete job steps """
+    job = get_object_or_404(Job, pk=job_id)
+    job_steps = JobSteps.objects.filter(job=job)
+    if request.method == 'POST':
+        for job_step in job_steps:
+            if request.POST.get(
+                f"step_{job_step.step_number}_checkbox"
+            ) == 'on':
+                job_step.completed = True
+            else:
+                job_step.completed = False
+            job_step.save()
+        messages.success(request, "Job Steps Updated Successfully!")
+        return redirect(reverse(job_details, args=[job_id]))
+
+    context = {
+        'job_steps': job_steps,
+        'job': job,
+    }
+    context = {**context, **app_context}
+
+    return render(request, 'jobs/job_steps_form_table.html', context)
