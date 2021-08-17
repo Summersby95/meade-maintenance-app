@@ -44,6 +44,7 @@ def ongoing_projects(request):
 
     context = {
         'projects': projects,
+        'table_title': 'Ongoing Projects',
     }
     context = {**app_context, **context}
 
@@ -59,6 +60,7 @@ def completed_projects(request):
 
     context = {
         'projects': projects,
+        'table_title': 'Completed Projects',
     }
     context = {**app_context, **context}
 
@@ -74,6 +76,7 @@ def cancelled_projects(request):
 
     context = {
         'projects': projects,
+        'table_title': 'Cancelled Projects',
     }
     context = {**app_context, **context}
 
