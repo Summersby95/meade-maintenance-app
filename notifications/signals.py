@@ -2,7 +2,7 @@ from django.db.models.signals import post_save, post_delete, m2m_changed
 from django.db.models import Q
 from django.dispatch import receiver
 from .models import Notification, NotificationType
-from jobs.models import Job
+from jobs.models import Job, JobTimes
 from stocks.models import StockTransfer, StockReceipts, StockItem
 from profiles.models import UserTypes, UserProfile
 
