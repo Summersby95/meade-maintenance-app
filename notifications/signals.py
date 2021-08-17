@@ -31,6 +31,11 @@ def create_notification(user, notification_type, job=None, stock_item=None):
                 type=NotificationType.objects.get(type='Stock Warning'),
                 stock_item=StockItem.objects.get(id=stock_item.id)
             )
+    elif notification_type == 'Unassigned Stock Alert':
+        Notification.objects.create(
+            user=user,
+            type=NotificationType.objects.get(type='Unassigned Stock'),
+        )
 
 
 @receiver(m2m_changed, sender=Job.assigned_to.through)
