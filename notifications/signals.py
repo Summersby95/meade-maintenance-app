@@ -74,3 +74,13 @@ def unassigned_stock_alert(sender, instance, created, **kwargs):
             create_notification(instance.user, 'Unassigned Stock Alert')
 
 
+@receiver(post_save, sender=JobTimes)
+def started_job_alert(sender, instance, created, **kwargs):
+    """
+    Function to notify users of started jobs
+    """
+    if created:
+        if instance.time_end is None:
+            create_notification(instance.user, 'Started Job', job=instance.job)
+
+
