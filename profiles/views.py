@@ -50,8 +50,17 @@ def staff_detail(request, staff_id):
     employee = UserProfile.objects.get(id=staff_id)
     jobs = Job.objects.filter(
         Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
-    )
-    stock_withdrawls = StockTransfer.objects.filter(user=employee.user)
+    ).distinct().order_by('-created_on')[:10]
+    total_jobs = Job.objects.filter(
+        Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
+    ).distinct().count()
+    stock_withdrawls = StockTransfer.objects.filter(user=employee.user)[:10]
+    total_stock_withdrawls = StockTransfer.objects.filter(
+        user=employee.user
+    ).count()
+    time_logs_list = JobTimes.objects.filter(
+        ~Q(time_end=None), user=employee.user
+    ).order_by('-time_start')[:10]
     time_logs = JobTimes.objects.filter(~Q(time_end=None), user=employee.user)
 
     cancelled_jobs = jobs.filter(
