@@ -14,6 +14,9 @@ def custom_user_test(test_func, login_url=None,
     """
     Custom user_passes_test decorator that passes the request to
     the test_func instead of request.user.
+
+    The user passes test decorator is a django decorator that I
+    have amended to suit my needs.
     """
 
     def decorator(view_func):

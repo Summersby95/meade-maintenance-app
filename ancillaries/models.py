@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Departments(models.Model):
+    """ Departments Model """
     department_name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -12,6 +13,7 @@ class Departments(models.Model):
 
 
 class Locations(models.Model):
+    """ Locations Model """
     location_name = models.CharField(max_length=100)
     department = models.ForeignKey(Departments, on_delete=models.CASCADE)
 
@@ -23,6 +25,7 @@ class Locations(models.Model):
 
 
 class Suppliers(models.Model):
+    """ Suppliers Model """
     supplier_name = models.CharField(max_length=100)
 
     def __str__(self):
