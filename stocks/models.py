@@ -43,6 +43,7 @@ class StockItem(models.Model):
     def __str__(self):
         return self.name
 
+    """ Returns The Stock Item's Current Stock Level """
     def get_current_stock(self):
         return (
             (StockReceipts.objects.filter(item=self).aggregate(

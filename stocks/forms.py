@@ -5,7 +5,7 @@ from ancillaries.forms import DateInput
 
 
 class StockItemForm(forms.ModelForm):
-
+    """ Stock Item Form """
     class Meta:
         model = StockItem
         fields = '__all__'
@@ -15,6 +15,7 @@ class StockItemForm(forms.ModelForm):
 
 
 class StockReceiptsForm(forms.ModelForm):
+    """ Stock Receipts Form """
     class Meta:
         model = StockReceipts
         exclude = ('created_by', 'created_on',)
@@ -27,7 +28,7 @@ class StockReceiptsForm(forms.ModelForm):
 
 
 class StockTransferForm(forms.ModelForm):
-
+    """ Stock Transfer Form """
     class Meta:
         model = StockTransfer
         exclude = ('user', 'created_on',)

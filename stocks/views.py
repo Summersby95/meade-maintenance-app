@@ -57,6 +57,7 @@ app_context = {
 
 @login_required
 def inventory_view(request):
+    """ Stock Inventory View """
     items = StockItem.objects.all()
 
     context = {
@@ -69,6 +70,7 @@ def inventory_view(request):
 
 @login_required
 def stock_item_details(request, stock_id):
+    """ Stock Item Details View """
     item = get_object_or_404(StockItem, pk=stock_id)
     stock_receipts = StockReceipts.objects.filter(item=item)
     stock_transfers = StockTransfer.objects.filter(item=item)
