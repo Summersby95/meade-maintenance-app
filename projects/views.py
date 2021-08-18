@@ -89,27 +89,28 @@ def project_details(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     jobs = Job.objects.filter(project=project)
 
-    # FIX
-    total_time = datetime.timedelta()
-    users = []
-    for job in jobs:
-        job_times = JobTimes.objects.filter(
-            ~Q(time_end=None), job=job
-        )
-        for job_time in job_times:
-            total_time += job_time.time_end - job_time.time_start
-            if job_time.user.username not in users:
-                users.append(job_time.user.username)
-    total_time = total_time - datetime.timedelta(
-        microseconds=total_time.microseconds
+    total_time = sum(
+        [time.time_diff() for time in JobTimes.objects.filter(
+            job__project=project,
+            time_end__isnull=False
+        )],
+        datetime.timedelta()
     )
 
-    completed = sum(job.status.status == 'Completed' for job in jobs)
+    completed = Job.objects.filter(
+        Q(status=JobStatus.objects.get(status='Completed')) &
+        Q(project=project)
+    ).distinct().count()
+
+    distinct_users = JobTimes.objects.filter(
+        job__project=project,
+        time_end__isnull=False
+    ).values('user').distinct().count()
+
     average_time = total_time / len(jobs) if len(jobs) > 0 else 0
     average_time = average_time - datetime.timedelta(
         microseconds=average_time.microseconds
     )
-    distinct_users = len(users)
 
     context = {
         'project': project,
