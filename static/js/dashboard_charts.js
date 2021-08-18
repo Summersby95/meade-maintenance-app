@@ -1,7 +1,7 @@
 /* jshint esversion: 7 */
 
+/* this file builds charts using the chart.js file */
 chart_data = JSON.parse(document.getElementById("chart_data").textContent);
-console.log(chart_data);
 
 var jtc = document.getElementById('jobsTodayChart').getContext('2d');
 var jobsTodayChart = new Chart(jtc, {
