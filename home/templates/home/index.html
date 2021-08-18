@@ -3,7 +3,7 @@
 
 {% block main_content %}
 <header class="sticky-top shadow">
-    <nav class="navbar navbar-dark">
+    <nav class="navbar navbar-expand-md navbar-dark">
         <a href="{% url 'home' %}" class="navbar-brand">
             <img src="{% static 'images/owl-icon.png' %}" alt="Logo" width="30" height="30">
             Pallas
@@ -16,18 +16,23 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a href="{% url 'dashboard' %}" class="nav-link">
-                            <i class="fab fa-wpforms"></i> Dashboard
+                            <i class="fas fa-folder"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'account_logout' %}" class="nav-link">
+                            <i class="fas fa-user-slash"></i> Log Out
                         </a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a href="/accounts/login/" class="nav-link">
+                        <a href="{% url 'account_login' %}" class="nav-link">
                             <i class="fas fa-user-alt"></i> Login
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/accounts/signup/" class="nav-link">
-                            <i class="fab fa-wpforms"></i> Register
+                        <a href="{% url 'account_signup' %}" class="nav-link">
+                            <i class="fas fa-pen"></i> Register
                         </a>
                     </li>
                 {% endif %}
@@ -35,5 +40,55 @@
         </div>
     </nav>
 </header>
-<h4>Placeholder!</h4>
+<main role="main">
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1>Welcome to Pallas</h1>
+            <p class="lead">The Job Logging Application</p>
+            <hr class="my-4">
+            <p>A bespoke job logging system for the engineering team at Meade Farm Group</p>
+            <p>
+                <a href="{% url 'account_login' %}" class="btn btn-primary my-2">
+                    <i class="fas fa-user"></i> Log In
+                </a>
+                <a href="{% url 'account_signup' %}" class="btn btn-secondary my-2">
+                    <i class="fas fa-pen"></i> Register
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="py-5">
+        .<div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="{% static 'images/machining.jpg' %}" alt="Factory Floor" class="bd-placeholder-img card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-hammer"></i> Jobs</h5>
+                            <p class="card-text">Easily record and log your work in real time, on the go, on your phone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="{% static 'images/parts.jpg' %}" alt="Factory Floor" class="bd-placeholder-img card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-puzzle-piece"></i> Parts</h5>
+                            <p class="card-text">See up to date stock records, find where your parts are and what you've used.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="{% static 'images/welding.jpg' %}" alt="Factory Floor" class="bd-placeholder-img card-img-top">
+                        <div class="card-body">
+                            <h5><i class="fas fa-clock"></i> Time Management</h5>
+                            <p class="card-text">See where you are spending your day, how long you're spending there and what you're doing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}

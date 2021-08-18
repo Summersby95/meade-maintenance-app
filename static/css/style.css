@@ -166,6 +166,14 @@ header ul.nav {
     }
 }
 
+<<<<<<< HEAD
+=======
+#card-element {
+    border: 1px solid #ccc;
+    line-height: 50px;
+}
+
+>>>>>>> 2a03c9f0e8923509f6111ad62ad9a48763ab1d65
 /* Notification Icon */
 .notification-icon {
     height: 25px;
@@ -174,4 +182,25 @@ header ul.nav {
     border-radius: 50%;
     display: inline-block;
     text-align: center;
+}
+
+/* Home page style rules */
+
+.home-card {
+    margin: 10px 10px;
+    max-height: 500px;
+}
+
+.home-container {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.home-container img {
+    height: 140px;
+    width: 140px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
 }
