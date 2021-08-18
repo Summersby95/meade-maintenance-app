@@ -261,7 +261,15 @@ def create_stock_transfer(request):
                 stock_item_details, args=[form.instance.item.id]
             ))
         else:
-            messages.error(request, 'Stock Withdrawl Failed! Please Try Again')
+            if "No Stock" in str(form.errors.as_data()['__all__']):
+                messages.error(
+                    request,
+                    'No Stock Available For This Item! Please Try Again'
+                )
+            else:
+                messages.error(
+                    request, 'Stock Withdrawl Failed! Please Try Again'
+                )
     else:
         form = StockTransferForm()
 
