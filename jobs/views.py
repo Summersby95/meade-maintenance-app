@@ -75,7 +75,8 @@ def outstanding_jobs(request):
         )
     else:
         jobs = Job.objects.filter(
-            (Q(assigned_to=request.user) | Q(assigned_to=None)) &
+            (Q(assigned_to=request.user) | Q(assigned_to=None) |
+             Q(created_by=request.user)) &
             ~Q(status=JobStatus.objects.get(status='Completed')) &
             ~Q(status=JobStatus.objects.get(status='Cancelled'))
             & Q(ppm=None)
@@ -103,7 +104,8 @@ def outstanding_ppms(request):
         )
     else:
         jobs = Job.objects.filter(
-            (Q(assigned_to=request.user) | Q(assigned_to=None)) &
+            (Q(assigned_to=request.user) | Q(assigned_to=None) |
+             Q(created_by=request.user)) &
             ~Q(status=JobStatus.objects.get(status='Completed')) &
             ~Q(status=JobStatus.objects.get(status='Cancelled'))
             & ~Q(ppm=None)
@@ -130,7 +132,8 @@ def completed_jobs(request):
         )
     else:
         jobs = Job.objects.filter(
-            (Q(assigned_to=request.user) | Q(assigned_to=None)) &
+            (Q(assigned_to=request.user) | Q(assigned_to=None) |
+             Q(created_by=request.user)) &
             Q(status=JobStatus.objects.get(status='Completed'))
             & Q(ppm=None)
         )
