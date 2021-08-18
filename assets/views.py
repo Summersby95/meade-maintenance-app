@@ -3,11 +3,11 @@ import datetime
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Count
 
 from .models import Assets, PPM
 from .forms import AssetForm, PPMForm
-from jobs.models import Job, JobTimes
+from jobs.models import Job, JobStatus, JobTimes
 
 app_context = {
     'nbar': 'assets',
@@ -65,18 +65,23 @@ def asset_details(request, asset_id):
     ppms = PPM.objects.filter(asset=asset)
     jobs = Job.objects.filter(asset=asset)
 
-    # FIX
-    total_time = datetime.timedelta()
-    users = []
-    for job in jobs:
-        job_times = JobTimes.objects.filter(~Q(time_end=None), job=job)
-        for job_time in job_times:
-            total_time += job_time.time_end - job_time.time_start
-            if job_time.user.username not in users:
-                users.append(job_time.user.username)
+    total_time = sum(
+        [time.time_diff() for time in JobTimes.objects.filter(
+            job__asset=asset,
+            time_end__isnull=False
+        )],
+        datetime.timedelta()
+    )
 
-    completed = sum(job.status.status == 'Completed' for job in jobs)
-    distinct_users = len(users)
+    completed = Job.objects.filter(
+        Q(status=JobStatus.objects.get(status='Completed')) &
+        Q(asset=asset)
+    ).distinct().count()
+
+    distinct_users = JobTimes.objects.filter(
+        job__asset=asset,
+        time_end__isnull=False
+    ).values('user').distinct().count()
 
     context = {
         'asset': asset,
