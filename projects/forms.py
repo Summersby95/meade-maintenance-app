@@ -4,7 +4,7 @@ from ancillaries.forms import DateInput
 
 
 class ProjectForm(forms.ModelForm):
-
+    """ Project Form """
     class Meta:
         model = Project
         exclude = [

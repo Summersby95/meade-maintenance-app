@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.db.models import Q
 
 from .models import Project, ProjectStatus
-from jobs.models import Job, JobTimes
+from jobs.models import Job, JobStatus, JobTimes
 from profiles.models import UserProfile
 from .forms import ProjectForm
 from ancillaries.decorators import custom_user_test, manager_test
@@ -146,7 +146,7 @@ def project_details(request, project_id):
 @custom_user_test(manager_test, login_url='/projects/',
                   redirect_field_name=None)
 def create_project(request):
-    """ View to create job """
+    """ View to create project """
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
         form = ProjectForm(request.POST)
@@ -179,7 +179,7 @@ def create_project(request):
 @custom_user_test(manager_test, login_url='/projects/',
                   redirect_field_name=None)
 def edit_project(request, project_id):
-    """ View to edit job """
+    """ View to edit project """
     project = get_object_or_404(Project, pk=project_id)
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
@@ -211,7 +211,7 @@ def edit_project(request, project_id):
 @custom_user_test(manager_test, login_url='/projects/',
                   redirect_field_name=None)
 def mark_project_completed(request, project_id):
-    """ View to mark job as completed """
+    """ View to mark project as completed """
     project = get_object_or_404(Project, pk=project_id)
     project.status = get_object_or_404(ProjectStatus, status='Completed')
     project.save()
@@ -223,7 +223,7 @@ def mark_project_completed(request, project_id):
 @custom_user_test(manager_test, login_url='/projects/',
                   redirect_field_name=None)
 def cancel_project(request, project_id):
-    """ View to mark job as completed """
+    """ View to mark project as cancelled """
     project = get_object_or_404(Project, pk=project_id)
     project.status = get_object_or_404(ProjectStatus, status='Cancelled')
     project.save()
@@ -235,7 +235,7 @@ def cancel_project(request, project_id):
 @custom_user_test(manager_test, login_url='/projects/',
                   redirect_field_name=None)
 def reopen_project(request, project_id):
-    """ View to mark job as completed """
+    """ View to mark project as in progress """
     project = get_object_or_404(Project, pk=project_id)
     project.status = get_object_or_404(ProjectStatus, status='In Progress')
     project.save()
