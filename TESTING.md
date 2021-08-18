@@ -14,3 +14,4 @@
 10. **Not Able To Accurately Record Which Jobs Are PPM's** - *Fix:* Change PPM model structure to be a job template.
 11. **Repetitive Templating** - *Fix:* Create base templates for different template structures
 12. **Unnecessary POST Handlers** - *Fix:* Some views call an instance of a form just to set an initial parameter but get passed to a different view as the POST form handler, as such, having POST handlers on the initial views was unneccessary
+13. **No Margin Beneath Buttons On Details Pages** - *Fix:* Add bottom padding to main element
