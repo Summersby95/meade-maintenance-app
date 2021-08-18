@@ -33,5 +33,15 @@ class StockTransferForm(forms.ModelForm):
         model = StockTransfer
         exclude = ('user', 'created_on',)
 
+    """ Checks that stock item has sufficient stock to transfer """
+    def clean(self):
+        super().clean()
+        cleaned_data = self.cleaned_data
+        stock_item = cleaned_data.get('item')
+        quantity = cleaned_data.get('quantity')
+        if stock_item.get_current_stock() < quantity:
+            raise forms.ValidationError('No Stock')
+        return cleaned_data
+
     def __init__(self, *args, **kwargs):
         super(StockTransferForm, self).__init__(*args, **kwargs)
