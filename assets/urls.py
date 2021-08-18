@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+""" Url Patterns For Assets App """
 urlpatterns = [
     path('', views.active_assets, name='active_assets'),
     path('inactive/', views.inactive_assets, name='inactive_assets'),

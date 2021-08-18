@@ -3,11 +3,12 @@ from ancillaries.models import Departments, Locations, Suppliers
 
 
 class AssetTypes(models.Model):
+    """ Asset Types Model """
     type = models.CharField(max_length=50)
 
     def __str__(self):
         return self.type
-    
+
     class Meta:
         verbose_name_plural = 'Asset Types'
 
@@ -28,6 +29,6 @@ class Assets(models.Model):
 
     def __str__(self):
         return self.asset_name
-    
+
     class Meta:
         verbose_name_plural = "Assets"

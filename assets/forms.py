@@ -5,7 +5,7 @@ from ancillaries.forms import DateInput
 
 
 class AssetForm(forms.ModelForm):
-
+    """ Assets Form """
     class Meta:
         model = Assets
         fields = '__all__'
@@ -18,10 +18,10 @@ class AssetForm(forms.ModelForm):
 
 
 class PPMForm(forms.ModelForm):
-    
+    """ PPM Form """
     class Meta:
         model = PPM
-        exclude = ['asset', 'created_by',]
+        exclude = ['asset', 'created_by']
 
     def __init__(self, *args, **kwargs):
         super(PPMForm, self).__init__(*args, **kwargs)

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from assets.submodels.assets import Assets
 
+
 class PPM(models.Model):
     """
     PPM model
@@ -13,9 +14,9 @@ class PPM(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     time_interval = models.IntegerField()
     active = models.BooleanField(default=True)
-    
+
     def __str__(self):
         return self.job_title
-    
+
     class Meta:
         verbose_name_plural = "PPMs"
