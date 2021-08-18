@@ -26,13 +26,13 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a href="/accounts/login/" class="nav-link">
+                        <a href="{% url 'account_login' %}" class="nav-link">
                             <i class="fas fa-user-alt"></i> Login
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/accounts/signup/" class="nav-link">
-                            <i class="fab fa-wpforms"></i> Register
+                        <a href="{% url 'account_signup' %}" class="nav-link">
+                            <i class="fas fa-pen"></i> Register
                         </a>
                     </li>
                 {% endif %}
