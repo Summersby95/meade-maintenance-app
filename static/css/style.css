@@ -180,3 +180,24 @@ header ul.nav {
     display: inline-block;
     text-align: center;
 }
+
+/* Home page style rules */
+
+.home-card {
+    margin: 10px 10px;
+    max-height: 500px;
+}
+
+.home-container {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.home-container img {
+    height: 140px;
+    width: 140px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+}
