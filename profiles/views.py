@@ -226,36 +226,40 @@ def create_checkout_session(request, staff_id):
 def bonus_success(request, staff_id, checkout_session_id):
     """ bonus success view """
     employee = get_object_or_404(UserProfile, id=staff_id)
-    if stripe.checkout.Session.retrieve(checkout_session_id):
+
+    try:
         session = stripe.checkout.Session.retrieve(checkout_session_id)
-    else:
+
+        customer = stripe.Customer.retrieve(session.customer)
+        amount_total = format((int(session.amount_total)/100), '.2f')
+
+        UserBonusOrder.objects.create(
+            user=request.user,
+            bonus=amount_total,
+        )
+
+        context = {
+            'session': session,
+            'customer': customer,
+            'employee': employee,
+            'amount_total': amount_total,
+            'card_tabs': [
+                {
+                    'header': 'Employee Bonus',
+                    'template': 'profiles/employee_bonus_card.html',
+                }
+            ],
+            'actions': 'profiles/bonus_success_actions.html',
+        }
+        context = {**app_context, **context}
+        messages.success(
+            request, f'Bonus Payment Success For {customer.name}!'
+        )
+        return render(request, "includes/details.html", context)
+
+    except Exception as e:
         messages.error(request, "Something went wrong. Please try again.")
         return redirect(reverse(staff_detail, args=[staff_id]))
-
-    customer = stripe.Customer.retrieve(session.customer)
-    amount_total = format((int(session.amount_total)/100), '.2f')
-
-    UserBonusOrder.objects.create(
-        user=request.user,
-        bonus=amount_total,
-    )
-
-    context = {
-        'session': session,
-        'customer': customer,
-        'employee': employee,
-        'amount_total': amount_total,
-        'card_tabs': [
-            {
-                'header': 'Employee Bonus',
-                'template': 'profiles/employee_bonus_card.html',
-            }
-        ],
-        'actions': 'profiles/bonus_success_actions.html',
-    }
-    context = {**app_context, **context}
-    messages.success(request, f'Bonus Payment Success For {customer.name}!')
-    return render(request, "includes/details.html", context)
 
 
 @login_required
