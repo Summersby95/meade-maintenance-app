@@ -22,6 +22,11 @@ app_context = {
 @login_required
 def dashboard(request):
     """Returns dashboard home"""
+
+    """
+    create dictionaries with the different metrics
+    we want to display to the user
+    """
     jobs = {
         'all': Job.objects.all().count(),
         'completed': Job.objects.filter(
@@ -84,6 +89,9 @@ def dashboard(request):
         ),
     }
 
+    """
+    Dictionary of chart data to be passed to the template
+    """
     charts = {
         'jobs': {
             'today': {
