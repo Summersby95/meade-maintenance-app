@@ -4,6 +4,7 @@ from ancillaries.models import Departments
 
 
 class UserTypes(models.Model):
+    """ User Types Model """
     type = models.CharField(max_length=100)
 
     def __str__(self):
@@ -14,6 +15,7 @@ class UserTypes(models.Model):
 
 
 class UserProfile(models.Model):
+    """ User Profile Model """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
@@ -29,6 +31,7 @@ class UserProfile(models.Model):
 
 
 class UserBonusOrder(models.Model):
+    """ User Bonus Order Model """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     bonus = models.DecimalField(max_digits=10, decimal_places=2)
     order_date = models.DateField(auto_now_add=True)

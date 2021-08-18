@@ -5,6 +5,7 @@ from .models import *
 
 
 class CustomSignupForm(SignupForm):
+    """ Custom All auth Signup Form With Custom Fields """
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
     department = forms.ModelChoiceField(queryset=Departments.objects.all(),
@@ -35,7 +36,7 @@ class CustomSignupForm(SignupForm):
 
 
 class BonusOrderForm(forms.ModelForm):
-
+    """ Bonus Order Form """
     class Meta:
         model = UserBonusOrder
         fields = ['bonus']

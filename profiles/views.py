@@ -33,6 +33,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 @custom_user_test(manager_test, login_url='/jobs/',
                   redirect_field_name=None)
 def staff_list(request):
+    """ Staff List View """
     staff_list = UserProfile.objects.all()
 
     context = {
@@ -47,6 +48,7 @@ def staff_list(request):
 @custom_user_test(manager_test, login_url='/jobs/',
                   redirect_field_name=None)
 def staff_detail(request, staff_id):
+    """ Staff Detail View """
     employee = UserProfile.objects.get(id=staff_id)
     jobs = Job.objects.filter(
         Q(assigned_to__in=[employee.user]) | Q(created_by=employee.user)
@@ -165,6 +167,7 @@ def staff_detail(request, staff_id):
 @custom_user_test(manager_test, login_url='/jobs/',
                   redirect_field_name=None)
 def user_bonus(request, staff_id):
+    """ User Bonus Form """
     employee = UserProfile.objects.get(id=staff_id)
 
     bonus_form = BonusOrderForm()
@@ -183,6 +186,7 @@ def user_bonus(request, staff_id):
                   redirect_field_name=None)
 @require_http_methods(['POST'])
 def create_checkout_session(request, staff_id):
+    """ create checkout session view, creates stripe session """
     employee = UserProfile.objects.get(id=staff_id)
     url_vars = [
         "http://",
@@ -220,6 +224,7 @@ def create_checkout_session(request, staff_id):
 @custom_user_test(manager_test, login_url='/jobs/',
                   redirect_field_name=None)
 def bonus_success(request, staff_id, checkout_session_id):
+    """ bonus success view """
     employee = get_object_or_404(UserProfile, id=staff_id)
     if stripe.checkout.Session.retrieve(checkout_session_id):
         session = stripe.checkout.Session.retrieve(checkout_session_id)
@@ -257,6 +262,7 @@ def bonus_success(request, staff_id, checkout_session_id):
 @custom_user_test(manager_test, login_url='/jobs/',
                   redirect_field_name=None)
 def bonus_cancel(request, staff_id):
+    """ bonus cancel view """
     employee = get_object_or_404(UserProfile, id=staff_id)
     messages.error(
         request, f'Bonus Payment Cancelled For {employee.get_full_name()}!'
