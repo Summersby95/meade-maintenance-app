@@ -96,6 +96,7 @@ class JobTimes(models.Model):
     def __str__(self):
         return self.job.job_title
 
+    """ method to return the time difference of the log """
     def time_diff(self):
         if self.time_end is not None:
             delta = self.time_end - self.time_start

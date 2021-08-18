@@ -16,6 +16,11 @@ from projects.models import Project
 from stocks.models import StockTransfer
 from projects.views import project_details
 
+"""
+The app context dictionary tells the template
+which app is active and which links to show
+in the sidebar
+"""
 app_context = {
     'nbar': 'jobs',
     'links': [
@@ -56,6 +61,12 @@ def outstanding_jobs(request):
     """ View to see outstanding jobs for user """
     profile = get_object_or_404(UserProfile, user=request.user)
 
+    """
+    For manager/admin users we want to show all the jobs,
+    regardless of who is assigned or who created it.
+    For regular users we only want to show them jobs that are
+    applicable to them
+    """
     if str(profile.user_type).lower() in ("admin", "manager"):
         jobs = Job.objects.filter(
             ~Q(status=JobStatus.objects.get(status='Completed')) &
@@ -181,7 +192,6 @@ def user_jobs(request, user_id):
 @login_required
 def job_details(request, job_id):
     """ View to see details of a job """
-
     job = get_object_or_404(Job, pk=job_id)
 
     job_steps = JobSteps.objects.filter(job=job_id)
@@ -194,6 +204,10 @@ def job_details(request, job_id):
         time_end__isnull=True
     ).count()
 
+    """
+    The card tabs context variable tells the details template
+    which card tabs to render.
+    """
     context = {
         'job': job,
         'job_steps': job_steps,
@@ -417,6 +431,11 @@ def cancel_job(request, job_id):
 def start_job_log(request, job_id):
     """ View to create inital time_log """
     job = get_object_or_404(Job, pk=job_id)
+    """
+    we check if the user has any open time logs
+    for this job, we don't want multiple open time logs
+    for the same job running at the same time
+    """
     start_check = JobTimes.objects.filter(
         job=job,
         user=request.user,
