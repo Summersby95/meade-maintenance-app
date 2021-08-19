@@ -426,7 +426,7 @@ python manage.py migrate
 
 ## Project Outcome
 
-TBC
+The project is currently undergoing a few changes to work in a live production environment *(in a different repository)*. The users are very happy with the core functionalities of the applicaiton.
 
 ## Credits
 
@@ -439,3 +439,12 @@ TBC
 * [Django - Pass User Object To Form](https://stackoverflow.com/questions/43347566/how-to-pass-user-object-to-forms-in-django)
 * [Django - m2m_changed Signal](https://docs.djangoproject.com/en/3.2/ref/signals/#m2m-changed)
 * [Chart.js - Doughnut Charts](https://www.chartjs.org/docs/latest/charts/doughnut.html)
+
+### Special Thanks
+
+* Caleb Mbakwe, my mentor, for all his advice, guidance and support over all my projects.
+* My colleagues in the IT Department of Meade Farm Group, Stephen and Pawel, for their support and feedback on this project and all the others.
+* The engineers and managers at Meade Farm Group for allowing me to undertake this project, I hope I did a good job.
+* My friends and family for their support and love over these last 12 months.
+* All the open source coders out there who built the tools I used for this project, I hope I can return the favour sometime.
+* Code Institute and the CI community for their wonderful course and supports that taught me so much and has made me in to the programmer I am now, I'm forever grateful.
