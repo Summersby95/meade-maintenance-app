@@ -108,9 +108,10 @@ def project_details(request, project_id):
     ).values('user').distinct().count()
 
     average_time = total_time / len(jobs) if len(jobs) > 0 else 0
-    average_time = average_time - datetime.timedelta(
-        microseconds=average_time.microseconds
-    )
+    if type(average_time) is datetime.timedelta:
+        average_time = average_time - datetime.timedelta(
+            microseconds=average_time.microseconds
+        )
 
     context = {
         'project': project,
