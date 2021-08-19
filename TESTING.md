@@ -184,3 +184,59 @@ All mobile navigation behaved as intended.
 
 ![Mobile Nav Test 3](images/mobile-nav-test-3.gif)
 
+### Job Testing
+
+#### Job Testing Procedure
+
+1. Navigate to the *Jobs* app using the main navbar.
+2. Create a new job using the *Create Job* sidebar link.
+3. Fill in the form details and assign the job to the logged in user *(to verify notification works correctly)*
+4. Also select a project and asset that the job relates to *(to verify links in details work correctly)*
+5. Once filled out, submit the form.
+6. Navigate to *Outstanding Jobs* table to make sure the job appears there. *(Use search bar to find job if there are many)*
+7. Check profile icon to ensure notifications were created successfully
+8. Navigate to notifications page to check that notifications are there and link correctly
+9. Use link in notification to navigate to job
+10. Check that links to project and asset in job details work correctly.
+11. Attempt to edit job details through *Edit Job* button at bottom of job details
+12. Add job steps to job
+13. Test job steps buttons to check that they behave correctly
+14. Complete job steps through the *Complete Job* button at bottom of job details *(this button won't appear if the job has no steps attached to it)*
+15. Attempt to start a log for the job using the *Start Job* button
+16. Verify that a notification was created to let you know you have started a time log
+17. Navigate to the *My Started Time Logs* link and verify that your started log appears there.
+18. Use the *Stop* button in the log to stop the time log
+19. Navigate to the *My Time Logs* link to verify that your time log appears there.
+20. Navigate to the job through the log link and manually log time using the *Log Time* button
+21. Verify that both time logs appear in the *Job Times* table in the job details page.
+22. Use the *Add Part* button to add parts to the job
+23. Verify that the stock withdrawl form defaults the job field to the job you navigated from.
+24. Submit the stock withdrawl form and navigate back to the job.
+25. Ensure the stock withdrawl is visible in the *Parts Used* table in the job details
+26. Use the *Cancel Job* button and verify the status of the job is updated to *Cancelled* and that the links at the bottom of the job details view have updated.
+27. Use the *Reopen Job* button and verify the status of the job is updated to *In Progress* and that the links have updated
+28. Use the *Mark Completed* button and verify the status of the job has updated to *Completed* and that the links have updated.
+29. Navigate to the *Completed Jobs* link and verify that the job is now there.
+
+![Job Test](images/job-test.png)
+
+#### Job Test Outcome
+
+All steps were performed successfully and without error.
+
+##### Job Test Part 1
+
+![Job Test 1](images/job-test-1.gif)
+
+##### Job Test Part 2
+
+![Job Test 2](images/job-test-2.gif)
+
+##### Job Test Part 3
+
+![Job Test 3](images/job-test-3.gif)
+
+##### Job Test Part 4
+
+![Job Test 4](images/job-test-4.gif)
+
