@@ -335,3 +335,52 @@ After applying fixes for these issues the functionalities worked as expected.
 
 ![Assets Test 4](images/assets-test-4.gif)
 
+### Stocks Testing
+
+#### Stocks Testing Notes
+
+To use many of the functionalities in the *Stocks* app, your account must be either a *Stock Controller*, *Manager* or *Admin* account type.
+
+#### Stocks Testing Procedure
+
+1. Navigate to the *Stocks* app using the main nav
+2. Using the side nav navigate to the *Create Supplier* form
+3. Fill in the form and submit it
+4. Navigate to the *Supplier List* view and verify the supplier you created is there.
+5. Navigate to the *Create Stock Item* form in the side nav
+6. Fill in the form and submit it
+7. Navigate to the *Inventory View* and verify that your stock item now appears there
+8. Navigate to the *Withdraw Stock* form and attempt to withdraw stock of your product that is greater than zero. *(Do this before you try to receive stock for the product)*
+9. Verify that you get an error stating that there isn't sufficient stock for you to withdraw.
+10. Navigate to the *Receive Stock* view and receive a quantity of the new item you have created
+11. Verify that the current stock of the product has updated correctly
+12. Use the *Withdraw Stock* form to withdraw a quantity of the item such that it is now below it's stock alert
+13. Verify that the current stock of the product has updated successfully
+14. Verify that you have received a notification that a stock item is below it's alert level
+15. If you assigned the stock to a job verify that the transfer exists in the *My Assigned Stock* view
+16. If you didn't assign the stock to a job, verify the transfer is in the *My Unassigned Stock* view
+17. Attempt to edit the transfer to and verify that it updates correctly
+
+#### Stocks Testing Outcome
+
+All functionalities behaved as expected.
+
+##### Stocks Testing Part 1
+
+![Stocks Test 1](images/stocks-test-1.gif)
+
+##### Stocks Testing Part 2
+
+![Stocks Test 2](images/stocks-test-2.gif)
+
+##### Stocks Testing Part 3
+
+![Stocks Test 3](images/stocks-test-3.gif)
+
+##### Stocks Testing Part 4
+
+![Stocks Test 4](images/stocks-test-4.gif)
+
+##### Stocks Testing Part 5
+
+![Stocks Test 5](images/stocks-test-5.gif)
