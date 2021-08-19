@@ -285,3 +285,53 @@ After applying these fixes all the functionalities for this app worked as expect
 
 ![Project Testing 3](images/project-test-3.gif)
 
+### Assets Testing
+
+#### Assets Testing Notes
+
+Again, you must be logged in as an *Admin* or *Manager* to test this functionality.
+
+#### Assets Testing Procedure
+
+1. Navigate to *Assets* app using main nav
+2. Navigate to the *Create New Asset* link in the side nav
+3. Fill in the form as appropriate
+4. Submit the form and verify that the asset has successfully been created.
+5. Navigate to the *Active Assets* view and verify that the asset is now listed there
+6. Click the view button to view the asset
+7. At the bottom of the *Asset Details* page click the *Edit Asset* button
+8. Change some details of the asset and submit the changes
+9. Verify that the asset has been updated successfully
+10. At the bottom of the asset details page click *Add PPM Job*
+11. Fill in the details and submit the form.
+12. In the *Asset Details* page, ensure that the *PPM* is now in the scheduled PPMs section
+13. In the *Jobs* section, ensure that the *PPM* job has been created successfully
+14. Navigate to the *Outstanding PPMs* section in the *Jobs* app and verify that the PPM job is there
+15. Click on the PPM job that was created, verify that it's due date is set to today
+16. Add a part, log some time and mark the job as *Completed*
+17. Go back to the *Outstanding PPMs* view and verify that a new PPM job has been created with a due date of today *(the day of completion of the previous PPM)* plus the day interval of the PPM
+18. Navigate back to the asset details view
+19. Verify that the parts used, jobs and time statistics have updated appropriately
+
+#### Assets Testing Outcome
+
+The Assets app manual tests revealed that there was a problem with the asset details view that no parts were being shown, there was also a typo on one of the form headers and there was a dead *Make Asset Inactive* link.
+
+After applying fixes for these issues the functionalities worked as expected.
+
+##### Assets Testing Part 1
+
+![Assets Test 1](images/assets-test-1.gif)
+
+##### Assets Testing Part 2
+
+![Assets Test 2](images/assets-test-2.gif)
+
+##### Assets Testing Part 3
+
+![Assets Test 3](images/assets-test-3.gif)
+
+##### Assets Testing Part 4
+
+![Assets Test 4](images/assets-test-4.gif)
+
