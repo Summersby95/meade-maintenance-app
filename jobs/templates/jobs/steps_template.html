@@ -6,17 +6,17 @@
                 <td>
                     <input class="form-control"  name="step_{{ step.step_number }}" id="step_{{ step.step_number }}" value="{{ step.step }}" required>
                 </td>
-                <td>
+                <td class="d-none d-md-table-cell">
                     <button type="button" class="btn step-up" data-step="{{ step.step_number }}">
                         <i class="fas fa-arrow-up"></i>
                     </button>
                 </td>
-                <td>
+                <td class="d-none d-md-table-cell">
                     <button type="button" class="btn step-down" data-step="{{ step.step_number }}">
                         <i class="fas fa-arrow-down"></i>
                     </button>
                 </td>
-                <td>
+                <td class="d-none d-md-table-cell">
                     <button type="button" class="btn step-delete text-danger" data-step="{{ step.step_number }}">
                         <i class="fas fa-trash"></i>
                     </button>

@@ -19,17 +19,17 @@ $("#stepAdd").click(function() {
             <td>
                 <input class="form-control"  name="step_${stepNumber}" id="step_${stepNumber}" required>
             </td>
-            <td>
+            <td class="d-none d-md-table-cell">
                 <button type="button" class="btn step-up" data-step="${stepNumber}">
                     <i class="fas fa-arrow-up"></i>
                 </button>
             </td>
-            <td>
+            <td class="d-none d-md-table-cell">
                 <button type="button" class="btn step-down" data-step="${stepNumber}">
                     <i class="fas fa-arrow-down"></i>
                 </button>
             </td>
-            <td>
+            <td class="d-none d-md-table-cell">
                 <button type="button" class="btn step-delete text-danger" data-step="${stepNumber}">
                     <i class="fas fa-trash"></i>
                 </button>
