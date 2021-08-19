@@ -244,7 +244,19 @@ A payment processing functionality was not a feature that was required for this 
 
 ## Development Process
 
-TBC
+### Kanban Board
+
+I used a GitHub project board to help me track tasks that needed to be done for the project. You can find this project board [here](https://github.com/Summersby95/meade-maintenance-app/projects/1). I found it very useful in keeping track of my tasks.
+
+![Kanban Board](images/kanban-board.png)
+
+### VS Code
+
+I used Visual Studio Code as my editor of choice. I used the [virtualenv](https://virtualenv.pypa.io/en/latest/) python package to create a virtual environment in the project folder where I installed all my required python packages. This was very useful and helped contain my project packages to the project.
+
+### GitHub
+
+GitHub was used for source control. I committed regularly and in small descriptive chunks using key words like *feat* and *fix* as prefixes for the commits to help the reader understand them easier.
 
 ## Features
 
