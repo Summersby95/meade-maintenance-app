@@ -486,6 +486,7 @@ def user_started_logs(request):
 
     context = {
         'time_logs': time_logs,
+        'table_title': 'My Started Logs',
     }
     context = {**context, **app_context}
 
@@ -503,6 +504,7 @@ def user_completed_logs(request):
 
     context = {
         'time_logs': time_logs,
+        'table_title': 'My Completed Logs',
     }
     context = {**context, **app_context}
 
