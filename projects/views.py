@@ -113,9 +113,14 @@ def project_details(request, project_id):
             microseconds=average_time.microseconds
         )
 
+    job_transfers = StockTransfer.objects.filter(
+        job__project=project
+    )
+
     context = {
         'project': project,
         'jobs': jobs,
+        'job_transfers': job_transfers,
         'total_time': total_time,
         'completed': completed,
         'average_time': average_time,
