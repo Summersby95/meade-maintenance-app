@@ -476,3 +476,14 @@ To test responsiveness, I reperformed the entire manual testing procedures descr
 
 ![Responsiveness Test 2](images/responsiveness-test-2.gif)
 
+## User Story Testing
+
+* As a maintenance engineer, I need to be able to easily view my outstanding jobs while on the production floor. I also need to be able to quickly create and record time against jobs. I also need to be able to create unscheduled *ad hoc* jobs. I also want to be notified of any new jobs that are assigned to me.
+  * Outstanding jobs can be quickly found and filtered. Users can easily start time logs, add parts to jobs, create their own jobs with minimal effort. The site is responsive on mobile and so can be used easily on the go. Notifications are sent to users to inform them of new jobs they have been assigned. Users can view and withdraw stock easily and quickly. They can add job steps to track what needs to be done for the jobs.
+* As a maintenance manager, I need to be able to create jobs and assign them to users. I also need jobs to be automatically generated for different assets at specified time intervals. I also need to be able to view breakdowns detailing resources used by different departments/product lines. I also want to be able to assign priorities to jobs.
+  * Manager and Admin users can create jobs, assign them to multiple users, edit and update the jobs, see where users are spending time, what jobs they are spending their time on, where resources are being used and the status of jobs and projects. They can assign jobs different priorities so that users know which ones need to be done first.
+* As a stock controller, I need to be able to accurately maintain stock records. I need to be able to receive stock in and then assign it to users who can then assign it to jobs. I'd also like to be notified when stock quantities fall below a certain threshold. I'd also like to be able to assign items barcodes to help manage stock.
+  * Stock Controllers, Managers and Admin users can create stock items, receive stock for the items, withdraw stock, assign stock to a location. They are notified when stock drops below a certain level. Stock items have barcodes meaning stock controllers can easily manage their stock records.
+* As a commercial buyer, I need to be able to see reports detailing how much resources/time is being consumed by my product lines so that I can make informed decisions about the viability of the products.
+  * Detailed breakdowns in project, assets and job detail views show exactly how much resources are being used, who is using them and how they are being used.
+
