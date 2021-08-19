@@ -9,13 +9,15 @@
 1. [Project Overview](#project-overview)
 2. [Project Inception](#project-inception)
 3. [UX](#ux)
-4. [Features](#features)
-5. [Technologies](#technologies)
-6. [Testing](#testing)
-7. [Running Locally](#running-locally)
-8. [Deployment](#deployment)
-9. [Project Outcome](#project-outcome)
-10. [Credits](#credits)
+4. [Application Logic](#application-logic)
+5. [Stripe Integration](#stripe-integration)
+6. [Features](#features)
+7. [Technologies](#technologies)
+8. [Testing](#testing)
+9. [Running Locally](#running-locally)
+10. [Deployment](#deployment)
+11. [Project Outcome](#project-outcome)
+12. [Credits](#credits)
 
 ## Project Overview
 
