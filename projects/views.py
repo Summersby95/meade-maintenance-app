@@ -167,8 +167,8 @@ def create_project(request):
     context = {
         'form': form,
         'action': reverse(create_project),
-        'header': 'Create Stock Item',
-        'submit_text': 'Create Item',
+        'header': 'Create Project',
+        'submit_text': 'Create Project',
         'cancel': reverse(ongoing_projects),
     }
     context = {**context, **app_context}
