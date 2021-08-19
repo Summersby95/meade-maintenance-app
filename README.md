@@ -260,7 +260,32 @@ GitHub was used for source control. I committed regularly and in small descripti
 
 ## Features
 
-TBC
+### Existing Features
+
+* Job logging functionality
+* Time logging for jobs
+* Notifications system
+* Dashboard with metrics and charts
+* Registration/Log In/User Authentication with verification emails
+* Project tracking functionality
+* Asset tracking functionality
+* Stock management system
+* Employee reports
+* Employee bonus reward using *Stripe*
+* Responsive design
+* Easy to use navigation
+* Datatables to easily search and find things
+
+### Future Potential Features
+
+* Attachments - Give users the ability to attach photos, pdf manuals, standard operating procedures for jobs, assets, projects and so on.
+* Barcode Scanning - Give users the ability to scan barcodes of assets/stock items to withdraw them/find them.
+* Unit Tests - I would have liked to write unit tests for all the different functionalities of the site, however I simply ran out of time to implement these.
+* Better Stock Locations For Warehouse - More in depth location tracking, perhaps with a second stocks locaiton model to help manage stock better
+* Better Job Priority Notifications/Management - Alert users more effectively of high and urgent priority jobs they've been assigned
+* Phone Push Notifications - Send notifications to devices so that users don't have to log in to see their notifications
+* Reports - Create detailed reports for different areas like jobs/projects/assets to give detailed statistics of resources being used with specific style rules to make them print friendly
+* Better User Time Management - Create a more visually effective way to show a user their time log breakdowns to see where they've logged time for the day and where they havent
 
 ## Technologies Used
 
