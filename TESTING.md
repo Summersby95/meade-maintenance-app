@@ -93,3 +93,53 @@ Using the *Chrome Dev Tools*, I generated lighthouse reports for different secti
 ![Sign Up Form - Lighthouse](images/signup-form-lighthouse.png)
 
 I was pretty happy with the lighthouse results, there were only minor issues on most of the pages with easy fixes and I was satisfied that the scores were all high enough.
+
+## Manual Testing
+
+Manual testing was conducted to verify that all features, functionalities, buttons and forms performed the intended actions without any major problems or internal server errors.
+
+### Sign Up Form Testing
+
+#### Sign Up Test Procedure
+
+1. Navigate to sign up form
+2. Fill in form details using temporary email address from [Temp Mail](https://temp-mail.org/en/). Try using invalid responses to check that form doesn't allow blank fields
+3. Submit form
+4. Check temporary mailbox for verification email
+5. Click link in email to verify account
+6. Sign in with account to verify the account is working properly
+
+![Sign Up Form Test](images/signup-form-test.png)
+
+#### Sign Up Test Outcome
+
+Using an invalid email address for the email field wouldn't let me submit it as intended.
+
+![Email Input Test](images/email-input-test.png)
+
+Trying to sign up with a username that already exists also failed as should be the case.
+
+![Duplicate User Test](images/duplicate-user-test.png)
+
+Trying to create an account with too simple a password like *abc123* failed too which is appropriate.
+
+![Password Test](images/password-test.png)
+
+Upon submitting a valid form, the site notifies the user to verify their email address.
+
+![Verify Email](images/verify-email-test.png)
+
+The email was sent successfully, however, I did notice that the email contained an invalid link to the site of *pallas.example.com*.
+
+**Fix:** I logged into the admin center and changed the site entry to *meade-pallas.herokuapp.com* to fix this.
+
+![Email Test](images/email-test.png)
+
+Upon clicking the verification link, I was prompted to confirm my email as expected.
+
+![Confirm Email Test](images/confirm-email-test.png)
+
+After confirming the account, I was able to login as expected.
+
+![Sign In Test](images/signin-success-test.png)
+
