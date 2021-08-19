@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q, Count
 
+from stocks.models import StockTransfer
 from .models import Assets, PPM
 from .forms import AssetForm, PPMForm
 from jobs.models import Job, JobStatus, JobTimes
@@ -83,6 +84,10 @@ def asset_details(request, asset_id):
         time_end__isnull=False
     ).values('user').distinct().count()
 
+    job_transfers = StockTransfer.objects.filter(
+        job__asset=asset
+    )
+
     context = {
         'asset': asset,
         'ppms': ppms,
@@ -90,6 +95,7 @@ def asset_details(request, asset_id):
         'total_time': total_time,
         'completed': completed,
         'distinct_users': distinct_users,
+        'job_transfers': job_transfers,
     }
     context = {**app_context, **context}
 
