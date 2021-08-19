@@ -423,3 +423,40 @@ All functionalities of the *People* app behaved as expected.
 ![People Testing 2](images/people-test-2.gif)
 
 This concludes the manual testing section of the testing file. The manual testing process revealed various bugs that have been fixed and was very thorough.
+
+## Validator Testing
+
+### HTML Validator Testing
+
+HTML validation was performed using the [W3C Markup Validation Service](https://validator.w3.org/)
+
+#### HTML Validator Errors
+
+1. **The *main* role is unnecessary on element *main*** - *Fix:* Remove *main* role from *main* elements.
+
+Apart from that I received no validator errors.
+
+![HTML Validation](images/html-validation.png)
+
+### CSS Validator Testing
+
+CSS validation was conducted using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/)
+
+### CSS Validator Errors
+
+1. **Style rule with bad CSS rule** - *Fix:* I had a min height calculation on a class that was not valid. I removed the broken rule from the class
+
+Putting the URL of the deployed site revealed other errors however they were all linked to the *Bootstrap* style sheets and so was unable to fix them.
+
+Running my style sheet through direct input, I received warnings about unknown vendor extensions for my *root variables* that set the colours but I didn't want to explicitly replace the root variable with the explicit colour everywhere it was used and so ignored it.
+
+![CSS Validation](images/css-validation.png)
+
+### JavaScript Validation Testing
+
+I used Visual Studio Code to develop this application and installed the [JSHint](https://jshint.com/) extension in VSCode which notified me of JS errors during development which I fixed as and when they occured.
+
+### Python Validation Testing
+
+In VS Code, I used the [pycodestyle](https://pypi.org/project/pycodestyle/) extension to highlight linting and formatting errors in python while coding. This enforced the [PEP8](https://www.python.org/dev/peps/pep-0008/) python style guide on my Python code and kept the code clean and readable.
+
