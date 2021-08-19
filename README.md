@@ -92,10 +92,6 @@ I wanted the fonts to be professional, clearly legible and formal. For this, I d
 
 I used [Google Fonts](fonts.google.com) to source these fonts.
 
-### Process Flow
-
-TBD
-
 ### Wireframing
 
 For wireframing, I used [Balsamiq](https://balsamiq.com/). I spent a lot of time thinking about and looking for inspiration for layout designs that would suit the application. Given the use of the app, I wanted the navigation to be easy to use, but at the same time there was a lot of functionality and forms that the user could need to get to so I needed that to work too.
