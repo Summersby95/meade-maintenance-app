@@ -143,3 +143,44 @@ After confirming the account, I was able to login as expected.
 
 ![Sign In Test](images/signin-success-test.png)
 
+### Navigation Testing
+
+#### Navigation Test Procedure
+
+1. In desktop view, afer logging in, navigate to all the different apps in the site using the main navigation header, *Dashboard, Jobs, Projects, Assets, Stocks, People, Notifications*, making sure they direct to the correct page.
+2. Inside each of the apps, test that all sidebar links are working and directing to the correct page
+3. Test that notifications and logout links are working in the account drop left links.
+4. Return to the dashboard, change to mobile navigation and verify that all links in the mobile navbar direct to the correct page.
+
+![Navigation Test](images/navigation-test.png)
+
+#### Navigation Test Outcome
+
+All main nav navigation links behaved as intended.
+
+![Main Nav Test](images/main-navigation-test.gif)
+
+All side nav navigation links behaved as intended.
+
+![Side Nav Test](images/side-nav-test.gif)
+
+All account navigation links behaved as intended.
+
+![Account Navigation Test](images/account-nav-test.gif)
+
+All mobile navigation behaved as intended.
+
+**Fix:** While testing the mobile navigation I noticed a few of the tables, forms had headings that didn't line up with what they were showing. I amended those as appropriate.
+
+##### Part 1
+
+![Mobile Nav Test 1](images/mobile-nav-test-1.gif)
+
+##### Part 2
+
+![Mobile Nav Test 2](images/mobile-nav-test-2.gif)
+
+##### Part 3
+
+![Mobile Nav Test 3](images/mobile-nav-test-3.gif)
+
