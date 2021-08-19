@@ -156,6 +156,26 @@ def edit_asset(request, asset_id):
 
 
 @login_required
+def make_asset_inactive(request, asset_id):
+    """ View to make an asset inactive """
+    asset = get_object_or_404(Assets, pk=asset_id)
+    asset.active = False
+    asset.save()
+    messages.success(request, 'Asset Made Inactive Successfully')
+    return redirect(reverse('asset_details', args=(asset.id,)))
+
+
+@login_required
+def make_asset_active(request, asset_id):
+    """ View to make an asset active """
+    asset = get_object_or_404(Assets, pk=asset_id)
+    asset.active = True
+    asset.save()
+    messages.success(request, 'Asset Made Active Successfully')
+    return redirect(reverse('asset_details', args=(asset.id,)))
+
+
+@login_required
 def add_ppm(request, asset_id):
     """ View to add a new PPM to an existing asset """
     asset = get_object_or_404(Assets, pk=asset_id)
