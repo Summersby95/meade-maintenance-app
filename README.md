@@ -1,4 +1,8 @@
-# Meade Maintenance App
+# Pallas
+
+![Main Picture](images/main-pic.png)
+
+## [Deployed Site](https://meade-pallas.herokuapp.com/)
 
 ## Contents
 
@@ -15,7 +19,7 @@
 
 ## Project Overview
 
-The Meade Maintenance App is a bespoke web based application, designed for Meade Farm Group, that allows the maintenance team and their managers to record and maintain stock records and job records. The project uses *Django*, *PostgresQL*, *Heroku* and *AWS S3*. The project was requested by the maintenance team who required an easy to use, mobile, responsive application for recording and maintaining stock and job records.
+*Pallas* is a bespoke web based application, designed for Meade Farm Group, that allows the maintenance team and their managers to record and maintain stock records and job records. The project uses *Django*, *PostgresQL* and *Heroku*. The project was requested by the maintenance team who required an easy to use, mobile, responsive application for recording and maintaining stock and job records.
 
 Meade Farm Group is a fresh goods processor based in the Republic of Ireland, servicing the retail food sector, supplying fresh goods to the likes of Lidl and Aldi, amongst others. The maintenance/engineering teams at the company are involved in the general maintenance of all the machines in the factory, utilities in the offices and developing new areas and projects. Due to this wide range of responsibilities and the often *ad-hoc* nature of their work an app was required that allowed the team to record and maintain records of their work quickly and easily while on the job as well as being intuitive, giving users notifications of outstanding jobs to be done.
 
