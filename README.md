@@ -308,6 +308,9 @@ GitHub was used for source control. I committed regularly and in small descripti
 * [jQuery](https://jquery.com/)
 * [Balsamiq](https://balsamiq.com/)
 * [Diagrams.net](https://app.diagrams.net/)
+* [Chart.js](https://www.chartjs.org/)
+* [Datatables](https://datatables.net/)
+* [Stripe](https://stripe.com/en-ie)
 
 ## Testing
 
@@ -315,7 +318,67 @@ For testing information regarding this project please see the [TESTING.md](TESTI
 
 ## Running Locally
 
-TBC
+**Note:** There is an issue with the migrations for the project that seems to prevent the initial migrations for the app running correctly. The database runs fine for the application, but attempting to clone the repo and running the initial migrations will fail. I have attempted to find a fix to this, however I haven't been able to find one yet and I am out of time to find one. The following steps will work up until step 10, when I apply a fix the rest will work.
+
+To run this project locally, follow the following steps. The follwing steps assume you already have [Python 3.9.x](https://www.python.org/) and [pip](https://pypi.org/project/pip/) installed on your computer.
+
+1. Open your text editor of choice, in my case, I'm using Visual Studio Code
+2. Find the *Clone Git Repository* option in your text editor window.
+3. Once clicked, paste the following link in the field that appears: [Repo Link](https://github.com/Summersby95/meade-maintenance-app.git)
+4. Select a folder on your computer to store the cloned repository
+5. Once cloned, open the folder in your editor.
+
+![Local Run 1](images/local-run-1.gif)
+
+* Once done, open a terminal in the project window and run the following command
+
+```python
+# Command 1
+pip install virtualenv
+# Command 2
+virtualenv venv
+```
+
+* After running these commands, find the option in your editor to *Select Python Interpreter*
+* In the dropdown list, wait a few seconds, refresh the list and select the *venv* virtual environment.
+
+![Local Run 2](images/local-run-2.gif)
+
+* Once done, open a new terminal window and run the following command.
+
+```python
+pip install -r requirements.txt
+```
+
+![Local Run 3](images/local-run-3.gif)
+
+* Run the following command
+
+```python
+python manage.py migrate
+```
+
+* Create an ```env.py``` file in the base directory of the project and add the following, replacing the placholder text with your own values
+
+```python
+import os
+
+os.environ.setdefault("STRIPE_SECRET_KEY", "sk_test_secret_key")
+os.environ.setdefault("SECRET_KEY", 'django-insecure-secret-key')
+os.environ.setdefault("DEVELOPMENT", "True")
+```
+
+* Next run the following command and create a superuser account
+
+```python
+python manage.py createsuperuser
+```
+
+* Finally, start the server using the following command and navigate to ```localhost:8000``` to see it in action.
+
+```python
+py manage.py runserver
+```
 
 ## Deployment
 
