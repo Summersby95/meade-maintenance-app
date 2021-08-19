@@ -460,3 +460,19 @@ I used Visual Studio Code to develop this application and installed the [JSHint]
 
 In VS Code, I used the [pycodestyle](https://pypi.org/project/pycodestyle/) extension to highlight linting and formatting errors in python while coding. This enforced the [PEP8](https://www.python.org/dev/peps/pep-0008/) python style guide on my Python code and kept the code clean and readable.
 
+## Responsiveness Testing
+
+To test responsiveness, I reperformed the entire manual testing procedures described above on different screen sizes to verify that the site responded correctly.
+
+### Responsiveness Bugs
+
+**Steps Form Controls Taking Up Too Much Space On Mobile** - *Fix:* Add *d-none d-md-table-cell* classes to steps controls to hide them on mobile devices. This was necessary because the controls took up too much space in the row and the input text couldn't be seen otherwise.
+
+#### Responsive Testing Part 1
+
+![Responsiveness Test 1](images/responsiveness-test-1.gif)
+
+#### Responsive Testing Part 2
+
+![Responsiveness Test 2](images/responsiveness-test-2.gif)
+
