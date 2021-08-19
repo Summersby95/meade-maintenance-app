@@ -41,3 +41,55 @@ I struggled to find a solution to fix this problem. Adding CSS style rules to th
 One thing that did work was using a JS script to automatically refresh the page on screen resize however after discussing this fix with my mentor he suggested removing this as it was bad UX design to force a page reload on a screen resize. We worked together to try and find a solution to the issue but came up short and decided that screen resizes are not natural browser behaviours and that as long as it was responsive on mobile and desktop when the page is initially loaded then it is responsive. I agreed and removed it and decided instead to document the bug in the documentation as proof of my attempts to fix the issue.
 
 To be clear, the tables are responsive on all screen sizes and the tables resize correctly on small resizes, mobile portrait to mobile landscape for example, however on some large screen resizes the datatables may not behave properly by either not filling their div or overflowing it. This can be amended by a page reload.
+
+## Lighthouse Testing
+
+Using the *Chrome Dev Tools*, I generated lighthouse reports for different sections of the site to evaluate responsiveness, performance and find any issues the site may have. The Lighthouse testing was conducted on the [deployed](https://meade-pallas.herokuapp.com/) version of the site.
+
+### Home Page
+
+![Home - Lighthouse](images/home-lighthouse.png)
+
+**SEO: Site Didn't Have *Meta* Description** - *Fix:* Add *Meta* description to base template header.
+
+### Dashboard Page
+
+![Dashboard - Lighthouse](images/dashboard-lighthouse.png)
+
+**Performance: Eliminate render-blocking resoures** - The biggest issue holding the back was the loading of the external Bootstrap files which I couldn't really do anything about because they are needed by the site so I couldn't fix it.
+
+### Jobs Page
+
+![Jobs - Lighthouse](images/jobs-lighthouse.png)
+
+### Job Details Page
+
+![Job Details - Lighthouse](images/job-details-lighthouse.png)
+
+### Create Job Form Page
+
+![Job Details](images/create-job-lighthouse.png)
+
+### Notifications Page
+
+![Notifications - Lighthouse](images/notifications-lighthouse.png)
+
+**Bug: Table Not Responsive On Small Screens**  - *Fix:* Not Lighthouse specific but I noticed the notifications table slighthly overflowed on very small screens. I added table responsive sm class to table
+
+### Staff Detail Page
+
+![Staff Detail - Lighthouse](images/staff-detail-lighthouse.png)
+
+### Receive Stock Page
+
+![Receive Stock - Lighthouse](images/receive-stock-lighthouse.png)
+
+### Project Details Page
+
+![Project Details - Lighthouse](images/project-details-lighthouse.png)
+
+### Sign Up Form
+
+![Sign Up Form - Lighthouse](images/signup-form-lighthouse.png)
+
+I was pretty happy with the lighthouse results, there were only minor issues on most of the pages with easy fixes and I was satisfied that the scores were all high enough.
