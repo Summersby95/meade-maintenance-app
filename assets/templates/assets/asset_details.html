@@ -193,15 +193,21 @@
         {% load auth_tests %}
         {% manager_test as is_manager %}
         {% if is_manager %}
-            <a href="{% url 'edit_asset' asset.id %}" class="btn action-button midnight-blue">
-                <i class="fas fa-pen"></i> Edit Asset
-            </a>
-            <a href="{% url 'add_ppm' asset.id %}" class="btn action-button btn-success">
-                <i class="fas fa-plus"></i> Add PPM Job
-            </a>
-            <a href="#" class="btn action-button btn-danger">
-                <i class="fas fa-times"></i> Make Asset Inactive
-            </a>
+            {% if asset.active == True %}
+                <a href="{% url 'edit_asset' asset.id %}" class="btn action-button midnight-blue">
+                    <i class="fas fa-pen"></i> Edit Asset
+                </a>
+                <a href="{% url 'add_ppm' asset.id %}" class="btn action-button btn-success">
+                    <i class="fas fa-plus"></i> Add PPM Job
+                </a>
+                <a href="{% url 'make_asset_inactive' asset.id %}" class="btn action-button btn-danger">
+                    <i class="fas fa-times"></i> Make Asset Inactive
+                </a>
+            {% else %}
+                <a href="{% url 'make_asset_active' asset.id %}" class="btn action-button btn-success">
+                    <i class="fas fa-plus"></i> Make Asset Active
+                </a>
+            {% endif %}
         {% endif %}
     </div>
     
