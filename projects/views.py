@@ -9,6 +9,7 @@ from jobs.models import Job, JobStatus, JobTimes
 from profiles.models import UserProfile
 from .forms import ProjectForm
 from ancillaries.decorators import custom_user_test, manager_test
+from stocks.models import StockTransfer
 
 app_context = {
     'nbar': 'projects',
