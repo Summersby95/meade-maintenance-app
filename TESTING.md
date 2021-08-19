@@ -384,3 +384,42 @@ All functionalities behaved as expected.
 ##### Stocks Testing Part 5
 
 ![Stocks Test 5](images/stocks-test-5.gif)
+
+### People Testing
+
+#### People Testing Notes
+
+As with other apps, you must be logged in as an *Admin* or *Manager* to use it.
+
+#### People Testing Procedure
+
+1. Using the main nav, navigate to the *People* app
+2. In the *Staff List* view, click the *View* action for an employee with a couple of jobs/time logs/parts used.
+3. Verify that all information and statistics in the *Employee Profile* page behave accordingly.
+4. In the *Jobs* section of the profile, use the *View All* button
+5. Verify that the *Jobs* shown in the view belong to the requested user.
+6. In the *Stock Withdrawls* section use the *View All* button
+7. Verify that the view shows you the stock transfers for the requested user.
+8. In the *Time Logs* section of the user profile, use the *View All* button
+9. Verify that the view shows all the time logs for the requested user.
+10. At the bottom of the user profile use the *Give Bonus* button
+11. Verify that this takes you to the employee bonus form page
+12. Enter a *Bonus* amount in the form field and click the *Give Bonus* button
+13. Verify that this directs you to a *Stripe* payment form.
+14. Fill in the card details with test card details. *(Real card info will not work as it is hooked up using a test API key)*
+15. Submit the form
+16. Verify the payment is authorized and that it redirects you to the bonus success page.
+
+#### People Testing Outcome
+
+All functionalities of the *People* app behaved as expected.
+
+##### People Testing Part 1
+
+![People Testing 1](images/people-test-1.gif)
+
+##### People Testing Part 2
+
+![People Testing 2](images/people-test-2.gif)
+
+This concludes the manual testing section of the testing file. The manual testing process revealed various bugs that have been fixed and was very thorough.
