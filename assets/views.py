@@ -197,8 +197,8 @@ def add_ppm(request, asset_id):
     context = {
         'form': form,
         'action': reverse(add_ppm, args=(asset.id,)),
-        'header': 'Create Stock Item',
-        'submit_text': 'Create Item',
+        'header': 'Create PPM Job',
+        'submit_text': 'Create PPM',
         'cancel': reverse(asset_details, args=(asset.id,)),
     }
     context = {**app_context, **context}
