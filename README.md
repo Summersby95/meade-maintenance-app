@@ -382,7 +382,45 @@ py manage.py runserver
 
 ## Deployment
 
-TBC
+This app was deployed on [Heroku](https://www.heroku.com/home) and uses a Heroku [PostgreSQL](https://www.postgresql.org/) database. I used the following steps to deploy the application. The following steps assume you are using GitHub for source control.
+
+**Note:** AWS S3 was *not* used for deploying the static files for this site, instead I used *whitenoise* and Heroku to host them. You can find documentation for this [here](https://devcenter.heroku.com/articles/django-assets). No setup manual setup is required to use whitenoise.
+
+1. Sign in to Heroku
+2. Create a new Heroku app
+3. Give it a name and region
+4. In the *Resources* tab of your new app, provision a *Heroku Postgres* database for the app
+
+![Deploy 1](images/deploy-1.gif)
+
+* Ensure that your ```settings.py``` file is configured properly to accept a PostgreSQL database URL. The ```DATABASES``` configuration in the file should look like this
+
+```python
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ['DATABASE_URL'])
+    }
+```
+
+* In your local project, create an environment variable with the ```DATABASE_URL``` from the config variables in the Heroku app
+* Run the following command on your local machine to apply the migrations to the Postgres database
+
+```python
+python manage.py migrate
+```
+
+* Back in your Heroku application, in the *Deploy* tab, connect your GitHub account in the *Deployment Method* section.
+* Search for the repository you would like the app to deploy and *Enable Automatic Deployments* for the repo.
+
+![Deploy 2](images/deploy-2.gif)
+
+* Create a commit locally and push to your GitHub repo
+* In the Heroku app, go to the *Activity* section and you should see an *In Progress* deployment happening
+* View the build log or wait for it to finish
+
+![Deploy Log](images/deploy-log.png)
+
+* Congratulations! Your project is now deployed! Click the *Open App* button in your Heroku app to view it.
 
 ## Project Outcome
 
