@@ -226,7 +226,21 @@ Similar to projects, *assets* are collections of jobs with a common heading, in 
 
 *Stock Items* or *Items* are stockable items that can be consumed by jobs. These can include, screws, bearings, cables, motors and so on.
 
-TBC
+### Authentication
+
+The application requires a user to login to use the application features.
+
+Certain functionalities are locked to different user types to prevent users seeing or performing actions that they shouldn't be. In the register form users must select a *User Type*. *Admin* and *Manager* users have access to all areas and can create, edit and view all areas of the site. These include the *People* and *Stocks* apps, use the Employee Bonus form with *Stripe* integration. They can also assign jobs to people, which *General Operative* users cannot do.
+
+*Stock Controllers* can perform all functions, including receiving and creating stock items, but cannot view the *People* app or staff details or assign jobs to other users.
+
+*General Operative* users can perform most functions except for the ones mentioned above.
+
+**Note:** *Admin* user types are **not** the same as a Django superuser. Registering for an account with an *Admin* user type will not work for the Django admin panel.
+
+## Stripe Integration
+
+A payment processing functionality was not a feature that was required for this project but it was a requirement for demonstration purposes. The *Stripe* API is hooked up to the application through the *User Bonus* form. This can only be accessed through the *People* link and in the main nav, clicking on a user, and going to the bottom of the user profile and clicking the *Give Employee Bonus* button. To be clear, the application does not store employee account details, in this theoretical use case, all money would go to the same stripe account, which doesn't make sense if the idea is to give the bonus to the selected employee. But the functionality is purely for demonstration purposes is not a core feature or functionality and will be removed for the live production deployment of the application.
 
 ## Development Process
 
