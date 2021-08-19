@@ -487,3 +487,31 @@ To test responsiveness, I reperformed the entire manual testing procedures descr
 * As a commercial buyer, I need to be able to see reports detailing how much resources/time is being consumed by my product lines so that I can make informed decisions about the viability of the products.
   * Detailed breakdowns in project, assets and job detail views show exactly how much resources are being used, who is using them and how they are being used.
 
+## Feature Testing
+
+* Job logging functionality
+  * Users can create jobs, edit them, input the steps they took to complete them, view jobs they've been assigned, filter and search them.
+* Time logging for jobs
+  * Users can log time against jobs, edit their time logs or delete them.
+* Notifications system
+  * Users are notified when they create a job, are assigned a job, when stock is below a threshold, when they have unassigned stock in their inventory, when they have outstanding time logs
+* Dashboard with metrics and charts
+  * The dashboard app shows users breakdowns of jobs, projects and time across the factory and charts are used to help visually convey that
+* Registration/Log In/User Authentication with verification emails
+  * Users can sign up for accounts, use them to login and use the application and are sent verification emails to verify their account
+* Project tracking functionality
+  * Projects can be created, jobs can be assigned to them and metrics such as time spent, resources used and users involved can be determined for the project. This information can then be evaluated by management
+* Asset tracking functionality
+  * Asset records can be maintained, preventative maintenance jobs *(PPMs)* can be created for assets that reoccur at specify intervals, users can see breakdowns of jobs been done for the asset and resources being used.
+* Stock management system
+  * Stock records can be kept, stock items can be created, stock can be received in, items can be withdrawn from stock. Stock controllers can see where stock is being used and who is using it
+* Employee reports
+  * Managers and Admins can view employee statistics, see where employees are spending their time, what they are using, what they have completed and what they haven't
+* Employee bonus reward using *Stripe* **FOR DEMONSTRATION PURPOSES ONLY**
+  * *This is a fictional feature and purely to demonstrate my ability to use Stripe integration.* Managers and Admins can reward employees by giving them a bonus, facilitated through the Stripe API
+* Responsive design
+  * The site is responsive on desktop and mobile, allowing the application to be used on the go and sitting at a desk
+* Easy to use navigation
+  * The navigation elements are easy to use and simple to understand
+* Datatables to easily search and find things
+  * The datatable elements allow jobs, projects, assets, stocks etc to be found, filtered and sorted quickly and easily allowing the user to find what they need fast.
