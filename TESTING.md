@@ -240,3 +240,48 @@ All steps were performed successfully and without error.
 
 ![Job Test 4](images/job-test-4.gif)
 
+### Project Testing
+
+#### Notes
+
+You must be logged in as an *Admin* or *Manager* user to create projects, you will not see a link if you are not logged in as an *Admin* or *Manager* user and attempting to navigate to the *Create Project* page will prompt a redirect and error to appear.
+
+#### Project Testing Procedure
+
+1. Navigate to the *Projects* app in using the main nav
+2. Click the *Create New Project* link in the sidenav.
+3. Fill in the form and submit to create a new project.
+4. On successful submission, navigate to the *Ongoing Projects* link in the sidenav
+5. Verify that the project you created is in the table view. *(Use the search function if you cannot find it)*
+6. Open the project you created using the *View* button.
+7. At the bottom click the *Edit Project* button to edit the project
+8. Amend one or more details of the project and submit the update
+9. Verify that the project details have updated successfully
+10. At the bottom of the project details page, use the *Create Project Job* button to create a project job.
+11. Verify that the create job form that appears has selected the project you created as the default project for the job.
+12. Fill in the other details for the job form and create the job.
+13. Add a part to the job and log some time to it.
+14. Once done, navigate back to the project details view and verify that the project jobs section shows the job you created, that the parts used section shows the parts used in the job you created and that the project time statistics have updated appropriately.
+15. Use the *Mark Completed* button in the project details page and verify that the status of the project updates and that the action buttons at the bottom update accordingly.
+16. Navigate to the *Completed Projects* view and verify that the project now appears there
+17. Open the project again and use the *Cancel Project* button and verify that the project status updates to *Cancelled*
+18. Navigate to the *Cancelled Projects* view and verify that the project is now there.
+
+#### Project Testing Outcome
+
+Initially when testing these features I got an internal server error related to trying to find the microseconds attribute of an int object which I resolved. I also noticed the parts used section of the project details page wasn't showing any parts which I realised was because I hadn't passed the parts to the context processor for the view.
+
+After applying these fixes all the functionalities for this app worked as expected.
+
+##### Project Testing Part 1
+
+![Project Testing 1](images/project-test-1.gif)
+
+##### Project Testing Part 2
+
+![Project Testing 2](images/project-test-2.gif)
+
+##### Project Testing Part 3
+
+![Project Testing 3](images/project-test-3.gif)
+
