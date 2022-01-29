@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from ancillaries.models import Locations
 
 
+def get_default_status():
+    return ProjectStatus.objects.get_or_create(status='Pending')[0]
+
+
 class ProjectStatus(models.Model):
     """
     Project status
@@ -25,9 +29,7 @@ class Project(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.ForeignKey(ProjectStatus, on_delete=models.CASCADE,
-                               default=ProjectStatus.objects.get(
-                                   status='Pending'
-                               ).id)
+                               default=get_default_status)
     description = models.TextField()
     location = models.ForeignKey(Locations, on_delete=models.CASCADE)
 
